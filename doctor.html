@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meet Dr. Jane Roberts | BrightSmile Dental Clinic</title>
+  <meta name="description" content="Get to know Dr. Jane Roberts, our lead dentist at BrightSmile. Learn about her experience, education, and patient-first philosophy.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  
+  <style>
+    html { scroll-behavior: smooth; }
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦷</text></svg>">
+</head>
+<body class="font-sans text-brand-900 bg-white">
+
+  <!-- Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-brand-100">
+    <nav class="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 group">
+        <div class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-brand-500/20 group-hover:scale-110 transition-transform">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+        <span class="font-display font-bold text-2xl tracking-tight text-brand-900">BrightSmile</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="font-medium text-brand-700 hover:text-brand-500 transition-colors">Home</a>
+        <a href="services.html" class="font-medium text-brand-700 hover:text-brand-500 transition-colors">Services</a>
+        <a href="doctor.html" class="font-medium text-brand-500 transition-colors border-b-2 border-brand-500">The Doctor</a>
+        <a href="contact.html" class="font-medium text-brand-700 hover:text-brand-500 transition-colors">Contact</a>
+        <a href="appointment.html" class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-brand-500 text-white font-semibold hover:bg-brand-600 transition-all">Book Now</a>
+      </div>
+
+      <button class="md:hidden p-2 rounded-lg hover:bg-brand-50 transition-colors" data-nav-toggle>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-brand-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="hidden md:hidden absolute top-full left-0 right-0 bg-white border-b border-brand-100 p-4 space-y-4 shadow-xl" data-nav-menu>
+      <a href="index.html" class="block font-medium py-2">Home</a>
+      <a href="services.html" class="block font-medium py-2">Services</a>
+      <a href="doctor.html" class="block font-medium py-2 text-brand-500">The Doctor</a>
+      <a href="contact.html" class="block font-medium py-2">Contact</a>
+      <a href="appointment.html" class="block w-full py-4 rounded-xl bg-brand-500 text-white text-center font-bold">Book Appointment</a>
+    </div>
+  </header>
+
+  <main class="pt-20">
+    <!-- Profile Hero -->
+    <section class="py-24">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="flex flex-col md:flex-row items-center gap-16">
+          <div class="flex-1">
+            <div class="relative">
+              <div class="absolute -inset-4 bg-brand-100 rounded-[2rem] -rotate-3 -z-10"></div>
+              <img src="https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&q=80&w=800" alt="Dr. Jane Roberts" class="w-full rounded-[2rem] shadow-2xl">
+            </div>
+          </div>
+          <div class="flex-1">
+            <span class="inline-block px-4 py-1 bg-brand-50 text-brand-600 rounded-full font-bold text-sm mb-6 uppercase tracking-wider">Lead Dentist & Founder</span>
+            <h1 class="font-display text-5xl md:text-6xl font-bold mb-6">Dr. Jane Roberts, <span class="text-brand-500 text-3xl">DDS</span></h1>
+            <p class="text-xl text-brand-700/80 mb-8 leading-relaxed italic">"My mission is to provide high-quality dental care in a comfortable environment where every patient feels like family."</p>
+            <p class="text-brand-700/70 mb-10 leading-relaxed">With over 15 years of experience in restorative and cosmetic dentistry, Dr. Roberts has built a reputation for her gentle touch and meticulous attention to detail. She believes that a healthy smile is the foundation of overall wellness.</p>
+            
+            <div class="grid grid-cols-2 gap-8 mb-10">
+              <div>
+                <h4 class="font-bold text-brand-900 mb-2">Specialization</h4>
+                <p class="text-brand-700/70">Cosmetic & Implant Dentistry</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-brand-900 mb-2">Experience</h4>
+                <p class="text-brand-700/70">15+ Years in Practice</p>
+              </div>
+            </div>
+
+            <a href="appointment.html" class="inline-flex items-center justify-center px-10 py-4 rounded-full bg-brand-500 text-white font-bold text-lg hover:bg-brand-600 shadow-xl shadow-brand-500/30 transition-all">Book a Consultation</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Credentials -->
+    <section class="py-24 bg-brand-50">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="font-display text-4xl font-bold text-center mb-16">Credentials & Education</h2>
+          
+          <div class="space-y-12">
+            <!-- Item 1 -->
+            <div class="flex gap-6 items-start">
+              <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-brand-500 shadow-sm shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                  <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2">Education</h3>
+                <ul class="space-y-2 text-brand-700/70">
+                  <li>Doctor of Dental Surgery (DDS) - Columbia University College of Dental Medicine</li>
+                  <li>BS in Biology - New York University</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="flex gap-6 items-start">
+              <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-brand-500 shadow-sm shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2">Certifications</h3>
+                <ul class="space-y-2 text-brand-700/70">
+                  <li>Board Certified in General Dentistry</li>
+                  <li>Fellow of the International Congress of Oral Implantologists (ICOI)</li>
+                  <li>Invisalign® Certified Provider</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="flex gap-6 items-start">
+              <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-brand-500 shadow-sm shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 014.453-4.453M9.707 9.707a3 3 0 114.586 4.586m-4.586-4.586a3 3 0 004.586 4.586" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2">Memberships</h3>
+                <ul class="space-y-2 text-brand-700/70">
+                  <li>American Dental Association (ADA)</li>
+                  <li>Academy of General Dentistry (AGD)</li>
+                  <li>American Academy of Cosmetic Dentistry (AACD)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philanthropy / Personal -->
+    <section class="py-24">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 class="font-display text-4xl font-bold mb-6">Beyond the Clinic</h2>
+            <p class="text-brand-700/70 mb-6 leading-relaxed">When she's not helping patients, Dr. Roberts is active in the local community. She volunteers for "Give Kids A Smile" and participates in local health fairs.</p>
+            <p class="text-brand-700/70 mb-8 leading-relaxed">She lives in the neighborhood with her husband and two children. You might spot her at the local farmers market on weekends or cycling along the river trails.</p>
+            <div class="flex gap-4">
+              <div class="p-4 bg-brand-50 rounded-2xl text-center flex-1">
+                <span class="block text-2xl mb-2">🎨</span>
+                <span class="text-sm font-bold text-brand-700">Art Lover</span>
+              </div>
+              <div class="p-4 bg-brand-50 rounded-2xl text-center flex-1">
+                <span class="block text-2xl mb-2">🚴‍♀️</span>
+                <span class="text-sm font-bold text-brand-700">Cycling</span>
+              </div>
+              <div class="p-4 bg-brand-50 rounded-2xl text-center flex-1">
+                <span class="block text-2xl mb-2">👩‍🍳</span>
+                <span class="text-sm font-bold text-brand-700">Cooking</span>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-3xl overflow-hidden shadow-xl">
+            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=800" alt="Dr. Roberts volunteering" class="w-full h-auto">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-brand-50 pt-20 pb-10">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="font-display text-3xl font-bold mb-6">Trust Your Smile to an Expert</h2>
+        <a href="appointment.html" class="inline-flex px-10 py-4 bg-brand-500 text-white rounded-full font-bold text-lg hover:bg-brand-600 transition-all shadow-lg">Schedule Your Visit</a>
+      </div>
+      
+      <div class="pt-8 border-t border-brand-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-brand-700/50">
+        <p>© 2026 BrightSmile Dental Clinic. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="index.html" class="hover:text-brand-500 transition-colors">Home</a>
+          <a href="services.html" class="hover:text-brand-500 transition-colors">Services</a>
+          <a href="contact.html" class="hover:text-brand-500 transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

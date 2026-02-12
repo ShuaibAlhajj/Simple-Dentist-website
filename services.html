@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services | BrightSmile Dental Clinic</title>
+  <meta name="description" content="Explore our range of dental services from preventative care to cosmetic dentistry and implants. Quality care for every smile.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  
+  <style>
+    html { scroll-behavior: smooth; }
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦷</text></svg>">
+</head>
+<body class="font-sans text-brand-900 bg-white">
+
+  <!-- Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-brand-100">
+    <nav class="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 group">
+        <div class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-brand-500/20 group-hover:scale-110 transition-transform">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+        <span class="font-display font-bold text-2xl tracking-tight text-brand-900">BrightSmile</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="font-medium text-brand-700 hover:text-brand-500 transition-colors">Home</a>
+        <a href="services.html" class="font-medium text-brand-500 transition-colors border-b-2 border-brand-500">Services</a>
+        <a href="doctor.html" class="font-medium text-brand-700 hover:text-brand-500 transition-colors">The Doctor</a>
+        <a href="contact.html" class="font-medium text-brand-700 hover:text-brand-500 transition-colors">Contact</a>
+        <a href="appointment.html" class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-brand-500 text-white font-semibold hover:bg-brand-600 transition-all">Book Now</a>
+      </div>
+
+      <button class="md:hidden p-2 rounded-lg hover:bg-brand-50 transition-colors" data-nav-toggle>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-brand-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="hidden md:hidden absolute top-full left-0 right-0 bg-white border-b border-brand-100 p-4 space-y-4 shadow-xl" data-nav-menu>
+      <a href="index.html" class="block font-medium py-2">Home</a>
+      <a href="services.html" class="block font-medium py-2 text-brand-500">Services</a>
+      <a href="doctor.html" class="block font-medium py-2">The Doctor</a>
+      <a href="contact.html" class="block font-medium py-2">Contact</a>
+      <a href="appointment.html" class="block w-full py-4 rounded-xl bg-brand-500 text-white text-center font-bold">Book Appointment</a>
+    </div>
+  </header>
+
+  <main class="pt-20">
+    <!-- Page Header -->
+    <section class="bg-brand-50 py-20">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="font-display text-4xl md:text-6xl font-bold mb-6">Our Services</h1>
+        <p class="text-lg text-brand-700/70 max-w-2xl mx-auto">Comprehensive dental care for all your needs. We combine technology with compassion to provide the best experience.</p>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="py-24">
+      <div class="container mx-auto px-4 md:px-6">
+        
+        <!-- General Dentistry -->
+        <div class="mb-20">
+          <div class="flex items-center gap-4 mb-10">
+            <div class="h-1 w-12 bg-brand-500 rounded-full"></div>
+            <h2 class="font-display text-3xl font-bold">General Dentistry</h2>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Service Card -->
+            <div class="p-8 rounded-3xl border border-brand-100 hover:border-brand-500 transition-all group">
+              <h3 class="text-xl font-bold mb-4">Routine Cleanings</h3>
+              <p class="text-brand-700/70 mb-6">Professional scaling and polishing to maintain gum health and prevent cavities.</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-sm font-bold text-brand-500 uppercase">Recommended 2x/Year</span>
+                <a href="appointment.html" class="text-brand-900 font-bold hover:text-brand-500 transition-colors">Book →</a>
+              </div>
+            </div>
+            
+            <div class="p-8 rounded-3xl border border-brand-100 hover:border-brand-500 transition-all group">
+              <h3 class="text-xl font-bold mb-4">Dental Fillings</h3>
+              <p class="text-brand-700/70 mb-6">High-quality, tooth-colored composite fillings to restore damaged or decayed teeth.</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-sm font-bold text-brand-500 uppercase">Natural Looking</span>
+                <a href="appointment.html" class="text-brand-900 font-bold hover:text-brand-500 transition-colors">Book →</a>
+              </div>
+            </div>
+
+            <div class="p-8 rounded-3xl border border-brand-100 hover:border-brand-500 transition-all group">
+              <h3 class="text-xl font-bold mb-4">Pediatric Care</h3>
+              <p class="text-brand-700/70 mb-6">Gentle dental visits designed specifically for our youngest patients to build healthy habits.</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-sm font-bold text-brand-500 uppercase">Kid-Friendly</span>
+                <a href="appointment.html" class="text-brand-900 font-bold hover:text-brand-500 transition-colors">Book →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cosmetic Dentistry -->
+        <div class="mb-20">
+          <div class="flex items-center gap-4 mb-10">
+            <div class="h-1 w-12 bg-brand-500 rounded-full"></div>
+            <h2 class="font-display text-3xl font-bold">Cosmetic Dentistry</h2>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="p-8 rounded-3xl border border-brand-100 hover:border-brand-500 transition-all group">
+              <h3 class="text-xl font-bold mb-4">Professional Whitening</h3>
+              <p class="text-brand-700/70 mb-6">In-office and take-home treatments to brighten your smile safely and effectively.</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-sm font-bold text-brand-500 uppercase">Instant Results</span>
+                <a href="appointment.html" class="text-brand-900 font-bold hover:text-brand-500 transition-colors">Book →</a>
+              </div>
+            </div>
+            
+            <div class="p-8 rounded-3xl border border-brand-100 hover:border-brand-500 transition-all group">
+              <h3 class="text-xl font-bold mb-4">Porcelain Veneers</h3>
+              <p class="text-brand-700/70 mb-6">Custom-made shells to correct imperfections and give you a flawless Hollywood smile.</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-sm font-bold text-brand-500 uppercase">Custom Design</span>
+                <a href="appointment.html" class="text-brand-900 font-bold hover:text-brand-500 transition-colors">Book →</a>
+              </div>
+            </div>
+
+            <div class="p-8 rounded-3xl border border-brand-100 hover:border-brand-500 transition-all group">
+              <h3 class="text-xl font-bold mb-4">Invisalign®</h3>
+              <p class="text-brand-700/70 mb-6">Clear aligners to straighten your teeth comfortably without the look of metal braces.</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-sm font-bold text-brand-500 uppercase">Clear Braces</span>
+                <a href="appointment.html" class="text-brand-900 font-bold hover:text-brand-500 transition-colors">Book →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Specialized Care -->
+        <div>
+          <div class="flex items-center gap-4 mb-10">
+            <div class="h-1 w-12 bg-brand-500 rounded-full"></div>
+            <h2 class="font-display text-3xl font-bold">Advanced & Emergency</h2>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="p-8 rounded-3xl border border-brand-100 hover:border-brand-500 transition-all group">
+              <h3 class="text-xl font-bold mb-4">Dental Implants</h3>
+              <p class="text-brand-700/70 mb-6">Permanent, natural-looking tooth replacement solutions using advanced technology.</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-sm font-bold text-brand-500 uppercase">Lifetime Solution</span>
+                <a href="appointment.html" class="text-brand-900 font-bold hover:text-brand-500 transition-colors">Book →</a>
+              </div>
+            </div>
+            
+            <div class="p-8 rounded-3xl border border-brand-100 hover:border-brand-500 transition-all group">
+              <h3 class="text-xl font-bold mb-4">Root Canal Therapy</h3>
+              <p class="text-brand-700/70 mb-6">Save your natural teeth from infection with our painless, modern root canal treatments.</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-sm font-bold text-brand-500 uppercase">Pain-Free Tech</span>
+                <a href="appointment.html" class="text-brand-900 font-bold hover:text-brand-500 transition-colors">Book →</a>
+              </div>
+            </div>
+
+            <div class="p-8 rounded-3xl border border-brand-500 bg-brand-500 text-white shadow-xl shadow-brand-500/30">
+              <h3 class="text-xl font-bold mb-4">Emergency Care</h3>
+              <p class="text-white/80 mb-6">Same-day appointments for dental emergencies, toothaches, or broken teeth.</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-sm font-bold uppercase">Call Anytime</span>
+                <a href="contact.html" class="text-white font-bold underline">Contact Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 bg-brand-50">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <h2 class="font-display text-4xl font-bold text-center mb-16">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          <div class="p-6 bg-white rounded-2xl shadow-sm">
+            <h4 class="font-bold mb-2">Do you accept dental insurance?</h4>
+            <p class="text-brand-700/70">Yes, we work with most major insurance providers. Our team will handle the claims for you.</p>
+          </div>
+          <div class="p-6 bg-white rounded-2xl shadow-sm">
+            <h4 class="font-bold mb-2">How often should I visit the dentist?</h4>
+            <p class="text-brand-700/70">We generally recommend a checkup and cleaning every six months to maintain optimal oral health.</p>
+          </div>
+          <div class="p-6 bg-white rounded-2xl shadow-sm">
+            <h4 class="font-bold mb-2">What should I bring to my first appointment?</h4>
+            <p class="text-brand-700/70">Please bring your ID, insurance card, and any relevant dental history or X-rays from your previous dentist.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-brand-900 text-white pt-20 pb-10">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="font-display text-3xl font-bold mb-8">Ready to book your visit?</h2>
+      <a href="appointment.html" class="inline-flex px-10 py-4 bg-brand-500 rounded-full font-bold text-xl hover:bg-brand-600 transition-all mb-16">Book Appointment Now</a>
+      
+      <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/50">
+        <p>© 2026 BrightSmile Dental Clinic. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="index.html" class="hover:text-white transition-colors">Home</a>
+          <a href="services.html" class="hover:text-white transition-colors">Services</a>
+          <a href="doctor.html" class="hover:text-white transition-colors">Doctor</a>
+          <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

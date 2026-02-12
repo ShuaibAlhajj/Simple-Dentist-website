@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - BrightSmile Dental Clinic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        },
+                        accent: {
+                            500: '#10b981',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+        }
+        .contact-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-brand-50 font-sans text-brand-900 selection:bg-brand-100">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center text-white text-xl shadow-lg shadow-brand-500/20 group-hover:rotate-12 transition-transform">
+                    🦷
+                </div>
+                <span class="font-display text-2xl font-extrabold tracking-tight">BrightSmile</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="font-semibold hover:text-brand-500 transition-colors">Home</a>
+                <a href="services.html" class="font-semibold hover:text-brand-500 transition-colors">Services</a>
+                <a href="doctor.html" class="font-semibold hover:text-brand-500 transition-colors">Our Doctor</a>
+                <a href="contact.html" class="font-semibold text-brand-500">Contact</a>
+                <a href="appointment.html" class="px-6 py-2.5 bg-brand-900 text-white rounded-full font-bold hover:bg-brand-800 transition-all shadow-lg shadow-brand-900/10">Book Now</a>
+            </div>
+
+            <button class="md:hidden text-2xl">☰</button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="pt-32 pb-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <span class="inline-block px-4 py-1.5 bg-brand-100 text-brand-600 rounded-full text-sm font-bold tracking-wide uppercase mb-6">Get In Touch</span>
+            <h1 class="font-display text-5xl md:text-6xl font-extrabold mb-6 leading-tight">We're Here to Help Your <br><span class="text-brand-500">Smile Shine</span></h1>
+            <p class="text-xl text-brand-700/70 max-w-2xl mx-auto leading-relaxed">Have questions about our services or want to schedule a visit? Our friendly team is ready to assist you.</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 pb-24">
+        <div class="grid lg:grid-cols-3 gap-8 -mt-10">
+            <!-- Contact Info Cards -->
+            <div class="contact-card bg-white p-8 rounded-[2rem] border border-brand-100 shadow-xl shadow-brand-500/5">
+                <div class="w-14 h-14 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center text-2xl mb-6">📍</div>
+                <h3 class="font-display text-xl font-bold mb-3">Our Location</h3>
+                <p class="text-brand-700/70 leading-relaxed mb-4">123 Dental Plaza, Suite 400<br>Medical District, City 56789</p>
+                <a href="#" class="text-brand-500 font-bold hover:underline">Get Directions →</a>
+            </div>
+
+            <div class="contact-card bg-white p-8 rounded-[2rem] border border-brand-100 shadow-xl shadow-brand-500/5">
+                <div class="w-14 h-14 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center text-2xl mb-6">📞</div>
+                <h3 class="font-display text-xl font-bold mb-3">Phone & Email</h3>
+                <p class="text-brand-700/70 leading-relaxed mb-2">Main: (555) 123-4567</p>
+                <p class="text-brand-700/70 leading-relaxed mb-4">Email: hello@brightsmile.com</p>
+                <a href="tel:5551234567" class="text-brand-500 font-bold hover:underline">Call Us Now →</a>
+            </div>
+
+            <div class="contact-card bg-white p-8 rounded-[2rem] border border-brand-100 shadow-xl shadow-brand-500/5">
+                <div class="w-14 h-14 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center text-2xl mb-6">⏰</div>
+                <h3 class="font-display text-xl font-bold mb-3">Working Hours</h3>
+                <p class="text-brand-700/70 leading-relaxed">Mon - Fri: 8:00 AM - 6:00 PM</p>
+                <p class="text-brand-700/70 leading-relaxed">Sat: 9:00 AM - 2:00 PM</p>
+                <p class="text-brand-700/70 leading-relaxed mt-2 text-sm italic">Closed on Sundays</p>
+            </div>
+        </div>
+
+        <div class="mt-20 grid lg:grid-cols-2 gap-12">
+            <!-- Contact Form -->
+            <div class="bg-white p-8 md:p-12 rounded-[2.5rem] border border-brand-100 shadow-2xl shadow-brand-500/5">
+                <h2 class="font-display text-3xl font-bold mb-8">Send us a Message</h2>
+                <form id="contactForm" class="space-y-6">
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-bold text-brand-900 mb-2">Full Name</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="Jane Doe">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-brand-900 mb-2">Email Address</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="jane@example.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-brand-900 mb-2">Subject</label>
+                        <select class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all bg-white">
+                            <option>General Inquiry</option>
+                            <option>Billing Question</option>
+                            <option>Feedback</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-brand-900 mb-2">Your Message</label>
+                        <textarea rows="5" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all resize-none" placeholder="How can we help you?"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-brand-500 text-white font-bold rounded-xl hover:bg-brand-600 transition-all shadow-lg shadow-brand-500/20 active:scale-[0.98]">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+
+            <!-- Map Placeholder -->
+            <div class="rounded-[2.5rem] overflow-hidden border border-brand-100 shadow-2xl shadow-brand-500/5 relative min-h-[400px] bg-brand-100">
+                <!-- Replace with actual Google Maps iframe if needed -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-4xl mb-4 shadow-lg">🗺️</div>
+                    <h3 class="font-display text-2xl font-bold mb-2">Interactive Map</h3>
+                    <p class="text-brand-700/70 max-w-xs">We're located in the heart of the city, easily accessible by public transport.</p>
+                    <div class="mt-8 px-6 py-3 bg-brand-900 text-white rounded-full font-bold text-sm">Open in Google Maps</div>
+                </div>
+                <!-- Simulated Map Texture -->
+                <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#0c4a6e 0.5px, transparent 0.5px); background-size: 20px 20px;"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-900 text-white py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-2">
+                    <a href="index.html" class="flex items-center gap-2 mb-6">
+                        <div class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center text-white text-xl">🦷</div>
+                        <span class="font-display text-2xl font-extrabold tracking-tight">BrightSmile</span>
+                    </a>
+                    <p class="text-brand-100/60 max-w-sm leading-relaxed mb-8">Providing world-class dental care with a personal touch. Your journey to a perfect smile starts here with our expert team and modern technology.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-500 transition-colors">f</a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-500 transition-colors">t</a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-500 transition-colors">i</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-display text-lg font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-4 text-brand-100/60">
+                        <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="doctor.html" class="hover:text-white transition-colors">Our Doctor</a></li>
+                        <li><a href="appointment.html" class="hover:text-white transition-colors">Book Appointment</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-display text-lg font-bold mb-6">Newsletter</h4>
+                    <p class="text-brand-100/60 text-sm mb-4">Get oral health tips and clinic updates.</p>
+                    <form class="flex gap-2">
+                        <input type="email" placeholder="Email" class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-500 w-full">
+                        <button class="px-4 py-2 bg-brand-500 rounded-lg text-sm font-bold">Join</button>
+                    </form>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-white/5 flex flex-col md:row justify-between items-center gap-4 text-brand-100/40 text-sm">
+                <p>© 2026 BrightSmile Dental Clinic. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
