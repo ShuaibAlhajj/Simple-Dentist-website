@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
       navToggle.setAttribute('aria-expanded', String(!expanded));
       navMenu.classList.toggle('hidden');
+      if (navMenu.classList.contains('hidden')) {
+        navMenu.classList.remove('flex');
+      } else {
+        navMenu.classList.add('flex');
+      }
     });
   }
 
