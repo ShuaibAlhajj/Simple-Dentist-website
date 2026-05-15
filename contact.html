@@ -66,7 +66,16 @@
                 <a href="appointment.html" class="px-6 py-2.5 bg-brand-900 text-white rounded-full font-bold hover:bg-brand-800 transition-all shadow-lg shadow-brand-900/10">Book Now</a>
             </div>
 
-            <button class="md:hidden text-2xl">☰</button>
+            <button class="md:hidden text-2xl p-2 rounded-lg hover:bg-brand-50 transition-colors" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle>☰</button>
+        </div>
+
+        <!-- Mobile Nav -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border-b border-brand-100 p-4 space-y-4 shadow-xl" data-nav-menu>
+            <a href="index.html" class="block font-medium py-2">Home</a>
+            <a href="services.html" class="block font-medium py-2">Services</a>
+            <a href="doctor.html" class="block font-medium py-2">The Doctor</a>
+            <a href="contact.html" class="block font-medium py-2 text-brand-500">Contact</a>
+            <a href="appointment.html" class="block w-full py-4 rounded-xl bg-brand-500 text-white text-center font-bold">Book Appointment</a>
         </div>
     </nav>
 
@@ -199,6 +208,6 @@
         </div>
     </footer>
 
-    <script src="main.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
