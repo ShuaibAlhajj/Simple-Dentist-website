@@ -25,6 +25,10 @@
               600: '#0284c7',
               700: '#0369a1',
               900: '#0c4a6e',
+            },
+            accent: {
+              500: '#10b981',
+              600: '#059669',
             }
           },
           fontFamily: {
@@ -199,15 +203,15 @@
   </main>
 
   <!-- Success Modal -->
-  <div id="successModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+  <div id="successModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="absolute inset-0 bg-brand-900/60 backdrop-blur-sm"></div>
     <div class="bg-white rounded-[2rem] p-8 md:p-12 max-w-md w-full relative z-10 text-center shadow-2xl scale-95 opacity-0 transition-all duration-300" id="modalContent">
-      <div class="w-20 h-20 bg-accent-500 text-white rounded-full flex items-center justify-center mx-auto mb-8 text-4xl shadow-lg shadow-accent-500/30">
+      <div class="w-20 h-20 bg-accent-500 text-white rounded-full flex items-center justify-center mx-auto mb-8 text-4xl shadow-lg shadow-accent-500/30" aria-hidden="true">
         ✓
       </div>
-      <h2 class="font-display text-3xl font-bold mb-4">Request Sent!</h2>
+      <h2 id="modalTitle" class="font-display text-3xl font-bold mb-4">Request Sent!</h2>
       <p class="text-brand-700/70 mb-8 leading-relaxed">Thank you for choosing BrightSmile. We've received your request and will call you shortly to confirm your appointment.</p>
-      <button onclick="closeModal()" class="w-full py-4 rounded-xl bg-brand-900 text-white font-bold hover:bg-brand-800 transition-colors">
+      <button class="w-full py-4 rounded-xl bg-brand-900 text-white font-bold hover:bg-brand-800 transition-colors" aria-label="Close success message">
         Got it, thanks!
       </button>
     </div>

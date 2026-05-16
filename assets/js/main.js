@@ -64,7 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const service = document.getElementById('service');
       const date = document.getElementById('date');
       const time = document.getElementById('time');
-      const name = document.getElementById('name');
+      const firstName = document.getElementById('firstName');
+      const lastName = document.getElementById('lastName');
       const phone = document.getElementById('phone');
       const email = document.getElementById('email');
 
@@ -73,6 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const msg = document.querySelector(`[data-error-for="${fieldId}"]`);
         if (!msg) return;
         msg.classList.toggle('hidden', !hasError);
+        const input = document.getElementById(fieldId);
+        if (input) {
+          input.classList.toggle('border-red-500', hasError);
+          input.classList.toggle('ring-red-100', hasError);
+        }
       };
 
       const phoneValid = phone && /^\+?\d{7,15}$/.test(phone.value.trim());
@@ -81,42 +87,69 @@ document.addEventListener('DOMContentLoaded', () => {
       setError('service', !service || !service.value);
       setError('date', !date || !date.value);
       setError('time', !time || !time.value);
-      setError('name', !name || name.value.trim().length < 2);
+      setError('firstName', !firstName || firstName.value.trim().length < 2);
+      setError('lastName', !lastName || lastName.value.trim().length < 2);
       setError('phone', !phoneValid);
       setError('email', !emailValid);
 
       if (!service || !service.value) errors.push('service');
       if (!date || !date.value) errors.push('date');
       if (!time || !time.value) errors.push('time');
-      if (!name || name.value.trim().length < 2) errors.push('name');
+      if (!firstName || firstName.value.trim().length < 2) errors.push('firstName');
+      if (!lastName || lastName.value.trim().length < 2) errors.push('lastName');
       if (!phoneValid) errors.push('phone');
       if (!emailValid) errors.push('email');
 
       if (errors.length === 0) {
-        const modal = document.getElementById('successModal');
-        if (modal) {
-          modal.classList.remove('hidden');
-          modal.classList.add('flex');
-          const closeBtn = modal.querySelector('[data-close-modal]');
-          closeBtn?.addEventListener('click', () => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-          }, { once: true });
-          modal.addEventListener('click', (ev) => {
-            if (ev.target === modal) {
-              modal.classList.add('hidden');
-              modal.classList.remove('flex');
-            }
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Sending...
+        `;
+
+        setTimeout(() => {
+          const modal = document.getElementById('successModal');
+          const modalContent = document.getElementById('modalContent');
+          if (modal && modalContent) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // Trigger transition
+            setTimeout(() => {
+              modalContent.classList.remove('scale-95', 'opacity-0');
+              modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+
+            const closeBtn = modal.querySelector('button');
+            const closeHandler = () => {
+              modalContent.classList.add('scale-95', 'opacity-0');
+              modalContent.classList.remove('scale-100', 'opacity-100');
+              setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+              }, 300);
+            };
+            closeBtn?.addEventListener('click', closeHandler, { once: true });
+            modal.addEventListener('click', (ev) => {
+              if (ev.target === modal) closeHandler();
+            }, { once: true });
+          } else {
+            alert('Appointment confirmed. Thank you!');
+          }
+
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+          form.reset();
+          if (hiddenTime) hiddenTime.value = '';
+          slotsContainer?.querySelectorAll('button[data-time]').forEach((b) => {
+            b.classList.remove('border-primary', 'bg-sky-50', 'text-primary');
+            b.classList.add('border-gray-300');
           });
-        } else {
-          alert('Appointment confirmed. Thank you!');
-        }
-        form.reset();
-        hiddenTime.value = '';
-        slotsContainer?.querySelectorAll('button[data-time]').forEach((b) => {
-          b.classList.remove('border-primary', 'bg-sky-50', 'text-primary');
-          b.classList.add('border-gray-300');
-        });
+        }, 1000);
       } else {
         const firstErrorField = document.getElementById(errors[0]);
         firstErrorField?.focus();
