@@ -122,17 +122,17 @@
                 <form id="contactForm" class="space-y-6">
                     <div class="grid sm:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-bold text-brand-900 mb-2">Full Name</label>
-                            <input type="text" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="Jane Doe">
+                            <label for="cname" class="block text-sm font-bold text-brand-900 mb-2">Full Name</label>
+                            <input type="text" id="cname" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="Jane Doe">
                         </div>
                         <div>
-                            <label class="block text-sm font-bold text-brand-900 mb-2">Email Address</label>
-                            <input type="email" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="jane@example.com">
+                            <label for="cemail" class="block text-sm font-bold text-brand-900 mb-2">Email Address</label>
+                            <input type="email" id="cemail" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="jane@example.com">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold text-brand-900 mb-2">Subject</label>
-                        <select class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all bg-white">
+                        <label for="csubject" class="block text-sm font-bold text-brand-900 mb-2">Subject</label>
+                        <select id="csubject" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all bg-white">
                             <option>General Inquiry</option>
                             <option>Billing Question</option>
                             <option>Feedback</option>
@@ -140,8 +140,8 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold text-brand-900 mb-2">Your Message</label>
-                        <textarea rows="5" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all resize-none" placeholder="How can we help you?"></textarea>
+                        <label for="cmessage" class="block text-sm font-bold text-brand-900 mb-2">Your Message</label>
+                        <textarea id="cmessage" rows="5" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all resize-none" placeholder="How can we help you?"></textarea>
                     </div>
                     <button type="submit" class="w-full py-4 bg-brand-500 text-white font-bold rounded-xl hover:bg-brand-600 transition-all shadow-lg shadow-brand-500/20 active:scale-[0.98]">
                         Send Message
