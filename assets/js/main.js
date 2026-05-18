@@ -16,15 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('#site-nav a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('nav a[href$=".html"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href.endsWith(current) || (current === '' && href.endsWith('index.html'));
       if (isActive) {
         a.setAttribute('aria-current', 'page');
-        a.classList.add('text-primary', 'font-semibold');
+        a.classList.add('text-brand-500', 'font-bold');
       } else {
         a.removeAttribute('aria-current');
-        a.classList.remove('text-primary', 'font-semibold');
+        a.classList.remove('text-brand-500', 'font-bold');
       }
     });
   };
@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const btn = e.target.closest('button[data-time]');
       if (!btn) return;
       slotsContainer.querySelectorAll('button[data-time]').forEach((b) => {
-        b.classList.remove('border-primary', 'bg-sky-50', 'text-primary');
-        b.classList.add('border-gray-300');
+        b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-500');
+        b.classList.add('border-brand-100');
       });
-      btn.classList.remove('border-gray-300');
-      btn.classList.add('border-primary', 'bg-sky-50', 'text-primary');
+      btn.classList.remove('border-brand-100');
+      btn.classList.add('border-brand-500', 'bg-brand-50', 'text-brand-500');
       hiddenTime.value = btn.getAttribute('data-time') || '';
     });
   }
@@ -146,8 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
           form.reset();
           if (hiddenTime) hiddenTime.value = '';
           slotsContainer?.querySelectorAll('button[data-time]').forEach((b) => {
-            b.classList.remove('border-primary', 'bg-sky-50', 'text-primary');
-            b.classList.add('border-gray-300');
+            b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-500');
+            b.classList.add('border-brand-100');
           });
         }, 1000);
       } else {
