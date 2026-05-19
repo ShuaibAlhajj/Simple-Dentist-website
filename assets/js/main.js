@@ -57,6 +57,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const setError = (fieldId, hasError) => {
+    const msg = document.querySelector(`[data-error-for="${fieldId}"]`);
+    if (!msg) return;
+    msg.classList.toggle('hidden', !hasError);
+    const input = document.getElementById(fieldId);
+    if (input) {
+      input.classList.toggle('border-red-500', hasError);
+      input.classList.toggle('ring-red-100', hasError);
+    }
+  };
+
+  const showSuccessModal = (title, message, onDone) => {
+    const modal = document.getElementById('successModal');
+    const modalContent = document.getElementById('modalContent');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalText = modal?.querySelector('p');
+
+    if (modal && modalContent) {
+      if (modalTitle && title) modalTitle.textContent = title;
+      if (modalText && message) modalText.textContent = message;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      // Trigger transition
+      setTimeout(() => {
+        modalContent.classList.remove('scale-95', 'opacity-0');
+        modalContent.classList.add('scale-100', 'opacity-100');
+      }, 10);
+
+      const closeBtn = modal.querySelector('button');
+      const closeHandler = () => {
+        modalContent.classList.add('scale-95', 'opacity-0');
+        modalContent.classList.remove('scale-100', 'opacity-100');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+          if (onDone) onDone();
+        }, 300);
+      };
+      closeBtn?.addEventListener('click', closeHandler, { once: true });
+      modal.addEventListener('click', (ev) => {
+        if (ev.target === modal) closeHandler();
+      }, { once: true });
+    } else {
+      alert(message || title);
+      if (onDone) onDone();
+    }
+  };
+
   const form = document.getElementById('appointmentForm');
   if (form) {
     form.addEventListener('submit', (e) => {
@@ -70,17 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = document.getElementById('email');
 
       const errors = [];
-      const setError = (fieldId, hasError) => {
-        const msg = document.querySelector(`[data-error-for="${fieldId}"]`);
-        if (!msg) return;
-        msg.classList.toggle('hidden', !hasError);
-        const input = document.getElementById(fieldId);
-        if (input) {
-          input.classList.toggle('border-red-500', hasError);
-          input.classList.toggle('ring-red-100', hasError);
-        }
-      };
-
       const phoneValid = phone && /^\+?\d{7,15}$/.test(phone.value.trim());
       const emailValid = email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
 
@@ -113,42 +151,21 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         setTimeout(() => {
-          const modal = document.getElementById('successModal');
-          const modalContent = document.getElementById('modalContent');
-          if (modal && modalContent) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            // Trigger transition
-            setTimeout(() => {
-              modalContent.classList.remove('scale-95', 'opacity-0');
-              modalContent.classList.add('scale-100', 'opacity-100');
-            }, 10);
-
-            const closeBtn = modal.querySelector('button');
-            const closeHandler = () => {
-              modalContent.classList.add('scale-95', 'opacity-0');
-              modalContent.classList.remove('scale-100', 'opacity-100');
-              setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-              }, 300);
-            };
-            closeBtn?.addEventListener('click', closeHandler, { once: true });
-            modal.addEventListener('click', (ev) => {
-              if (ev.target === modal) closeHandler();
-            }, { once: true });
-          } else {
-            alert('Appointment confirmed. Thank you!');
-          }
+          showSuccessModal(
+            'Request Sent!',
+            "Thank you for choosing BrightSmile. We've received your request and will call you shortly to confirm your appointment.",
+            () => {
+              form.reset();
+              if (hiddenTime) hiddenTime.value = '';
+              slotsContainer?.querySelectorAll('button[data-time]').forEach((b) => {
+                b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-500');
+                b.classList.add('border-brand-100');
+              });
+            }
+          );
 
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
-          form.reset();
-          if (hiddenTime) hiddenTime.value = '';
-          slotsContainer?.querySelectorAll('button[data-time]').forEach((b) => {
-            b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-500');
-            b.classList.add('border-brand-100');
-          });
         }, 1000);
       } else {
         const firstErrorField = document.getElementById(errors[0]);
@@ -164,12 +181,41 @@ document.addEventListener('DOMContentLoaded', () => {
       const cname = document.getElementById('cname');
       const cemail = document.getElementById('cemail');
       const cmessage = document.getElementById('cmessage');
+
       const emailValid = cemail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cemail.value.trim());
-      if (cname && cname.value.trim().length >= 2 && emailValid && cmessage && cmessage.value.trim().length >= 5) {
-        alert('Thank you for reaching out. We will get back to you soon.');
-        contactForm.reset();
+      const nameValid = cname && cname.value.trim().length >= 2;
+      const messageValid = cmessage && cmessage.value.trim().length >= 5;
+
+      setError('cname', !nameValid);
+      setError('cemail', !emailValid);
+      setError('cmessage', !messageValid);
+
+      if (nameValid && emailValid && messageValid) {
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Sending...
+        `;
+
+        setTimeout(() => {
+          showSuccessModal(
+            'Message Sent!',
+            "Thank you for reaching out to BrightSmile. We've received your message and our team will get back to you shortly.",
+            () => {
+              contactForm.reset();
+            }
+          );
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        }, 1000);
       } else {
-        alert('Please fill in your name, a valid email, and a short message.');
+        const firstError = !nameValid ? cname : (!emailValid ? cemail : cmessage);
+        firstError?.focus();
       }
     });
   }
