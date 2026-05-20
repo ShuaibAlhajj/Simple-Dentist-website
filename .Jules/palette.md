@@ -15,3 +15,9 @@
 **Learning:** Centralizing form validation (`setError`) and success feedback (`showSuccessModal`) in a shared script ensures a consistent user experience across different forms (Appointment vs. Contact). Using the `novalidate` attribute on forms is crucial when implementing custom client-side validation to prevent browser-default tooltips from clashing with custom UI.
 
 **Action:** Always use a `novalidate` attribute on `<form>` tags when using custom JS validation, and use shared utility functions for recurring UI patterns like success modals.
+
+## 2026-05-20 - Enhanced Form Accessibility and Focus Management
+
+**Learning:** Accessible forms require more than just visual feedback; they must include ARIA attributes (`aria-invalid`, `aria-describedby`) linked to error messages to inform assistive technology users. Furthermore, focus management is a critical part of UX—ensuring that error states and new modal windows correctly move the keyboard focus prevents "focus traps" and provides clear guidance on the next required action.
+
+**Action:** When implementing custom validation, always synchronize ARIA states with visual errors and explicitly manage focus for both error states and modal entries to maintain an intuitive keyboard flow.

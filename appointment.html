@@ -134,12 +134,12 @@
                 <div>
                   <label for="firstName" class="block text-sm font-bold text-brand-900 mb-2">First Name</label>
                   <input type="text" id="firstName" name="firstName" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="John">
-                  <p class="mt-1 text-xs text-red-500 hidden" data-error-for="firstName">Required</p>
+                  <p id="error-firstName" class="mt-1 text-xs text-red-500 hidden" data-error-for="firstName">Required</p>
                 </div>
                 <div>
                   <label for="lastName" class="block text-sm font-bold text-brand-900 mb-2">Last Name</label>
                   <input type="text" id="lastName" name="lastName" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="Doe">
-                  <p class="mt-1 text-xs text-red-500 hidden" data-error-for="lastName">Required</p>
+                  <p id="error-lastName" class="mt-1 text-xs text-red-500 hidden" data-error-for="lastName">Required</p>
                 </div>
               </div>
 
@@ -147,12 +147,12 @@
                 <div>
                   <label for="email" class="block text-sm font-bold text-brand-900 mb-2">Email Address</label>
                   <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="john@example.com">
-                  <p class="mt-1 text-xs text-red-500 hidden" data-error-for="email">Invalid email</p>
+                  <p id="error-email" class="mt-1 text-xs text-red-500 hidden" data-error-for="email">Invalid email</p>
                 </div>
                 <div>
                   <label for="phone" class="block text-sm font-bold text-brand-900 mb-2">Phone Number</label>
                   <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="(555) 000-0000">
-                  <p class="mt-1 text-xs text-red-500 hidden" data-error-for="phone">Required</p>
+                  <p id="error-phone" class="mt-1 text-xs text-red-500 hidden" data-error-for="phone">Required</p>
                 </div>
               </div>
 
@@ -166,26 +166,26 @@
                   <option value="checkup">General Checkup</option>
                   <option value="emergency">Emergency Visit</option>
                 </select>
-                <p class="mt-1 text-xs text-red-500 hidden" data-error-for="service">Please select a service</p>
+                <p id="error-service" class="mt-1 text-xs text-red-500 hidden" data-error-for="service">Please select a service</p>
               </div>
 
               <div class="grid sm:grid-cols-2 gap-6">
                 <div class="sm:col-span-1">
                   <label for="date" class="block text-sm font-bold text-brand-900 mb-2">Preferred Date</label>
                   <input type="date" id="date" name="date" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
-                  <p class="mt-1 text-xs text-red-500 hidden" data-error-for="date">Required</p>
+                  <p id="error-date" class="mt-1 text-xs text-red-500 hidden" data-error-for="date">Required</p>
                 </div>
                 <div class="sm:col-span-2">
                   <label class="block text-sm font-bold text-brand-900 mb-4">Preferred Time</label>
                   <div id="timeSlots" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                    <button type="button" data-time="09:00" class="px-4 py-3 rounded-xl border border-brand-100 text-sm font-medium hover:border-brand-500 hover:bg-brand-50 transition-all">09:00 AM</button>
-                    <button type="button" data-time="10:30" class="px-4 py-3 rounded-xl border border-brand-100 text-sm font-medium hover:border-brand-500 hover:bg-brand-50 transition-all">10:30 AM</button>
-                    <button type="button" data-time="13:00" class="px-4 py-3 rounded-xl border border-brand-100 text-sm font-medium hover:border-brand-500 hover:bg-brand-50 transition-all">01:00 PM</button>
-                    <button type="button" data-time="14:30" class="px-4 py-3 rounded-xl border border-brand-100 text-sm font-medium hover:border-brand-500 hover:bg-brand-50 transition-all">02:30 PM</button>
-                    <button type="button" data-time="16:00" class="px-4 py-3 rounded-xl border border-brand-100 text-sm font-medium hover:border-brand-500 hover:bg-brand-50 transition-all">04:00 PM</button>
+                    <button type="button" data-time="09:00" aria-pressed="false" class="px-4 py-3 rounded-xl border border-brand-100 text-sm font-medium hover:border-brand-500 hover:bg-brand-50 transition-all">09:00 AM</button>
+                    <button type="button" data-time="10:30" aria-pressed="false" class="px-4 py-3 rounded-xl border border-brand-100 text-sm font-medium hover:border-brand-500 hover:bg-brand-50 transition-all">10:30 AM</button>
+                    <button type="button" data-time="13:00" aria-pressed="false" class="px-4 py-3 rounded-xl border border-brand-100 text-sm font-medium hover:border-brand-500 hover:bg-brand-50 transition-all">01:00 PM</button>
+                    <button type="button" data-time="14:30" aria-pressed="false" class="px-4 py-3 rounded-xl border border-brand-100 text-sm font-medium hover:border-brand-500 hover:bg-brand-50 transition-all">02:30 PM</button>
+                    <button type="button" data-time="16:00" aria-pressed="false" class="px-4 py-3 rounded-xl border border-brand-100 text-sm font-medium hover:border-brand-500 hover:bg-brand-50 transition-all">04:00 PM</button>
                   </div>
                   <input type="hidden" id="time" name="time" required>
-                  <p class="mt-2 text-xs text-red-500 hidden" data-error-for="time">Please select a time slot</p>
+                  <p id="error-time" class="mt-2 text-xs text-red-500 hidden" data-error-for="time">Please select a time slot</p>
                 </div>
               </div>
 
