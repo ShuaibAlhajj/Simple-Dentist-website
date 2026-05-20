@@ -30,6 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   setActiveNav();
 
+  const dateInput = document.getElementById('date');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('href')?.slice(1);
@@ -50,9 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
       slotsContainer.querySelectorAll('button[data-time]').forEach((b) => {
         b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-500');
         b.classList.add('border-brand-100');
+        b.setAttribute('aria-pressed', 'false');
       });
       btn.classList.remove('border-brand-100');
       btn.classList.add('border-brand-500', 'bg-brand-50', 'text-brand-500');
+      btn.setAttribute('aria-pressed', 'true');
       hiddenTime.value = btn.getAttribute('data-time') || '';
     });
   }
@@ -65,6 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (input) {
       input.classList.toggle('border-red-500', hasError);
       input.classList.toggle('ring-red-100', hasError);
+      if (hasError) {
+        input.setAttribute('aria-invalid', 'true');
+        input.setAttribute('aria-describedby', `error-${fieldId}`);
+      } else {
+        input.removeAttribute('aria-invalid');
+        input.removeAttribute('aria-describedby');
+      }
     }
   };
 
@@ -84,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         modalContent.classList.remove('scale-95', 'opacity-0');
         modalContent.classList.add('scale-100', 'opacity-100');
+        modal.querySelector('button')?.focus();
       }, 10);
 
       const closeBtn = modal.querySelector('button');
@@ -160,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
               slotsContainer?.querySelectorAll('button[data-time]').forEach((b) => {
                 b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-500');
                 b.classList.add('border-brand-100');
+                b.setAttribute('aria-pressed', 'false');
               });
             }
           );
@@ -168,7 +185,10 @@ document.addEventListener('DOMContentLoaded', () => {
           submitBtn.innerHTML = originalText;
         }, 1000);
       } else {
-        const firstErrorField = document.getElementById(errors[0]);
+        let firstErrorField = document.getElementById(errors[0]);
+        if (errors[0] === 'time') {
+          firstErrorField = slotsContainer?.querySelector('button[data-time]');
+        }
         firstErrorField?.focus();
       }
     });
