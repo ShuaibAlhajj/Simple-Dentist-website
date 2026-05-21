@@ -12,11 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
         navMenu.classList.add('flex');
       }
     });
+
+    navMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navToggle.setAttribute('aria-expanded', 'false');
+        navMenu.classList.add('hidden');
+        navMenu.classList.remove('flex');
+      });
+    });
   }
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('nav a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href.endsWith(current) || (current === '' && href.endsWith('index.html'));
       if (isActive) {
@@ -239,4 +247,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  const backToTop = document.createElement('button');
+  backToTop.innerHTML = '↑';
+  backToTop.ariaLabel = 'Back to top';
+  backToTop.className = 'fixed bottom-8 right-8 w-12 h-12 bg-brand-500 text-white rounded-full shadow-xl shadow-brand-500/30 flex items-center justify-center text-2xl z-40 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none hover:bg-brand-600 active:scale-95 focus:outline-none focus:ring-4 focus:ring-brand-500/50';
+  document.body.appendChild(backToTop);
+
+  window.addEventListener('scroll', () => {
+    const isVisible = window.scrollY > 400;
+    backToTop.classList.toggle('opacity-0', !isVisible);
+    backToTop.classList.toggle('translate-y-10', !isVisible);
+    backToTop.classList.toggle('pointer-events-none', !isVisible);
+    backToTop.classList.toggle('opacity-100', isVisible);
+    backToTop.classList.toggle('translate-y-0', isVisible);
+    backToTop.classList.toggle('pointer-events-auto', isVisible);
+  });
+
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 });
