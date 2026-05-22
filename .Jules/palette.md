@@ -21,3 +21,9 @@
 **Learning:** Accessible forms require more than just visual feedback; they must include ARIA attributes (`aria-invalid`, `aria-describedby`) linked to error messages to inform assistive technology users. Furthermore, focus management is a critical part of UX—ensuring that error states and new modal windows correctly move the keyboard focus prevents "focus traps" and provides clear guidance on the next required action.
 
 **Action:** When implementing custom validation, always synchronize ARIA states with visual errors and explicitly manage focus for both error states and modal entries to maintain an intuitive keyboard flow.
+
+## 2026-05-20 - Global UX Elements Injection Pattern
+
+**Learning:** In a static multi-page website, global UX enhancements like a "Back to Top" button can be programmatically injected via a shared script to ensure consistency without modifying every HTML file. These elements must include proper accessibility features (ARIA labels, focus states) and smooth transitions (using Tailwind's `transition-all`, `opacity`, and `translate`) to feel integrated.
+
+**Action:** Use a centralized JavaScript file to inject and manage global UI components, ensuring they are initialized within a `DOMContentLoaded` listener and use consistent design tokens and accessibility standards.
