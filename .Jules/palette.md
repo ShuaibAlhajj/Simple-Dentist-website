@@ -21,3 +21,9 @@
 **Learning:** Accessible forms require more than just visual feedback; they must include ARIA attributes (`aria-invalid`, `aria-describedby`) linked to error messages to inform assistive technology users. Furthermore, focus management is a critical part of UX—ensuring that error states and new modal windows correctly move the keyboard focus prevents "focus traps" and provides clear guidance on the next required action.
 
 **Action:** When implementing custom validation, always synchronize ARIA states with visual errors and explicitly manage focus for both error states and modal entries to maintain an intuitive keyboard flow.
+
+## 2026-05-21 - Improving Global Accessibility with Aria-Labels and Navigation Aids
+
+**Learning:** Micro-UX enhancements like adding a 'Back to Top' button significantly improve navigation on long pages, while descriptive `aria-label` attributes for social media links are essential for providing context to screen reader users who would otherwise encounter ambiguous abbreviations or single-letter links.
+
+**Action:** Consistently audit footer links for descriptive accessibility labels and consider adding navigation aids (like 'Back to Top') for any page with substantial vertical content to enhance the overall user experience.
