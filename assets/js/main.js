@@ -239,4 +239,30 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Back to Top Button
+  const backToTopBtn = document.createElement('button');
+  backToTopBtn.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  `;
+  backToTopBtn.setAttribute('aria-label', 'Back to Top');
+  backToTopBtn.className = 'fixed bottom-8 right-8 p-3 rounded-full bg-brand-500 text-white shadow-lg opacity-0 invisible transition-all duration-300 z-50 hover:bg-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2';
+
+  document.body.appendChild(backToTopBtn);
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      backToTopBtn.classList.remove('opacity-0', 'invisible');
+      backToTopBtn.classList.add('opacity-100', 'visible');
+    } else {
+      backToTopBtn.classList.add('opacity-0', 'invisible');
+      backToTopBtn.classList.remove('opacity-100', 'visible');
+    }
+  });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 });
