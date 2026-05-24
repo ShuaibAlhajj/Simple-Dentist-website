@@ -27,3 +27,9 @@
 **Learning:** Micro-UX enhancements like 'Back to Top' buttons can be programmatically injected via shared scripts to provide consistent utility across long-form content without cluttering individual HTML files. Additionally, mobile navigation becomes significantly more intuitive when links automatically dismiss the menu, preventing users from having to manually toggle it closed after navigating to a section or page.
 
 **Action:** For multi-page static sites, use centralized JS to inject global UI utilities like scroll helpers. Ensure mobile menus listen for link clicks to provide a seamless transition between pages or sections.
+
+## 2026-05-22 - Form Autofill and Semantic Navigation States
+
+**Learning:** Small additions like `autocomplete` attributes on form fields significantly reduce friction by leveraging browser autofill. Furthermore, using `aria-current="page"` for active navigation links provides essential semantic context for assistive technologies, while ensuring active text colors meet a 4.5:1 contrast ratio (e.g., using `text-brand-600` instead of `text-brand-500` on white) improves readability for all users.
+
+**Action:** Always include appropriate `autocomplete` values for common form fields and use ARIA attributes to communicate navigation state. Verify that active link colors maintain sufficient contrast against their background.

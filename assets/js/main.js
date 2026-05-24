@@ -24,15 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    const navLinks = document.querySelectorAll('nav a[href$=".html"], [data-nav-menu] a[href$=".html"]');
+    navLinks.forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href.endsWith(current) || (current === '' && href.endsWith('index.html'));
       if (isActive) {
         a.setAttribute('aria-current', 'page');
-        a.classList.add('text-brand-500', 'font-bold');
+        a.classList.add('text-brand-600', 'font-bold');
       } else {
         a.removeAttribute('aria-current');
-        a.classList.remove('text-brand-500', 'font-bold');
+        a.classList.remove('text-brand-600', 'font-bold');
       }
     });
   };
