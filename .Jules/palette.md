@@ -27,3 +27,9 @@
 **Learning:** Micro-UX enhancements like 'Back to Top' buttons can be programmatically injected via shared scripts to provide consistent utility across long-form content without cluttering individual HTML files. Additionally, mobile navigation becomes significantly more intuitive when links automatically dismiss the menu, preventing users from having to manually toggle it closed after navigating to a section or page.
 
 **Action:** For multi-page static sites, use centralized JS to inject global UI utilities like scroll helpers. Ensure mobile menus listen for link clicks to provide a seamless transition between pages or sections.
+
+## 2026-05-22 - Precise Navigation Logic and Robust Attribute Management
+
+**Learning:** Dynamic navigation highlighting in static multi-page sites can easily lead to "active traps" where multiple links (like 'Home' and a subpage) appear active simultaneously if matching logic is too broad (e.g., using `endsWith`). Furthermore, when programmatically creating interactive elements, using `setAttribute('aria-label', ...)` is more reliable for screen reader compatibility than directly setting the `ariaLabel` property.
+
+**Action:** Implement exact string matching for navigation state logic. Always prefer `setAttribute` for defining ARIA attributes on programmatically injected DOM elements to ensure consistent assistive technology support.

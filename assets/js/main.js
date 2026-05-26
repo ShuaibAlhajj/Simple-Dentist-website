@@ -26,13 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const current = location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
-      const isActive = href.endsWith(current) || (current === '' && href.endsWith('index.html'));
+      const isActive = href === current || (current === 'index.html' && href === 'index.html');
       if (isActive) {
         a.setAttribute('aria-current', 'page');
-        a.classList.add('text-brand-500', 'font-bold');
+        a.classList.add('text-brand-600', 'font-bold');
       } else {
         a.removeAttribute('aria-current');
-        a.classList.remove('text-brand-500', 'font-bold');
+        a.classList.remove('text-brand-600', 'font-bold');
       }
     });
   };
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const backToTop = document.createElement('button');
   backToTop.innerHTML = '↑';
-  backToTop.ariaLabel = 'Back to top';
+  backToTop.setAttribute('aria-label', 'Back to top');
   backToTop.className = 'fixed bottom-8 right-8 w-12 h-12 bg-brand-500 text-white rounded-full shadow-xl shadow-brand-500/30 flex items-center justify-center text-2xl z-40 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none hover:bg-brand-600 active:scale-95 focus:outline-none focus:ring-4 focus:ring-brand-500/50';
   document.body.appendChild(backToTop);
 
