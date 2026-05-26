@@ -27,3 +27,9 @@
 **Learning:** Micro-UX enhancements like 'Back to Top' buttons can be programmatically injected via shared scripts to provide consistent utility across long-form content without cluttering individual HTML files. Additionally, mobile navigation becomes significantly more intuitive when links automatically dismiss the menu, preventing users from having to manually toggle it closed after navigating to a section or page.
 
 **Action:** For multi-page static sites, use centralized JS to inject global UI utilities like scroll helpers. Ensure mobile menus listen for link clicks to provide a seamless transition between pages or sections.
+
+## 2026-05-22 - Tailwind Utility Specificity and Dynamic Styling
+
+**Learning:** When using JavaScript to dynamically apply active states (like `text-brand-600`) on elements that already have default Tailwind utility classes in the source HTML (like `text-brand-500`), the dynamic class may fail to render correctly if the previous class is not explicitly removed. This is because both classes often have the same specificity, and the browser's application order might favor the one already in the DOM or the one appearing later in the stylesheet.
+
+**Action:** When implementing dynamic active states, always use JavaScript to explicitly remove conflicting utility classes before adding the new state-specific classes to ensure the visual change is reliable.
