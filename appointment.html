@@ -133,12 +133,12 @@
               <div class="grid sm:grid-cols-2 gap-6">
                 <div>
                   <label for="firstName" class="block text-sm font-bold text-brand-900 mb-2">First Name</label>
-                  <input type="text" id="firstName" name="firstName" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="John">
+                  <input type="text" id="firstName" name="firstName" required autocomplete="given-name" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="John">
                   <p id="error-firstName" class="mt-1 text-xs text-red-500 hidden" data-error-for="firstName">Required</p>
                 </div>
                 <div>
                   <label for="lastName" class="block text-sm font-bold text-brand-900 mb-2">Last Name</label>
-                  <input type="text" id="lastName" name="lastName" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="Doe">
+                  <input type="text" id="lastName" name="lastName" required autocomplete="family-name" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="Doe">
                   <p id="error-lastName" class="mt-1 text-xs text-red-500 hidden" data-error-for="lastName">Required</p>
                 </div>
               </div>
@@ -146,12 +146,12 @@
               <div class="grid sm:grid-cols-2 gap-6">
                 <div>
                   <label for="email" class="block text-sm font-bold text-brand-900 mb-2">Email Address</label>
-                  <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="john@example.com">
+                  <input type="email" id="email" name="email" required autocomplete="email" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="john@example.com">
                   <p id="error-email" class="mt-1 text-xs text-red-500 hidden" data-error-for="email">Invalid email</p>
                 </div>
                 <div>
                   <label for="phone" class="block text-sm font-bold text-brand-900 mb-2">Phone Number</label>
-                  <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="(555) 000-0000">
+                  <input type="tel" id="phone" name="phone" required autocomplete="tel" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="(555) 000-0000">
                   <p id="error-phone" class="mt-1 text-xs text-red-500 hidden" data-error-for="phone">Required</p>
                 </div>
               </div>
@@ -161,8 +161,13 @@
                 <select id="service" name="service" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all bg-white">
                   <option value="">Choose a service...</option>
                   <option value="cleaning">Routine Cleaning</option>
+                  <option value="fillings">Dental Fillings</option>
+                  <option value="pediatric">Pediatric Care</option>
                   <option value="whitening">Teeth Whitening</option>
-                  <option value="implant">Dental Implant Consultation</option>
+                  <option value="veneers">Porcelain Veneers</option>
+                  <option value="invisalign">Invisalign®</option>
+                  <option value="implant">Dental Implants</option>
+                  <option value="root-canal">Root Canal Therapy</option>
                   <option value="checkup">General Checkup</option>
                   <option value="emergency">Emergency Visit</option>
                 </select>

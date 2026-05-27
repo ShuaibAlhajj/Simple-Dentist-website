@@ -33,3 +33,9 @@
 **Learning:** Dynamic navigation highlighting in static multi-page sites can easily lead to "active traps" where multiple links (like 'Home' and a subpage) appear active simultaneously if matching logic is too broad (e.g., using `endsWith`). Furthermore, when programmatically creating interactive elements, using `setAttribute('aria-label', ...)` is more reliable for screen reader compatibility than directly setting the `ariaLabel` property.
 
 **Action:** Implement exact string matching for navigation state logic. Always prefer `setAttribute` for defining ARIA attributes on programmatically injected DOM elements to ensure consistent assistive technology support.
+
+## 2026-05-23 - Contextual Form Pre-filling and Browser Autocomplete
+
+**Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
+
+**Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
