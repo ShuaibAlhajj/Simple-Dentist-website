@@ -127,12 +127,12 @@
                     <div class="grid sm:grid-cols-2 gap-6">
                         <div>
                             <label for="cname" class="block text-sm font-bold text-brand-900 mb-2">Full Name</label>
-                            <input type="text" id="cname" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="Jane Doe">
+                            <input type="text" id="cname" required autocomplete="name" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="Jane Doe">
                             <p id="error-cname" class="mt-1 text-xs text-red-500 hidden" data-error-for="cname">Required (min 2 characters)</p>
                         </div>
                         <div>
                             <label for="cemail" class="block text-sm font-bold text-brand-900 mb-2">Email Address</label>
-                            <input type="email" id="cemail" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="jane@example.com">
+                            <input type="email" id="cemail" required autocomplete="email" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="jane@example.com">
                             <p id="error-cemail" class="mt-1 text-xs text-red-500 hidden" data-error-for="cemail">Invalid email</p>
                         </div>
                     </div>

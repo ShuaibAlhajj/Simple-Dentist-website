@@ -44,6 +44,16 @@ document.addEventListener('DOMContentLoaded', () => {
     dateInput.setAttribute('min', today);
   }
 
+  const prefillService = () => {
+    const params = new URLSearchParams(window.location.search);
+    const service = params.get('service');
+    const serviceSelect = document.getElementById('service');
+    if (service && serviceSelect) {
+      serviceSelect.value = service;
+    }
+  };
+  prefillService();
+
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('href')?.slice(1);
