@@ -275,4 +275,39 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const initFaqAccordion = () => {
+    const faqItems = document.querySelectorAll('[data-faq-item]');
+    faqItems.forEach((item) => {
+      const button = item.querySelector('button');
+      const content = item.querySelector('[role="region"]');
+      const icon = button.querySelector('svg');
+
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+
+        // Close all other items
+        faqItems.forEach((otherItem) => {
+          if (otherItem !== item) {
+            const otherButton = otherItem.querySelector('button');
+            const otherContent = otherItem.querySelector('[role="region"]');
+            const otherIcon = otherButton.querySelector('svg');
+
+            otherButton.setAttribute('aria-expanded', 'false');
+            otherContent.classList.add('hidden');
+            if (otherIcon) otherIcon.classList.remove('rotate-180');
+            otherItem.classList.remove('border-brand-500', 'shadow-md');
+          }
+        });
+
+        // Toggle current item
+        button.setAttribute('aria-expanded', String(!expanded));
+        content.classList.toggle('hidden');
+        if (icon) icon.classList.toggle('rotate-180');
+        item.classList.toggle('border-brand-500', !expanded);
+        item.classList.toggle('shadow-md', !expanded);
+      });
+    });
+  };
+  initFaqAccordion();
 });
