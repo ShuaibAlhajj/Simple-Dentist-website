@@ -275,4 +275,48 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Accordion Logic
+  const faqItems = document.querySelectorAll('[data-faq-item]');
+  faqItems.forEach((item) => {
+    const button = item.querySelector('button');
+    const content = item.querySelector('[role="region"]');
+    const icon = button.querySelector('svg');
+
+    button.addEventListener('click', () => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Close all other items (mutually exclusive)
+      faqItems.forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherButton = otherItem.querySelector('button');
+          const otherContent = otherItem.querySelector('[role="region"]');
+          const otherIcon = otherButton.querySelector('svg');
+
+          otherButton.setAttribute('aria-expanded', 'false');
+          otherContent.classList.remove('grid-rows-[1fr]');
+          otherContent.classList.add('grid-rows-[0fr]');
+          otherIcon.classList.remove('rotate-180');
+          otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+          otherItem.classList.add('border-brand-100');
+        }
+      });
+
+      // Toggle current item
+      button.setAttribute('aria-expanded', String(!isExpanded));
+      if (!isExpanded) {
+        content.classList.remove('grid-rows-[0fr]');
+        content.classList.add('grid-rows-[1fr]');
+        icon.classList.add('rotate-180');
+        item.classList.remove('border-brand-100');
+        item.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+      } else {
+        content.classList.remove('grid-rows-[1fr]');
+        content.classList.add('grid-rows-[0fr]');
+        icon.classList.remove('rotate-180');
+        item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        item.classList.add('border-brand-100');
+      }
+    });
+  });
 });

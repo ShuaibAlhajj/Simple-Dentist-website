@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Smooth Accordion Transitions with CSS Grid
+
+**Learning:** Implementing smooth "slide-down" transitions for elements with unknown heights (like accordion content) can be elegantly handled using CSS Grid's `grid-template-rows`. By transitioning from `0fr` to `1fr`, we avoid the jank of hardcoded `max-height` or the complexity of JavaScript height calculations, while maintaining a clean, declarative approach that integrates perfectly with Tailwind's utility classes.
+
+**Action:** For interactive components like accordions or expandable cards, use the `grid grid-rows-[0fr] transition-all` pattern to achieve smooth height animations without sacrificing accessibility or performance. Ensure the inner content has `overflow: hidden`.
