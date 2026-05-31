@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Efficient Height Transitions and State Sync
+
+**Learning:** Implementing accessible accordions with smooth height transitions can be achieved concisely using Tailwind's `grid-rows-[0fr]` to `grid-rows-[1fr]` pattern. This avoids the need for hardcoded height calculations in JavaScript. Mutually exclusive expansion improves focus but requires efficient state synchronization across all items to maintain performance and accessibility.
+
+**Action:** Prefer CSS-based height transitions for accordions. When implementing mutually exclusive behavior, use a single loop to synchronize ARIA states and visual classes across the component set.
