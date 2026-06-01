@@ -275,4 +275,39 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqItems = document.querySelectorAll('[data-faq-item]');
+  faqItems.forEach((item) => {
+    const button = item.querySelector('button');
+    const content = item.querySelector('[role="region"]');
+    const icon = button.querySelector('svg');
+
+    button.addEventListener('click', () => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Close all other items
+      faqItems.forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherButton = otherItem.querySelector('button');
+          const otherContent = otherItem.querySelector('[role="region"]');
+          const otherIcon = otherButton.querySelector('svg');
+
+          otherButton.setAttribute('aria-expanded', 'false');
+          otherContent.classList.remove('grid-rows-[1fr]');
+          otherContent.classList.add('grid-rows-[0fr]');
+          otherIcon.classList.remove('rotate-180');
+          otherItem.classList.remove('border-brand-500', 'ring-1', 'ring-brand-500/20');
+        }
+      });
+
+      // Toggle current item
+      button.setAttribute('aria-expanded', String(!isExpanded));
+      content.classList.toggle('grid-rows-[0fr]', isExpanded);
+      content.classList.toggle('grid-rows-[1fr]', !isExpanded);
+      icon.classList.toggle('rotate-180', !isExpanded);
+      item.classList.toggle('border-brand-500', !isExpanded);
+      item.classList.toggle('ring-1', !isExpanded);
+      item.classList.toggle('ring-brand-500/20', !isExpanded);
+    });
+  });
 });
