@@ -66,10 +66,10 @@
       </a>
 
       <div class="hidden md:flex items-center gap-8">
-        <a href="index.html" class="font-medium text-brand-700 hover:text-brand-500 transition-colors">Home</a>
-        <a href="services.html" class="font-medium text-brand-700 hover:text-brand-500 transition-colors">Services</a>
-        <a href="doctor.html" class="font-medium text-brand-700 hover:text-brand-500 transition-colors">The Doctor</a>
-        <a href="contact.html" class="font-medium text-brand-700 hover:text-brand-500 transition-colors">Contact</a>
+        <a href="index.html" data-nav-link class="font-medium text-brand-700 hover:text-brand-500 transition-colors">Home</a>
+        <a href="services.html" data-nav-link class="font-medium text-brand-700 hover:text-brand-500 transition-colors">Services</a>
+        <a href="doctor.html" data-nav-link class="font-medium text-brand-700 hover:text-brand-500 transition-colors">The Doctor</a>
+        <a href="contact.html" data-nav-link class="font-medium text-brand-700 hover:text-brand-500 transition-colors">Contact</a>
         <a href="appointment.html" class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-brand-500 text-white font-semibold shadow-lg shadow-brand-500/25">Book Now</a>
       </div>
 
@@ -81,12 +81,14 @@
     </nav>
 
     <!-- Mobile Nav -->
-    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border-b border-brand-100 p-4 space-y-4 shadow-xl" data-nav-menu>
-      <a href="index.html" class="block font-medium py-2">Home</a>
-      <a href="services.html" class="block font-medium py-2">Services</a>
-      <a href="doctor.html" class="block font-medium py-2">The Doctor</a>
-      <a href="contact.html" class="block font-medium py-2">Contact</a>
-      <a href="appointment.html" class="block w-full py-4 rounded-xl bg-brand-500 text-white text-center font-bold">Book Appointment</a>
+    <div id="mobile-menu" class="grid grid-rows-[0fr] invisible md:hidden absolute top-full left-0 right-0 bg-white border-b border-brand-100 shadow-xl transition-all duration-300 overflow-hidden" data-nav-menu>
+      <div class="min-h-0 p-4 space-y-4">
+        <a href="index.html" data-nav-link class="block font-medium py-2">Home</a>
+        <a href="services.html" data-nav-link class="block font-medium py-2">Services</a>
+        <a href="doctor.html" data-nav-link class="block font-medium py-2">The Doctor</a>
+        <a href="contact.html" data-nav-link class="block font-medium py-2">Contact</a>
+        <a href="appointment.html" class="block w-full py-4 rounded-xl bg-brand-500 text-white text-center font-bold">Book Appointment</a>
+      </div>
     </div>
   </header>
 

@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Accessible Transitions and Precise Navigation Selectors
+
+**Learning:** When implementing visual transitions (like height-based reveals), visual hiding alone (e.g., `overflow: hidden`) is insufficient for accessibility as hidden links remain in the tab order. Combining these with `visibility: hidden` (or Tailwind's `invisible`) correctly removes them from the accessibility tree. Additionally, dynamic navigation highlighting scripts must use highly specific selectors (e.g., `data-nav-link`) to prevent side effects on other header elements like brand logos or primary CTA buttons.
+
+**Action:** Always pair visual height/opacity transitions for menus with `visibility: hidden` to ensure keyboard accessibility. Use dedicated data attributes for navigation link targeting to isolate script-driven styling from the rest of the UI.

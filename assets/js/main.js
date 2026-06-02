@@ -5,34 +5,36 @@ document.addEventListener('DOMContentLoaded', () => {
     navToggle.addEventListener('click', () => {
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
       navToggle.setAttribute('aria-expanded', String(!expanded));
-      navMenu.classList.toggle('hidden');
-      if (navMenu.classList.contains('hidden')) {
-        navMenu.classList.remove('flex');
-      } else {
-        navMenu.classList.add('flex');
-      }
+      navMenu.classList.toggle('grid-rows-[0fr]');
+      navMenu.classList.toggle('grid-rows-[1fr]');
+      navMenu.classList.toggle('invisible');
     });
 
     navMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         navToggle.setAttribute('aria-expanded', 'false');
-        navMenu.classList.add('hidden');
-        navMenu.classList.remove('flex');
+        navMenu.classList.add('grid-rows-[0fr]');
+        navMenu.classList.remove('grid-rows-[1fr]');
+        navMenu.classList.add('invisible');
       });
     });
   }
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('[data-nav-link]').forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href === current || (current === 'index.html' && href === 'index.html');
+
+      // Target navigation links only; avoid impacting Logo or CTA buttons
+      a.classList.remove('text-brand-700', 'text-brand-600', 'text-brand-500', 'font-medium', 'font-semibold', 'font-bold');
+
       if (isActive) {
         a.setAttribute('aria-current', 'page');
         a.classList.add('text-brand-600', 'font-bold');
       } else {
         a.removeAttribute('aria-current');
-        a.classList.remove('text-brand-600', 'font-bold');
+        a.classList.add('text-brand-700', 'font-medium');
       }
     });
   };
