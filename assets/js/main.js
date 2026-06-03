@@ -275,4 +275,37 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqItems = document.querySelectorAll('[data-faq-item]');
+  faqItems.forEach((item) => {
+    const trigger = item.querySelector('button');
+    const content = item.querySelector('[role="region"]');
+    const icon = trigger?.querySelector('svg');
+
+    trigger?.addEventListener('click', () => {
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+      faqItems.forEach((other) => {
+        const otherTrigger = other.querySelector('button');
+        const otherContent = other.querySelector('[role="region"]');
+        const otherIcon = otherTrigger?.querySelector('svg');
+
+        otherTrigger?.setAttribute('aria-expanded', 'false');
+        otherContent?.classList.remove('grid-rows-[1fr]');
+        otherContent?.classList.add('grid-rows-[0fr]', 'invisible');
+        otherIcon?.classList.remove('rotate-180');
+        other.classList.remove('border-brand-500', 'ring-1', 'ring-brand-500');
+        other.classList.add('border-brand-100');
+      });
+
+      if (!isExpanded) {
+        trigger.setAttribute('aria-expanded', 'true');
+        content?.classList.remove('grid-rows-[0fr]', 'invisible');
+        content?.classList.add('grid-rows-[1fr]');
+        icon?.classList.add('rotate-180');
+        item.classList.remove('border-brand-100');
+        item.classList.add('border-brand-500', 'ring-1', 'ring-brand-500');
+      }
+    });
+  });
 });
