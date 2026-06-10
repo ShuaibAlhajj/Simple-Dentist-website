@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Holistic UX: Keyboard Shortcuts, Scroll Locking, and Resilient Selectors
+
+**Learning:** True micro-UX excellence comes from combining accessibility (Skip to Content links), predictability (Escape key for dismissal), and control (body scroll locking for modals). Additionally, global JS logic must be resilient to heterogeneous HTML structures; using combined selectors (like 'header a, nav a') ensures features like navigation highlighting don't break when individual pages deviate from the standard template.
+
+**Action:** Always pair modals with body scroll locking and 'Escape' key dismissal. When implementing global UI logic, prioritize selector breadth to accommodate varying page structures across the site.
