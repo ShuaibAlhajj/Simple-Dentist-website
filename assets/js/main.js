@@ -275,4 +275,54 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // FAQ Accordion Logic
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const trigger = e.target.closest('button[aria-controls]');
+      if (!trigger) return;
+
+      const item = trigger.closest('[data-faq-item]');
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      const content = document.getElementById(trigger.getAttribute('aria-controls'));
+      const icon = trigger.querySelector('span:last-child');
+
+      // Close all other items
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherTrigger = otherItem.querySelector('button');
+          const otherContent = document.getElementById(otherTrigger.getAttribute('aria-controls'));
+          const otherIcon = otherTrigger.querySelector('span:last-child');
+
+          otherTrigger.setAttribute('aria-expanded', 'false');
+          otherItem.classList.remove('border-brand-500', 'shadow-xl', 'shadow-brand-500/10');
+          otherItem.classList.add('border-transparent');
+          if (otherContent) {
+            otherContent.classList.remove('grid-rows-[1fr]');
+            otherContent.classList.add('grid-rows-[0fr]');
+          }
+          if (otherIcon) otherIcon.classList.remove('rotate-180', 'bg-brand-500', 'text-white');
+        }
+      });
+
+      // Toggle current item
+      trigger.setAttribute('aria-expanded', String(!expanded));
+      item.classList.toggle('border-brand-500', !expanded);
+      item.classList.toggle('shadow-xl', !expanded);
+      item.classList.toggle('shadow-brand-500/10', !expanded);
+      item.classList.toggle('border-transparent', expanded);
+
+      if (content) {
+        content.classList.toggle('grid-rows-[0fr]', expanded);
+        content.classList.toggle('grid-rows-[1fr]', !expanded);
+      }
+
+      if (icon) {
+        icon.classList.toggle('rotate-180', !expanded);
+        icon.classList.toggle('bg-brand-500', !expanded);
+        icon.classList.toggle('text-white', !expanded);
+      }
+    });
+  }
 });
