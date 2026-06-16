@@ -275,4 +275,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  document.querySelector('[data-faq-accordion]')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[aria-expanded]');
+    if (!btn) return;
+    const item = btn.closest('[data-faq-item]'), expanded = btn.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('[data-faq-item]').forEach(i => {
+      const b = i.querySelector('button'), c = i.querySelector('.grid');
+      const isCur = i === item && !expanded;
+      b.setAttribute('aria-expanded', isCur);
+      c.classList.toggle('grid-rows-[1fr]', isCur);
+      c.classList.toggle('grid-rows-[0fr]', !isCur);
+      b.querySelector('span:last-child').style.transform = isCur ? 'rotate(180deg)' : '';
+    });
+  });
 });
