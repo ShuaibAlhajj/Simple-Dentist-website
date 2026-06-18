@@ -275,4 +275,24 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faq = document.querySelector('[data-faq-accordion]');
+  if (faq) {
+    faq.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[aria-controls]');
+      if (!btn) return;
+      const item = btn.closest('[data-faq-item]'), open = btn.getAttribute('aria-expanded') !== 'true';
+      faq.querySelectorAll('[data-faq-item]').forEach(el => {
+        const b = el.querySelector('button'), c = el.querySelector('[role="region"]'), active = el === item && open;
+        b.setAttribute('aria-expanded', active);
+        c.classList.toggle('grid-rows-[1fr]', active);
+        c.classList.toggle('grid-rows-[0fr]', !active);
+        el.classList.toggle('border-brand-500', active);
+        el.classList.toggle('ring-4', active);
+        el.classList.toggle('ring-brand-500/5', active);
+        el.classList.toggle('border-transparent', !active);
+        b.querySelector('svg')?.classList.toggle('rotate-180', active);
+      });
+    });
+  }
 });
