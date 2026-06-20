@@ -275,4 +275,39 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[aria-controls]');
+      if (!btn) return;
+
+      const item = btn.closest('[data-faq-item]');
+      const content = document.getElementById(btn.getAttribute('aria-controls'));
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+      // Close all others
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem === item) return;
+        const otherBtn = otherItem.querySelector('button[aria-controls]');
+        const otherContent = document.getElementById(otherBtn.getAttribute('aria-controls'));
+        otherBtn.setAttribute('aria-expanded', 'false');
+        otherContent.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+        otherItem.classList.remove('border-brand-500', 'shadow-md');
+        otherBtn.querySelector('svg').classList.remove('rotate-180');
+      });
+
+      // Toggle current
+      btn.setAttribute('aria-expanded', String(!isExpanded));
+      if (!isExpanded) {
+        content.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+        item.classList.add('border-brand-500', 'shadow-md');
+        btn.querySelector('svg').classList.add('rotate-180');
+      } else {
+        content.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+        item.classList.remove('border-brand-500', 'shadow-md');
+        btn.querySelector('svg').classList.remove('rotate-180');
+      }
+    });
+  }
 });
