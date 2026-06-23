@@ -5,34 +5,42 @@ document.addEventListener('DOMContentLoaded', () => {
     navToggle.addEventListener('click', () => {
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
       navToggle.setAttribute('aria-expanded', String(!expanded));
-      navMenu.classList.toggle('hidden');
-      if (navMenu.classList.contains('hidden')) {
-        navMenu.classList.remove('flex');
+
+      if (expanded) {
+        navMenu.classList.remove('grid-rows-[1fr]');
+        navMenu.classList.add('grid-rows-[0fr]', 'invisible');
       } else {
-        navMenu.classList.add('flex');
+        navMenu.classList.remove('grid-rows-[0fr]', 'invisible');
+        navMenu.classList.add('grid-rows-[1fr]');
       }
     });
 
     navMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         navToggle.setAttribute('aria-expanded', 'false');
-        navMenu.classList.add('hidden');
-        navMenu.classList.remove('flex');
+        navMenu.classList.remove('grid-rows-[1fr]');
+        navMenu.classList.add('grid-rows-[0fr]', 'invisible');
       });
     });
   }
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('header a[href$=".html"], nav a[href$=".html"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href === current || (current === 'index.html' && href === 'index.html');
+
+      // Clear existing state
+      a.removeAttribute('aria-current');
+      a.classList.remove('text-brand-600', 'text-brand-500', 'font-bold');
+
       if (isActive) {
         a.setAttribute('aria-current', 'page');
+        a.classList.remove('font-medium'); // Replace medium with bold
         a.classList.add('text-brand-600', 'font-bold');
       } else {
-        a.removeAttribute('aria-current');
-        a.classList.remove('text-brand-600', 'font-bold');
+        // Restore medium for inactive links if it was removed
+        a.classList.add('font-medium');
       }
     });
   };
