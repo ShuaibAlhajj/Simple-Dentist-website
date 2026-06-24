@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-06-24 - Accessible Accordion Semantics and Focus Visibility
+
+**Learning:** Interactive accordions require more than just ARIA attributes; they must maintain a semantic document structure. Wrapping toggle buttons in headings (e.g., `<h3>`) allows screen reader users to navigate the content hierarchy effectively. Furthermore, custom focus-visible styles (like `focus-visible:ring-4`) are essential when using `outline-none` to ensure that keyboard users can clearly identify the focused interactive element.
+
+**Action:** When implementing accordions, always wrap the toggle button in an appropriate heading level and provide explicit `focus-visible` ring styles to maintain keyboard accessibility and visual hierarchy.
