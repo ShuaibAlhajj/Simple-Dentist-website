@@ -74,12 +74,14 @@
         </div>
 
         <!-- Mobile Nav -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border-b border-brand-100 p-4 space-y-4 shadow-xl" data-nav-menu>
-            <a href="index.html" class="block font-medium py-2">Home</a>
-            <a href="services.html" class="block font-medium py-2">Services</a>
-            <a href="doctor.html" class="block font-medium py-2">The Doctor</a>
-            <a href="contact.html" class="block font-medium py-2 text-brand-500">Contact</a>
-            <a href="appointment.html" class="block w-full py-4 rounded-xl bg-brand-500 text-white text-center font-bold">Book Appointment</a>
+        <div id="mobile-menu" class="md:hidden absolute top-full left-0 right-0 bg-white border-b border-brand-100 shadow-xl grid grid-rows-[0fr] transition-all duration-300 overflow-hidden invisible" data-nav-menu>
+            <div class="min-h-0 p-4 space-y-4">
+                <a href="index.html" class="block font-medium py-2">Home</a>
+                <a href="services.html" class="block font-medium py-2">Services</a>
+                <a href="doctor.html" class="block font-medium py-2">The Doctor</a>
+                <a href="contact.html" class="block font-medium py-2 text-brand-500">Contact</a>
+                <a href="appointment.html" class="block w-full py-4 rounded-xl bg-brand-500 text-white text-center font-bold">Book Appointment</a>
+            </div>
         </div>
     </nav>
 
