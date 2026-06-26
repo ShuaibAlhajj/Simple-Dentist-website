@@ -275,4 +275,34 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[aria-controls]');
+      if (!btn) return;
+
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const currentItem = btn.closest('[data-faq-item]');
+      const currentContent = document.getElementById(btn.getAttribute('aria-controls'));
+
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((item) => {
+        const itemBtn = item.querySelector('button[aria-controls]');
+        const itemContent = document.getElementById(itemBtn?.getAttribute('aria-controls'));
+        if (item === currentItem) {
+          itemBtn?.setAttribute('aria-expanded', String(!expanded));
+          itemContent?.classList.toggle('grid-rows-[0fr]', expanded);
+          itemContent?.classList.toggle('grid-rows-[1fr]', !expanded);
+          item.classList.toggle('border-brand-500', !expanded);
+          item.classList.toggle('border-brand-100', expanded);
+        } else {
+          itemBtn?.setAttribute('aria-expanded', 'false');
+          itemContent?.classList.add('grid-rows-[0fr]');
+          itemContent?.classList.remove('grid-rows-[1fr]');
+          item.classList.remove('border-brand-500');
+          item.classList.add('border-brand-100');
+        }
+      });
+    });
+  }
 });
