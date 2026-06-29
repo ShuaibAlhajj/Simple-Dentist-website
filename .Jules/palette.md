@@ -39,3 +39,7 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-06-29 - FAQ Accordion Accessibility & Motion
+**Learning:** Interactive accordions benefit from a single-open pattern to reduce cognitive load, and using CSS Grid for height transitions provides a smoother, more performant experience than animating max-height. Explicit ARIA regions and controlled-by relationships are essential for screen reader users to understand the component structure.
+**Action:** When implementing accordions, use the 'grid-rows-[0fr]' to 'grid-rows-[1fr]' pattern with 'min-h-0' for robust height transitions, and ensure all ARIA states (expanded, controls, regions) are correctly synchronized in JS.
