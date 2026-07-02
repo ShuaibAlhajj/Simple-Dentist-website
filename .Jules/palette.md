@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-07-02 - Accessible Accordions and Single-Open UX
+
+**Learning:** Combining the Tailwind Grid height transition pattern ('grid-rows-[0fr]' to 'grid-rows-[1fr]') with ARIA attributes ('aria-expanded', 'aria-controls') creates a highly accessible and smooth component. Enforcing a 'single-open' pattern via JavaScript reduces visual noise and helps users focus on one piece of information at a time. Explicitly managing focus and hover states (e.g., 'hover:bg-brand-50/50') on the triggers is essential for a polished feel.
+
+**Action:** When implementing accordions, always synchronize visual expansion (Grid/Height) with semantic state (ARIA) and consider 'single-open' as a default for mobile-friendly FAQs.
