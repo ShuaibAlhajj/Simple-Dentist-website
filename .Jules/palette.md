@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-07-04 - Interactive Accordion Accessibility and Unified Navigation State
+
+**Learning:** Implementing interactive accordions requires a combination of semantic HTML, ARIA attributes (`aria-expanded`, `aria-controls`), and keyboard-friendly transitions (like the CSS Grid height pattern) to ensure they are accessible and performant. Additionally, unified navigation logic in multi-page sites must account for inconsistent page structures (e.g., missing `<header>`) and explicitly clear potentially conflicting branding classes to maintain high visual contrast for active states.
+
+**Action:** For accordions, use event delegation on a common container and explicitly link buttons to their content panels with unique IDs. In global navigation scripts, use broad but precise selectors (like `header a, nav a`) and sanitize link classes before applying active state styles to guarantee consistent UX across all pages.
