@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Semantic Accordions and Robust State Management
+
+**Learning:** Accessible interactive components like FAQ accordions benefit from semantic HTML (buttons in headings) and precise ARIA attribute management. Furthermore, when dynamically applying active styles (like borders or shadows) in a single-open pattern, it is critical to explicitly restore default styling (like `shadow-sm`) to closing items to maintain visual consistency. Additionally, active navigation logic must explicitly remove all possible conflicting Tailwind classes before applying new ones to ensure reliable rendering over static HTML defaults.
+
+**Action:** Use the Tailwind Grid pattern for smooth height transitions. Always synchronize visual state changes (shadows, borders) with ARIA states, and ensure that dynamic JS-driven styles correctly override or clear pre-existing static classes on the same elements.
