@@ -212,6 +212,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const currentItem = button.closest('[data-faq-item]');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      const controlsId = button.getAttribute('aria-controls');
+      const content = document.getElementById(controlsId);
+
+      // Close all other items
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((item) => {
+        if (item !== currentItem) {
+          const otherButton = item.querySelector('button[aria-controls]');
+          const otherContent = document.getElementById(otherButton?.getAttribute('aria-controls'));
+          otherButton?.setAttribute('aria-expanded', 'false');
+          if (otherContent) otherContent.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+          item.classList.replace('border-brand-500', 'border-transparent');
+          item.classList.replace('shadow-lg', 'shadow-sm');
+          item.classList.remove('shadow-brand-500/10');
+        }
+      });
+
+      // Toggle current item
+      button.setAttribute('aria-expanded', String(!isExpanded));
+      if (!isExpanded) {
+        content?.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+        currentItem.classList.replace('border-transparent', 'border-brand-500');
+        currentItem.classList.replace('shadow-sm', 'shadow-lg');
+        currentItem.classList.add('shadow-brand-500/10');
+      } else {
+        content?.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+        currentItem.classList.replace('border-brand-500', 'border-transparent');
+        currentItem.classList.replace('shadow-lg', 'shadow-sm');
+        currentItem.classList.remove('shadow-brand-500/10');
+      }
+    });
+  }
+
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
