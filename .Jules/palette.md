@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-07-07 - Robust Accordion State Management and Semantic Structure
+
+**Learning:** Interactive FAQ accordions benefit from a "single-open" pattern that reduces cognitive load by focusing on one answer at a time. For robust state management, using `classList.toggle` based on an explicit state boolean ensures UI consistency. Furthermore, wrapping interactive buttons in semantic headings (like `<h3>`) preserves document hierarchy for assistive technology users while providing a clear interaction trigger.
+
+**Action:** When implementing accordions, use semantic HTML headings for triggers and manage all visual states (borders, shadows, icons) consistently within a centralized toggle function to ensure a polished, accessible experience.
