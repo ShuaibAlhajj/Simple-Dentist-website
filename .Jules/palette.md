@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Accessible Accordions and Enhanced Text Contrast
+
+**Learning:** Static FAQ lists can be transformed into engaging micro-interactions using a CSS Grid-based height transition (`grid-rows-[0fr]` to `grid-rows-[1fr]`). This pattern provides smooth animations without custom CSS. Furthermore, accessibility in accordions requires explicit ARIA roles, states (`aria-expanded`), and focus management (`focus-visible`). Improving text contrast by removing opacity (e.g., changing `text-brand-700/70` to `text-brand-700`) is a low-effort, high-impact way to meet WCAG AA standards.
+
+**Action:** When implementing accordions, use semantic `<button>` triggers within headers and link them to answer regions using `aria-controls`. Always audit text opacity levels on light backgrounds to ensure sufficient color contrast for readability.

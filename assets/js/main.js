@@ -212,6 +212,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const initFaqAccordion = () => {
+    const accordion = document.querySelector('[data-faq-accordion]');
+    if (!accordion) return;
+
+    accordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const panelId = button.getAttribute('aria-controls');
+      const panel = document.getElementById(panelId);
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      const item = button.closest('[data-faq-item]');
+
+      // Close other items
+      accordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherButton = otherItem.querySelector('button[aria-controls]');
+          const otherPanel = otherItem.querySelector('[role="region"]');
+          const otherChevron = otherButton.querySelector('svg');
+
+          otherButton.setAttribute('aria-expanded', 'false');
+          otherPanel.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+          otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+          otherItem.classList.add('border-brand-100');
+          otherChevron?.classList.remove('rotate-180');
+        }
+      });
+
+      // Toggle current item
+      const chevron = button.querySelector('svg');
+      button.setAttribute('aria-expanded', String(!isExpanded));
+
+      if (!isExpanded) {
+        panel.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+        item.classList.replace('border-brand-100', 'border-brand-500');
+        item.classList.add('shadow-lg', 'shadow-brand-500/10');
+        chevron?.classList.add('rotate-180');
+      } else {
+        panel.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+        item.classList.replace('border-brand-500', 'border-brand-100');
+        item.classList.remove('shadow-lg', 'shadow-brand-500/10');
+        chevron?.classList.remove('rotate-180');
+      }
+    });
+  };
+  initFaqAccordion();
+
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
