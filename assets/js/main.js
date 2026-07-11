@@ -275,4 +275,40 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[aria-controls]');
+      if (!btn) return;
+
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const targetId = btn.getAttribute('aria-controls');
+      const target = document.getElementById(targetId);
+      const parent = btn.closest('[data-faq-item]');
+
+      // Single-open logic
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((item) => {
+        const itemBtn = item.querySelector('button[aria-controls]');
+        const itemTarget = document.getElementById(itemBtn.getAttribute('aria-controls'));
+        const itemChevron = itemBtn.querySelector('svg');
+
+        if (item === parent && !expanded) {
+          // Open current
+          itemBtn.setAttribute('aria-expanded', 'true');
+          itemTarget.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+          itemChevron.classList.add('rotate-180');
+          item.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+          item.classList.remove('border-transparent');
+        } else {
+          // Close others
+          itemBtn.setAttribute('aria-expanded', 'false');
+          itemTarget.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+          itemChevron.classList.remove('rotate-180');
+          item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+          item.classList.add('border-transparent');
+        }
+      });
+    });
+  }
 });
