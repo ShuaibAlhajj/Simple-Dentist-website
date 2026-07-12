@@ -39,3 +39,15 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Interactive Accordions and Robust State Management
+
+**Learning:** Smooth height transitions in vanilla Tailwind environments are best achieved using a CSS Grid pattern (`grid-rows-[0fr]` to `grid-rows-[1fr]`). To ensure accessibility and visual consistency in single-open patterns, it is critical to explicitly reset/remove all potential state classes (like borders, shadows, and rotation) from inactive items rather than relying on `classList.toggle` alone.
+
+**Action:** Implement accordions using semantic `<button>` triggers and Grid-based transition containers. Always use a loop to explicitly clean up visual and ARIA states for all peer items when an item is expanded.
+
+## 2026-05-25 - Comprehensive Navigation Highlighting
+
+**Learning:** Dynamic navigation highlighting can fail or create visual artifacts if it only targets a subset of navigation containers (e.g., just `header` vs all `nav` tags) or if it doesn't account for pre-existing utility classes in the HTML. Reliable state management requires clearing all related styling classes (like different brand shades and font weights) before applying the active state.
+
+**Action:** Expand navigation selectors to include all semantic navigation containers. Explicitly remove all possible color and typography variants for the target elements before applying the 'active' classes to ensure a predictable and high-contrast result.
