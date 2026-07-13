@@ -275,4 +275,47 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const panelId = button.getAttribute('aria-controls');
+      const panel = document.getElementById(panelId);
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Close other open items (Single-open pattern)
+      faqAccordion.querySelectorAll('button[aria-controls]').forEach((otherBtn) => {
+        if (otherBtn !== button) {
+          const otherPanelId = otherBtn.getAttribute('aria-controls');
+          const otherPanel = document.getElementById(otherPanelId);
+          const otherItem = otherBtn.closest('[data-faq-item]');
+
+          otherBtn.setAttribute('aria-expanded', 'false');
+          otherPanel?.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+          otherBtn.querySelector('svg')?.classList.remove('rotate-180');
+          otherItem?.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+          otherItem?.classList.add('border-transparent');
+        }
+      });
+
+      // Toggle current item
+      const item = button.closest('[data-faq-item]');
+      button.setAttribute('aria-expanded', String(!isExpanded));
+
+      if (!isExpanded) {
+        panel?.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+        button.querySelector('svg')?.classList.add('rotate-180');
+        item?.classList.replace('border-transparent', 'border-brand-500');
+        item?.classList.add('shadow-lg', 'shadow-brand-500/10');
+      } else {
+        panel?.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+        button.querySelector('svg')?.classList.remove('rotate-180');
+        item?.classList.replace('border-brand-500', 'border-transparent');
+        item?.classList.remove('shadow-lg', 'shadow-brand-500/10');
+      }
+    });
+  }
 });
