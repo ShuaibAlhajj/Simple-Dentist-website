@@ -259,10 +259,55 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const backToTop = document.createElement('button');
-  backToTop.innerHTML = '↑';
+  backToTop.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  `;
   backToTop.setAttribute('aria-label', 'Back to top');
   backToTop.className = 'fixed bottom-8 right-8 w-12 h-12 bg-brand-500 text-white rounded-full shadow-xl shadow-brand-500/30 flex items-center justify-center text-2xl z-40 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none hover:bg-brand-600 active:scale-95 focus:outline-none focus:ring-4 focus:ring-brand-500/50';
   document.body.appendChild(backToTop);
+
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const item = button.closest('[data-faq-item]');
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      const controls = button.getAttribute('aria-controls');
+      const content = document.getElementById(controls);
+
+      // Close all other items
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherButton = otherItem.querySelector('button[aria-controls]');
+          const otherContent = document.getElementById(otherButton.getAttribute('aria-controls'));
+          otherButton.setAttribute('aria-expanded', 'false');
+          otherContent.classList.add('grid-rows-[0fr]');
+          otherContent.classList.remove('grid-rows-[1fr]');
+          otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+          otherItem.classList.add('border-brand-100');
+        }
+      });
+
+      // Toggle current item
+      if (expanded) {
+        button.setAttribute('aria-expanded', 'false');
+        content.classList.add('grid-rows-[0fr]');
+        content.classList.remove('grid-rows-[1fr]');
+        item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        item.classList.add('border-brand-100');
+      } else {
+        button.setAttribute('aria-expanded', 'true');
+        content.classList.add('grid-rows-[1fr]');
+        content.classList.remove('grid-rows-[0fr]');
+        item.classList.remove('border-brand-100');
+        item.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+      }
+    });
+  }
 
   window.addEventListener('scroll', () => {
     const isVisible = window.scrollY > 400;
