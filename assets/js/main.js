@@ -275,4 +275,52 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const item = button.closest('[data-faq-item]');
+      const panel = item?.querySelector('[role="region"]');
+      const icon = button.querySelector('svg');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Close other items
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem === item) return;
+        const otherButton = otherItem.querySelector('button');
+        const otherPanel = otherItem.querySelector('[role="region"]');
+        const otherIcon = otherButton?.querySelector('svg');
+
+        otherButton?.setAttribute('aria-expanded', 'false');
+        otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        otherItem.classList.add('border-transparent');
+        if (otherPanel) {
+          otherPanel.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+          otherPanel.classList.replace('opacity-100', 'opacity-0');
+        }
+        if (otherIcon) otherIcon.classList.remove('rotate-180');
+      });
+
+      // Toggle current item
+      button.setAttribute('aria-expanded', String(!isExpanded));
+      item.classList.toggle('border-brand-500', !isExpanded);
+      item.classList.toggle('shadow-lg', !isExpanded);
+      item.classList.toggle('shadow-brand-500/10', !isExpanded);
+      item.classList.toggle('border-transparent', isExpanded);
+
+      if (panel) {
+        if (isExpanded) {
+          panel.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+          panel.classList.replace('opacity-100', 'opacity-0');
+        } else {
+          panel.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+          panel.classList.replace('opacity-0', 'opacity-100');
+        }
+      }
+      if (icon) icon.classList.toggle('rotate-180', !isExpanded);
+    });
+  }
 });
