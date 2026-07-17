@@ -22,6 +22,71 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const item = button.closest('[data-faq-item]');
+      if (!item) return;
+
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // First, collapse all other items in the accordion
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherButton = otherItem.querySelector('button[aria-controls]');
+          const otherContent = otherItem.querySelector('[role="region"]');
+          const otherIcon = otherButton?.querySelector('svg');
+
+          if (otherButton) {
+            otherButton.setAttribute('aria-expanded', 'false');
+          }
+          if (otherContent) {
+            otherContent.classList.remove('grid-rows-[1fr]');
+            otherContent.classList.add('grid-rows-[0fr]');
+          }
+          if (otherIcon) {
+            otherIcon.classList.remove('rotate-180');
+          }
+
+          // Restore default wrapper styling
+          otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+          otherItem.classList.add('border-brand-100/60', 'shadow-sm');
+        }
+      });
+
+      // Toggle clicked item
+      const content = item.querySelector('[role="region"]');
+      const icon = button.querySelector('svg');
+
+      if (isExpanded) {
+        button.setAttribute('aria-expanded', 'false');
+        if (content) {
+          content.classList.remove('grid-rows-[1fr]');
+          content.classList.add('grid-rows-[0fr]');
+        }
+        if (icon) {
+          icon.classList.remove('rotate-180');
+        }
+        item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        item.classList.add('border-brand-100/60', 'shadow-sm');
+      } else {
+        button.setAttribute('aria-expanded', 'true');
+        if (content) {
+          content.classList.remove('grid-rows-[0fr]');
+          content.classList.add('grid-rows-[1fr]');
+        }
+        if (icon) {
+          icon.classList.add('rotate-180');
+        }
+        item.classList.remove('border-brand-100/60', 'shadow-sm');
+        item.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+      }
+    });
+  }
+
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
