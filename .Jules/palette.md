@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-07-22 - Interactive and Fully Accessible FAQ Accordions
+
+**Learning:** Static FAQs can clutter informational pages and increase cognitive load. Converting them into interactive accordions dramatically improves readability. For full accessibility and a robust visual hierarchy, accordion triggers must be structured with semantic headers (`<h3>`), explicitly linked using `aria-controls` / `aria-labelledby`, and styled with interactive focus indicators. Animating these dynamically is best achieved using CSS Grid row sizing (`grid-rows-[0fr]` to `grid-rows-[1fr]`) inside a relative wrapper containing `min-h-0 overflow-hidden` to avoid layout jank or fragile JS height calculations.
+
+**Action:** When implementing accordions, prioritize a single-open pattern that resets the visual border, shadow state, and chevron rotation of other items. Always verify focus-visible rings and region labeling using screen reader/Playwright verification.
