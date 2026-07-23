@@ -258,6 +258,74 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // FAQ Accordion Logic with Single-Open Pattern and Event Delegation
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const currentItem = button.closest('[data-faq-item]');
+      if (!currentItem) return;
+
+      const panelId = button.getAttribute('aria-controls');
+      const currentPanel = document.getElementById(panelId);
+      if (!currentPanel) return;
+
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Single-open pattern: close all other items in the accordion
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((item) => {
+        if (item === currentItem) return;
+
+        const btn = item.querySelector('button[aria-controls]');
+        const panel = item.querySelector('[role="region"]');
+        const icon = btn?.querySelector('svg');
+
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (panel) {
+          panel.classList.remove('grid-rows-[1fr]');
+          panel.classList.add('grid-rows-[0fr]');
+        }
+        if (icon) {
+          icon.classList.remove('rotate-180');
+        }
+
+        // Restore default collapsed style classes
+        item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        item.classList.add('border-brand-100', 'shadow-sm');
+        btn?.classList.remove('rounded-t-2xl');
+        btn?.classList.add('rounded-2xl');
+      });
+
+      // Toggle current item
+      const icon = button.querySelector('svg');
+      button.setAttribute('aria-expanded', String(!isExpanded));
+
+      if (!isExpanded) {
+        currentPanel.classList.remove('grid-rows-[0fr]');
+        currentPanel.classList.add('grid-rows-[1fr]');
+        if (icon) icon.classList.add('rotate-180');
+
+        // Apply expanded style classes
+        currentItem.classList.remove('border-brand-100', 'shadow-sm');
+        currentItem.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        button.classList.remove('rounded-2xl');
+        button.classList.add('rounded-t-2xl');
+      } else {
+        currentPanel.classList.remove('grid-rows-[1fr]');
+        currentPanel.classList.add('grid-rows-[0fr]');
+        if (icon) icon.classList.remove('rotate-180');
+
+        // Restore default collapsed style classes
+        currentItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        currentItem.classList.add('border-brand-100', 'shadow-sm');
+        button.classList.remove('rounded-t-2xl');
+        button.classList.add('rounded-2xl');
+      }
+    });
+  }
+
   const backToTop = document.createElement('button');
   backToTop.innerHTML = '↑';
   backToTop.setAttribute('aria-label', 'Back to top');
