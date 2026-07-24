@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Interactive FAQ Accordions with CSS Grid and ARIA Integration
+
+**Learning:** Static FAQ sections are major opportunities for interactive delight. When converting them, using a Tailwind CSS CSS Grid pattern toggling between `grid-rows-[0fr]` and `grid-rows-[1fr]` produces extremely smooth height transitions without layout shift. Additionally, linking semantic headings (`<h3>`), trigger buttons with `aria-expanded` and `aria-controls`, and content panels with `role="region"` and `aria-labelledby` ensures W3C standards compliance and outstanding screen reader capability.
+
+**Action:** For frequently asked questions or collapsing menus, wrap the items with custom `data-*` attributes for delegation, implement semantic markup with native headers and buttons, and utilize the CSS Grid `0fr` to `1fr` height transition for hardware-accelerated animations.
