@@ -24,15 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('header a[href$=".html"], nav a[href$=".html"]').forEach((a) => {
+      if (a.classList.contains('group') || a.classList.contains('text-white')) return;
       const href = a.getAttribute('href') || '';
       const isActive = href === current || (current === 'index.html' && href === 'index.html');
+
+      a.classList.remove('text-brand-500', 'text-brand-600', 'text-brand-700', 'font-bold', 'font-medium');
+
       if (isActive) {
         a.setAttribute('aria-current', 'page');
         a.classList.add('text-brand-600', 'font-bold');
       } else {
         a.removeAttribute('aria-current');
-        a.classList.remove('text-brand-600', 'font-bold');
+        a.classList.add('text-brand-700', 'font-medium');
       }
     });
   };
