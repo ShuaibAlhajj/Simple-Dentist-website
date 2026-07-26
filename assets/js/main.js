@@ -275,4 +275,69 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // FAQ Accordion Logic
+  const accordion = document.querySelector('[data-faq-accordion]');
+  if (accordion) {
+    accordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const currentItem = button.closest('[data-faq-item]');
+      if (!currentItem) return;
+
+      const regionId = button.getAttribute('aria-controls');
+      const region = currentItem.querySelector(`[id="${regionId}"]`);
+      if (!region) return;
+
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Single-open logic: close all other open accordion items
+      accordion.querySelectorAll('[data-faq-item]').forEach((item) => {
+        if (item !== currentItem) {
+          const itemButton = item.querySelector('button[aria-controls]');
+          const itemRegion = item.querySelector('[role="region"]');
+          const itemIcon = item.querySelector('[data-faq-icon]');
+
+          if (itemButton && itemRegion) {
+            itemButton.setAttribute('aria-expanded', 'false');
+            itemRegion.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+
+            // Reset visual active state classes
+            item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+            item.classList.add('border-brand-100', 'shadow-sm');
+
+            if (itemIcon) {
+              itemIcon.classList.remove('rotate-45', 'bg-brand-500', 'text-white', 'border-brand-500');
+              itemIcon.classList.add('text-brand-500', 'border-brand-100');
+            }
+          }
+        }
+      });
+
+      // Toggle current accordion item state
+      button.setAttribute('aria-expanded', String(!isExpanded));
+      const icon = currentItem.querySelector('[data-faq-icon]');
+
+      if (isExpanded) {
+        // Collapse
+        region.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+        currentItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        currentItem.classList.add('border-brand-100', 'shadow-sm');
+        if (icon) {
+          icon.classList.remove('rotate-45', 'bg-brand-500', 'text-white', 'border-brand-500');
+          icon.classList.add('text-brand-500', 'border-brand-100');
+        }
+      } else {
+        // Expand
+        region.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+        currentItem.classList.remove('border-brand-100', 'shadow-sm');
+        currentItem.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        if (icon) {
+          icon.classList.add('rotate-45', 'bg-brand-500', 'text-white', 'border-brand-500');
+          icon.classList.remove('text-brand-500', 'border-brand-100');
+        }
+      }
+    });
+  }
 });
