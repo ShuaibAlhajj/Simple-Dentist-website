@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-07-27 - Fully Accessible Animated FAQ Accordions with CSS Grid and Event Delegation
+
+**Learning:** Building accordions that conform completely to W3C accessible design patterns requires linking each toggle button directly to its region-wrapped panel with IDs, `aria-controls`, and `aria-labelledby`. For smooth, non-layout-shifting height transitions, combining CSS Grid container rows (`grid-rows-[0fr]` to `grid-rows-[1fr]`) with internal `min-h-0` child blocks is highly effective. Additionally, using robust single-open loop cleanups with explicit `classList.add` and `classList.remove` prevents residual active states.
+
+**Action:** When designing interactive accordions, link triggers and content regions explicitly with matching ARIA/ID structures, animate heights cleanly using Tailwind's Grid template rows, and manage selection toggles dynamically using a single-open event-delegated listener loop.
