@@ -258,6 +258,74 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // FAQ Accordion Interactivity
+  const accordion = document.querySelector('[data-faq-accordion]');
+  if (accordion) {
+    accordion.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[aria-controls]');
+      if (!btn) return;
+      const item = btn.closest('[data-faq-item]');
+      if (!item) return;
+
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+      // Single-open logic: close all other items
+      accordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem === item) return;
+        const otherBtn = otherItem.querySelector('button[aria-controls]');
+        const otherPanel = otherItem.querySelector('[role="region"]');
+        const otherIcon = otherBtn?.querySelector('span[aria-hidden="true"]');
+
+        if (otherBtn) {
+          otherBtn.setAttribute('aria-expanded', 'false');
+          otherBtn.classList.remove('rounded-b-none');
+          otherBtn.classList.add('rounded-2xl');
+        }
+        if (otherPanel) {
+          otherPanel.classList.remove('grid-rows-[1fr]');
+          otherPanel.classList.add('grid-rows-[0fr]');
+        }
+        if (otherIcon) {
+          otherIcon.classList.remove('rotate-45');
+        }
+        otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        otherItem.classList.add('border-brand-100/50', 'shadow-sm');
+      });
+
+      // Toggle current item
+      const panel = item.querySelector('[role="region"]');
+      const icon = btn.querySelector('span[aria-hidden="true"]');
+
+      if (isExpanded) {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.classList.remove('rounded-b-none');
+        btn.classList.add('rounded-2xl');
+        if (panel) {
+          panel.classList.remove('grid-rows-[1fr]');
+          panel.classList.add('grid-rows-[0fr]');
+        }
+        if (icon) {
+          icon.classList.remove('rotate-45');
+        }
+        item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        item.classList.add('border-brand-100/50', 'shadow-sm');
+      } else {
+        btn.setAttribute('aria-expanded', 'true');
+        btn.classList.remove('rounded-2xl');
+        btn.classList.add('rounded-b-none');
+        if (panel) {
+          panel.classList.remove('grid-rows-[0fr]');
+          panel.classList.add('grid-rows-[1fr]');
+        }
+        if (icon) {
+          icon.classList.add('rotate-45');
+        }
+        item.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        item.classList.remove('border-brand-100/50', 'shadow-sm');
+      }
+    });
+  }
+
   const backToTop = document.createElement('button');
   backToTop.innerHTML = '↑';
   backToTop.setAttribute('aria-label', 'Back to top');
