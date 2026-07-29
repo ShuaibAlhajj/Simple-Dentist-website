@@ -258,6 +258,73 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // FAQ Accordion Interactivity
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const currentItem = button.closest('[data-faq-item]');
+      if (!currentItem) return;
+
+      const targetId = button.getAttribute('aria-controls');
+      const region = currentItem.querySelector(`#${targetId}[role="region"]`);
+      if (!region) return;
+
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Single-open loop: Close other open accordion items
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((item) => {
+        if (item !== currentItem) {
+          const itemBtn = item.querySelector('button[aria-controls]');
+          const itemRegion = item.querySelector('[role="region"]');
+          if (itemBtn) {
+            itemBtn.setAttribute('aria-expanded', 'false');
+            const icon = itemBtn.querySelector('span[aria-hidden="true"]');
+            if (icon) {
+              icon.classList.remove('rotate-45');
+            }
+            itemBtn.classList.remove('rounded-t-2xl');
+            itemBtn.classList.add('rounded-2xl');
+          }
+          if (itemRegion) {
+            itemRegion.classList.remove('grid-rows-[1fr]');
+            itemRegion.classList.add('grid-rows-[0fr]');
+          }
+          item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+          item.classList.add('border-transparent', 'shadow-sm');
+        }
+      });
+
+      // Toggle the clicked item
+      button.setAttribute('aria-expanded', String(!isExpanded));
+      const clickedIcon = button.querySelector('span[aria-hidden="true"]');
+
+      if (!isExpanded) {
+        region.classList.remove('grid-rows-[0fr]');
+        region.classList.add('grid-rows-[1fr]');
+        if (clickedIcon) {
+          clickedIcon.classList.add('rotate-45');
+        }
+        currentItem.classList.remove('border-transparent', 'shadow-sm');
+        currentItem.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        button.classList.remove('rounded-2xl');
+        button.classList.add('rounded-t-2xl');
+      } else {
+        region.classList.remove('grid-rows-[1fr]');
+        region.classList.add('grid-rows-[0fr]');
+        if (clickedIcon) {
+          clickedIcon.classList.remove('rotate-45');
+        }
+        currentItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        currentItem.classList.add('border-transparent', 'shadow-sm');
+        button.classList.remove('rounded-t-2xl');
+        button.classList.add('rounded-2xl');
+      }
+    });
+  }
+
   const backToTop = document.createElement('button');
   backToTop.innerHTML = '↑';
   backToTop.setAttribute('aria-label', 'Back to top');
