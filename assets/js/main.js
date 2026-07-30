@@ -258,6 +258,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const accordion = document.querySelector('[data-faq-accordion]');
+  if (accordion) {
+    accordion.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[aria-controls]');
+      if (!btn) return;
+      const item = btn.closest('[data-faq-item]');
+      const panel = item?.querySelector('[role="region"]');
+      const icon = btn.querySelector('[data-faq-icon]');
+      if (!item || !panel || !icon) return;
+
+      const expand = btn.getAttribute('aria-expanded') !== 'true';
+
+      accordion.querySelectorAll('[data-faq-item]').forEach((el) => {
+        const b = el.querySelector('button[aria-controls]');
+        const p = el.querySelector('[role="region"]');
+        const ic = b?.querySelector('[data-faq-icon]');
+        const act = el === item && expand;
+
+        b?.setAttribute('aria-expanded', String(act));
+        b?.classList.toggle('rounded-t-2xl', act);
+        b?.classList.toggle('rounded-2xl', !act);
+        p?.classList.toggle('grid-rows-[1fr]', act);
+        p?.classList.toggle('grid-rows-[0fr]', !act);
+        el.classList.toggle('border-brand-500', act);
+        el.classList.toggle('shadow-lg', act);
+        el.classList.toggle('shadow-brand-500/10', act);
+        el.classList.toggle('border-transparent', !act);
+        el.classList.toggle('shadow-sm', !act);
+        ic?.classList.toggle('rotate-45', act);
+      });
+    });
+  }
+
   const backToTop = document.createElement('button');
   backToTop.innerHTML = '↑';
   backToTop.setAttribute('aria-label', 'Back to top');
