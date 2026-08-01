@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-06-01 - Interactive FAQ Accordion and Accessible Single-Open Logic
+
+**Learning:** Transitioning a static FAQ section into an interactive single-open accordion significantly reduces page-length scrolling and improves readability. To ensure W3C accessibility conformance, trigger buttons must toggle `aria-expanded` and link directly to content regions with `role="region"`, `aria-labelledby`, and `aria-controls`. Smooth height transitions can be achieved using a Tailwind CSS Grid pattern (`grid-rows-[0fr]` to `grid-rows-[1fr]`) over an inner container with `min-h-0`.
+
+**Action:** When creating accordions, wrap toggle triggers in semantic headings, establish explicit ARIA associations, and coordinate active classes/icon states inside centralized JavaScript loop handlers for clean, predictable collapses.

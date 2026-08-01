@@ -275,4 +275,67 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // FAQ Accordion Handler
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const item = button.closest('[data-faq-item]');
+      if (!item) return;
+
+      const region = item.querySelector('[role="region"]');
+      if (!region) return;
+
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Single-open accordion logic: close all other items in this accordion
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherButton = otherItem.querySelector('button[aria-controls]');
+          const otherRegion = otherItem.querySelector('[role="region"]');
+
+          if (otherButton && otherRegion) {
+            otherButton.setAttribute('aria-expanded', 'false');
+            otherRegion.classList.remove('grid-rows-[1fr]');
+            otherRegion.classList.add('grid-rows-[0fr]');
+
+            const otherIcon = otherButton.querySelector('span:last-child');
+            if (otherIcon) {
+              otherIcon.classList.remove('rotate-45');
+            }
+          }
+          otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+          otherItem.classList.add('border-brand-100/50', 'shadow-sm');
+        }
+      });
+
+      // Toggle current item
+      if (isExpanded) {
+        button.setAttribute('aria-expanded', 'false');
+        region.classList.remove('grid-rows-[1fr]');
+        region.classList.add('grid-rows-[0fr]');
+        item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        item.classList.add('border-brand-100/50', 'shadow-sm');
+
+        const icon = button.querySelector('span:last-child');
+        if (icon) {
+          icon.classList.remove('rotate-45');
+        }
+      } else {
+        button.setAttribute('aria-expanded', 'true');
+        region.classList.remove('grid-rows-[0fr]');
+        region.classList.add('grid-rows-[1fr]');
+        item.classList.remove('border-brand-100/50', 'shadow-sm');
+        item.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+
+        const icon = button.querySelector('span:last-child');
+        if (icon) {
+          icon.classList.add('rotate-45');
+        }
+      }
+    });
+  }
 });
