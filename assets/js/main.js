@@ -258,6 +258,66 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[aria-controls]');
+      if (!btn) return;
+
+      const item = btn.closest('[data-faq-item]');
+      if (!item) return;
+
+      const content = item.querySelector('[role="region"]');
+      if (!content) return;
+
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+      // First close all other accordion items
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherBtn = otherItem.querySelector('button[aria-controls]');
+          const otherContent = otherItem.querySelector('[role="region"]');
+          if (otherBtn && otherContent) {
+            otherBtn.setAttribute('aria-expanded', 'false');
+            otherContent.classList.remove('grid-rows-[1fr]');
+            otherContent.classList.add('grid-rows-[0fr]');
+
+            // Reset visually closed state classes
+            otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+            otherItem.classList.add('border-transparent');
+
+            const otherIcon = otherItem.querySelector('[data-faq-icon]');
+            if (otherIcon) {
+              otherIcon.classList.remove('rotate-45');
+            }
+          }
+        }
+      });
+
+      // Toggle current item
+      btn.setAttribute('aria-expanded', String(!isExpanded));
+      if (!isExpanded) {
+        content.classList.remove('grid-rows-[0fr]');
+        content.classList.add('grid-rows-[1fr]');
+        item.classList.remove('border-transparent');
+        item.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        const icon = item.querySelector('[data-faq-icon]');
+        if (icon) {
+          icon.classList.add('rotate-45');
+        }
+      } else {
+        content.classList.remove('grid-rows-[1fr]');
+        content.classList.add('grid-rows-[0fr]');
+        item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        item.classList.add('border-transparent');
+        const icon = item.querySelector('[data-faq-icon]');
+        if (icon) {
+          icon.classList.remove('rotate-45');
+        }
+      }
+    });
+  }
+
   const backToTop = document.createElement('button');
   backToTop.innerHTML = '↑';
   backToTop.setAttribute('aria-label', 'Back to top');
