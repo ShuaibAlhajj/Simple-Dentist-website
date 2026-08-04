@@ -258,6 +258,56 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const trigger = e.target.closest('button[aria-controls]');
+      if (!trigger) return;
+
+      const item = trigger.closest('[data-faq-item]');
+      if (!item) return;
+
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+      // First, close all items (single-open pattern)
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((el) => {
+        const btn = el.querySelector('button[aria-controls]');
+        const panel = el.querySelector('[role="region"]');
+        const icon = btn?.querySelector('span:last-child');
+
+        // Reset elements
+        el.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        el.classList.add('border-transparent', 'shadow-sm');
+
+        btn?.setAttribute('aria-expanded', 'false');
+        btn?.classList.remove('rounded-t-2xl');
+        btn?.classList.add('rounded-2xl');
+
+        panel?.classList.remove('grid-rows-[1fr]');
+        panel?.classList.add('grid-rows-[0fr]');
+
+        icon?.classList.remove('rotate-45');
+      });
+
+      // If it was not expanded, now expand this one
+      if (!isExpanded) {
+        item.classList.remove('border-transparent', 'shadow-sm');
+        item.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+
+        trigger.setAttribute('aria-expanded', 'true');
+        trigger.classList.remove('rounded-2xl');
+        trigger.classList.add('rounded-t-2xl');
+
+        const panel = item.querySelector('[role="region"]');
+        panel?.classList.remove('grid-rows-[0fr]');
+        panel?.classList.add('grid-rows-[1fr]');
+
+        const icon = trigger.querySelector('span:last-child');
+        icon?.classList.add('rotate-45');
+      }
+    });
+  }
+
   const backToTop = document.createElement('button');
   backToTop.innerHTML = '↑';
   backToTop.setAttribute('aria-label', 'Back to top');
