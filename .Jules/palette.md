@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-08-05 - Semantic Accordion Components and Grid Height Transitions
+
+**Learning:** Static informational components (like FAQs) can be transformed into interactive, space-saving widgets that feel seamless and look highly polished. Using a Tailwind CSS Grid row height transition (`grid-rows-[0fr]` to `grid-rows-[1fr]` with `min-h-0`) is a bulletproof way to animate variable content heights smoothly without layout jank. Full W3C ARIA compliance (using `aria-expanded`, `aria-controls`, and `role="region"`) ensures the widget is fully accessible to assistive technology.
+
+**Action:** When creating collapsible or accordion-style elements, always wrap the toggle buttons in semantic headings, link triggers and regions with ARIA IDs, and utilize the grid row height transition technique to achieve smooth variable-height animations.
