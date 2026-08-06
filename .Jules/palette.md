@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-08-06 - CSS-Grid Height Transitions for Accessible FAQ Accordions
+
+**Learning:** Implementing collapsible FAQ sections using the Tailwind CSS grid rows height transition pattern (`grid-rows-[0fr]` to `grid-rows-[1fr]` with a inner child containing `min-h-0`) delivers an incredibly smooth animation that doesn't trigger layout jank or require manual pixel measurement in JavaScript. Furthermore, maintaining accessibility via appropriate semantic `<h3>` header wrappers, button focus rings (`focus-visible:ring-4`), and explicit `aria-expanded`/`aria-controls`/`role="region"` relationships ensures full compliance with screen readers.
+
+**Action:** When building interactive collapsibles, prioritize pure-CSS grid-based height transitions and fully conform to W3C ARIA accordion guidelines to ensure screen-reader clarity and animation performance.
