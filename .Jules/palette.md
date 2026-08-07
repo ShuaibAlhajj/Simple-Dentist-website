@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - W3C Semantic Accordions and Single-Open Transitions
+
+**Learning:** Transforming static content blocks (like FAQs) into interactive, single-open accordions improves content scannability and layout density. To be truly accessible, accordions require explicit ARIA attributes (`aria-expanded`, `aria-controls`, `role="region"`, `aria-labelledby`) to be recognized correctly in the accessibility tree, alongside exact CSS class resets when toggling nodes in loops.
+
+**Action:** When building interactive accordion systems, always pair trigger buttons directly with semantic region containers using ARIA attributes. Implement single-open event delegation in JS and reset the border and shadow styling on all sibling elements when a new item is activated.
