@@ -1,0 +1,20 @@
+name: Enable auto-merge for PRs assigned to google-labs-jules[bot]
+
+on:
+  pull_request:
+    types: [assigned, opened, reopened, edited]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  enable-automerge:
+    runs-on: ubuntu-latest
+    if: contains(join(github.event.pull_request.assignees.*.login, ','), 'google-labs-jules[bot]')
+    steps:
+      - name: Enable GitHub auto-merge for this PR
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ github.event.pull_request.number }}
+          merge-method: merge
