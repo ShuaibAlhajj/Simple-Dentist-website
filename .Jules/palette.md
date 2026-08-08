@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Accessible Accordions and Modern Height Transitions
+
+**Learning:** Static FAQ sections can be transformed into accessible, interactive accordions using a combination of semantic <h3> headings and <button> triggers. Smooth height transitions are best achieved using the Tailwind CSS Grid pattern (grid-rows-[0fr] to grid-rows-[1fr]), which avoids the "jank" of traditional height animations. Active states should be reinforced with both visual (borders, shadows) and programmatic (aria-expanded) feedback.
+
+**Action:** Use the [data-faq-accordion] pattern for interactive lists. Ensure content panels use min-h-0 inside a grid container for reliable collapse. Always explicitly reset visual states (like border colors) when closing other items in a "single-open" pattern.
