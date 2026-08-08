@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Interactive FAQ Accordions and Accessibility
+
+**Learning:** Converting static content into interactive accordions reduces cognitive load and improves focus. However, they must be accessible via keyboard and screen readers using semantic `<button>` elements, proper ARIA roles (`region`), and states (`aria-expanded`, `aria-controls`). Visual feedback through border changes, shadows, and icon rotations provides essential clarity for sighted users.
+
+**Action:** Implement accordions using the Tailwind Grid height transition pattern. Always wrap triggers in semantic headings, link them to content via ARIA attributes, and enforce a single-open pattern to maintain a clean and focused user interface.
