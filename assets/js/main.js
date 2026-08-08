@@ -275,4 +275,49 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // FAQ Accordion Logic
+  const faqContainer = document.querySelector('[data-faq-accordion]');
+  if (faqContainer) {
+    faqContainer.addEventListener('click', (e) => {
+      const trigger = e.target.closest('button[aria-controls]');
+      if (!trigger) return;
+
+      const item = trigger.closest('[data-faq-item]');
+      const content = document.getElementById(trigger.getAttribute('aria-controls'));
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+      // Close other items (Single-open behavior)
+      faqContainer.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem === item) return;
+        const otherTrigger = otherItem.querySelector('button');
+        const otherContent = document.getElementById(otherTrigger.getAttribute('aria-controls'));
+
+        otherTrigger.setAttribute('aria-expanded', 'false');
+        otherItem.classList.remove('border-brand-500', 'shadow-md');
+        otherItem.classList.add('border-transparent');
+        if (otherContent) {
+          otherContent.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+        }
+        otherTrigger.querySelector('svg')?.classList.remove('rotate-180');
+      });
+
+      // Toggle current item
+      const newState = !isExpanded;
+      trigger.setAttribute('aria-expanded', String(newState));
+      item.classList.toggle('border-brand-500', newState);
+      item.classList.toggle('shadow-md', newState);
+      item.classList.toggle('border-transparent', !newState);
+
+      if (content) {
+        content.classList.toggle('grid-rows-[0fr]', !newState);
+        content.classList.toggle('grid-rows-[1fr]', newState);
+      }
+
+      const icon = trigger.querySelector('svg');
+      if (icon) {
+        icon.classList.toggle('rotate-180', newState);
+      }
+    });
+  }
 });
