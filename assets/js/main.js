@@ -275,4 +275,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqItems = document.querySelectorAll('[data-faq-item]');
+  faqItems.forEach((item) => {
+    const btn = item.querySelector('button'), content = item.querySelector('[role="region"]'), icon = btn?.querySelector('svg');
+    btn?.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      faqItems.forEach((it) => {
+        const b = it.querySelector('button'), c = it.querySelector('[role="region"]'), i = b?.querySelector('svg');
+        const open = it === item && !expanded;
+        b?.setAttribute('aria-expanded', String(open));
+        c?.classList.toggle('grid-rows-[1fr]', open);
+        c?.classList.toggle('grid-rows-[0fr]', !open);
+        i?.classList.toggle('rotate-180', open);
+        it.classList.toggle('border-brand-500', open);
+        it.classList.toggle('ring-1', open);
+        it.classList.toggle('ring-brand-500/20', open);
+      });
+    });
+  });
 });
