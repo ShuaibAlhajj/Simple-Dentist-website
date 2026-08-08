@@ -22,9 +22,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  document.querySelectorAll('[data-faq-item]').forEach(item => {
+    const btn = item.querySelector('button');
+    const content = item.querySelector('[role="region"]');
+    const icon = item.querySelector('span');
+    btn?.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !open);
+      content.classList.toggle('grid-rows-[1fr]', !open);
+      content.classList.toggle('grid-rows-[0fr]', open);
+      icon.classList.toggle('rotate-180', !open);
+    });
+  });
+
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('nav a[href$=".html"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href === current || (current === 'index.html' && href === 'index.html');
       if (isActive) {

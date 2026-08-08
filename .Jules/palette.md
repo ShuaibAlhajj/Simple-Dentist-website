@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Progressive Disclosure via Accordions
+
+**Learning:** Large blocks of information (like FAQs) can be overwhelming. Using progressive disclosure via accordions with smooth Tailwind Grid transitions (`grid-rows-[0fr]` to `grid-rows-[1fr]`) improves focus and reduces cognitive load while maintaining accessibility through proper ARIA attributes. Additionally, ensuring CSS selectors for global logic (like navigation highlighting) are robust enough to handle minor structural differences across pages prevents broken states.
+
+**Action:** Implement accordions for secondary content to improve page scanability. Use generic, robust selectors in global scripts to maintain consistent functionality across slightly divergent HTML structures.
