@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-06-06 - Live Validation Feedback
+
+**Learning:** "Sticky" error messages that remain visible after a user has corrected their input are a common source of frustration. Implementing live validation clearing (removing errors on `input` or `change` events) provides immediate positive reinforcement and a smoother form-filling experience.
+
+**Action:** Always implement global event listeners on forms to clear validation errors immediately as users interact with the fields. For custom interactive elements (like button grids for time slots), manually trigger error clearing upon selection.

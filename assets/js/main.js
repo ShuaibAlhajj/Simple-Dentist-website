@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('border-brand-500', 'bg-brand-50', 'text-brand-500');
       btn.setAttribute('aria-pressed', 'true');
       hiddenTime.value = btn.getAttribute('data-time') || '';
+      setError('time', false);
     });
   }
 
@@ -257,6 +258,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Live validation: clear errors on input/change
+  document.querySelectorAll('form').forEach((f) => {
+    f.addEventListener('input', (e) => {
+      if (e.target.id) setError(e.target.id, false);
+    });
+    f.addEventListener('change', (e) => {
+      if (e.target.id) setError(e.target.id, false);
+    });
+  });
 
   const backToTop = document.createElement('button');
   backToTop.innerHTML = '↑';
