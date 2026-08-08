@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Accessible FAQ Accordions and Icon State Management
+
+**Learning:** Accessible interactive components like FAQ accordions require meticulous state management to ensure consistency between visual and programmatic states. For instance, when implementing a single-open pattern, it is critical to reset not only the content visibility and ARIA attributes of the closing items but also their visual indicators (like rotated icons). Additionally, using Tailwind's CSS Grid height transition (`grid-rows-[0fr]` to `grid-rows-[1fr]`) provides a smooth, layout-stable animation for hidden content.
+
+**Action:** When implementing single-open interactive components, always use a loop to explicitly reset ALL state indicators (ARIA, classes, and sub-element transitions) for inactive items.
