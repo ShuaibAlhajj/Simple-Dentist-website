@@ -275,4 +275,47 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[aria-controls]');
+      if (!btn) return;
+
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const item = btn.closest('[data-faq-item]');
+      const content = document.getElementById(btn.getAttribute('aria-controls'));
+      const chevron = btn.querySelector('svg');
+
+      // Single-open pattern: Close all other items
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem === item) return;
+        const otherBtn = otherItem.querySelector('button[aria-controls]');
+        const otherContent = document.getElementById(otherBtn.getAttribute('aria-controls'));
+        const otherChevron = otherBtn.querySelector('svg');
+
+        otherBtn.setAttribute('aria-expanded', 'false');
+        otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/5');
+        otherItem.classList.add('border-brand-100');
+        if (otherContent) {
+          otherContent.classList.remove('grid-rows-[1fr]');
+          otherContent.classList.add('grid-rows-[0fr]');
+        }
+        if (otherChevron) otherChevron.classList.remove('rotate-180');
+      });
+
+      // Toggle current item
+      btn.setAttribute('aria-expanded', String(!expanded));
+      item.classList.toggle('border-brand-500', !expanded);
+      item.classList.toggle('shadow-lg', !expanded);
+      item.classList.toggle('shadow-brand-500/5', !expanded);
+      item.classList.toggle('border-brand-100', expanded);
+
+      if (content) {
+        content.classList.toggle('grid-rows-[1fr]', !expanded);
+        content.classList.toggle('grid-rows-[0fr]', expanded);
+      }
+      if (chevron) chevron.classList.toggle('rotate-180', !expanded);
+    });
+  }
 });
