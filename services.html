@@ -214,19 +214,92 @@
     <section class="py-24 bg-brand-50">
       <div class="container mx-auto px-4 max-w-3xl">
         <h2 class="font-display text-4xl font-bold text-center mb-16">Frequently Asked Questions</h2>
-        <div class="space-y-6">
-          <div class="p-6 bg-white rounded-2xl shadow-sm">
-            <h4 class="font-bold mb-2">Do you accept dental insurance?</h4>
-            <p class="text-brand-700/70">Yes, we work with most major insurance providers. Our team will handle the claims for you.</p>
+        <div class="space-y-6" data-faq-accordion>
+
+          <!-- FAQ Item 1 -->
+          <div class="bg-white rounded-2xl border border-brand-100 shadow-sm transition-all duration-300" data-faq-item>
+            <h3>
+              <button type="button"
+                      id="faq-1-button"
+                      aria-expanded="false"
+                      aria-controls="faq-1"
+                      class="w-full flex items-center justify-between p-6 text-left font-bold text-brand-900 hover:bg-brand-50/50 transition-colors rounded-2xl focus-visible:ring-4 focus-visible:ring-brand-500/20 outline-none">
+                <span>Do you accept dental insurance?</span>
+                <span class="ml-4 shrink-0 transition-transform duration-300" aria-hidden="true">
+                  <svg class="w-5 h-5 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+            </h3>
+            <div id="faq-1"
+                 role="region"
+                 aria-labelledby="faq-1-button"
+                 class="grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+              <div class="min-h-0 overflow-hidden">
+                <div class="px-6 pb-6 text-brand-700/70 leading-relaxed">
+                  Yes, we work with most major insurance providers. Our team will handle the claims for you.
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="p-6 bg-white rounded-2xl shadow-sm">
-            <h4 class="font-bold mb-2">How often should I visit the dentist?</h4>
-            <p class="text-brand-700/70">We generally recommend a checkup and cleaning every six months to maintain optimal oral health.</p>
+
+          <!-- FAQ Item 2 -->
+          <div class="bg-white rounded-2xl border border-brand-100 shadow-sm transition-all duration-300" data-faq-item>
+            <h3>
+              <button type="button"
+                      id="faq-2-button"
+                      aria-expanded="false"
+                      aria-controls="faq-2"
+                      class="w-full flex items-center justify-between p-6 text-left font-bold text-brand-900 hover:bg-brand-50/50 transition-colors rounded-2xl focus-visible:ring-4 focus-visible:ring-brand-500/20 outline-none">
+                <span>How often should I visit the dentist?</span>
+                <span class="ml-4 shrink-0 transition-transform duration-300" aria-hidden="true">
+                  <svg class="w-5 h-5 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+            </h3>
+            <div id="faq-2"
+                 role="region"
+                 aria-labelledby="faq-2-button"
+                 class="grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+              <div class="min-h-0 overflow-hidden">
+                <div class="px-6 pb-6 text-brand-700/70 leading-relaxed">
+                  We generally recommend a checkup and cleaning every six months to maintain optimal oral health.
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="p-6 bg-white rounded-2xl shadow-sm">
-            <h4 class="font-bold mb-2">What should I bring to my first appointment?</h4>
-            <p class="text-brand-700/70">Please bring your ID, insurance card, and any relevant dental history or X-rays from your previous dentist.</p>
+
+          <!-- FAQ Item 3 -->
+          <div class="bg-white rounded-2xl border border-brand-100 shadow-sm transition-all duration-300" data-faq-item>
+            <h3>
+              <button type="button"
+                      id="faq-3-button"
+                      aria-expanded="false"
+                      aria-controls="faq-3"
+                      class="w-full flex items-center justify-between p-6 text-left font-bold text-brand-900 hover:bg-brand-50/50 transition-colors rounded-2xl focus-visible:ring-4 focus-visible:ring-brand-500/20 outline-none">
+                <span>What should I bring to my first appointment?</span>
+                <span class="ml-4 shrink-0 transition-transform duration-300" aria-hidden="true">
+                  <svg class="w-5 h-5 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+            </h3>
+            <div id="faq-3"
+                 role="region"
+                 aria-labelledby="faq-3-button"
+                 class="grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+              <div class="min-h-0 overflow-hidden">
+                <div class="px-6 pb-6 text-brand-700/70 leading-relaxed">
+                  Please bring your ID, insurance card, and any relevant dental history or X-rays from your previous dentist.
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
