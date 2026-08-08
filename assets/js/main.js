@@ -275,4 +275,24 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const acc = document.querySelector('[data-faq-accordion]');
+  acc?.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[aria-expanded]');
+    if (!btn) return;
+    const item = btn.closest('[data-faq-item]'), content = document.getElementById(btn.getAttribute('aria-controls')), open = btn.getAttribute('aria-expanded') === 'true';
+    acc.querySelectorAll('[data-faq-item]').forEach((i) => {
+      const b = i.querySelector('button'), c = document.getElementById(b.getAttribute('aria-controls'));
+      b.setAttribute('aria-expanded', 'false');
+      c.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+      i.classList.replace('border-brand-500', 'border-transparent');
+      b.querySelector('svg').classList.remove('rotate-180');
+    });
+    if (!open) {
+      btn.setAttribute('aria-expanded', 'true');
+      content.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+      item.classList.replace('border-transparent', 'border-brand-500');
+      btn.querySelector('svg').classList.add('rotate-180');
+    }
+  });
 });
