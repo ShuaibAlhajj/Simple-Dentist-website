@@ -275,4 +275,49 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const accordion = document.querySelector('[data-faq-accordion]');
+  if (accordion) {
+    accordion.addEventListener('click', (e) => {
+      const trigger = e.target.closest('button[aria-expanded]');
+      if (!trigger) return;
+
+      const item = trigger.closest('[data-faq-item]');
+      const content = item?.querySelector('.grid');
+      const icon = trigger.querySelector('svg');
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+      // Close all other items
+      accordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherTrigger = otherItem.querySelector('button[aria-expanded]');
+          const otherContent = otherItem.querySelector('.grid');
+          const otherIcon = otherTrigger?.querySelector('svg');
+
+          otherTrigger?.setAttribute('aria-expanded', 'false');
+          otherContent?.classList.remove('grid-rows-[1fr]');
+          otherContent?.classList.add('grid-rows-[0fr]');
+          otherItem.classList.remove('border-brand-500', 'shadow-lg');
+          otherItem.classList.add('border-transparent');
+          if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+        }
+      });
+
+      // Toggle current item
+      trigger.setAttribute('aria-expanded', String(!isExpanded));
+      if (!isExpanded) {
+        content?.classList.remove('grid-rows-[0fr]');
+        content?.classList.add('grid-rows-[1fr]');
+        item?.classList.remove('border-transparent');
+        item?.classList.add('border-brand-500', 'shadow-lg');
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      } else {
+        content?.classList.remove('grid-rows-[1fr]');
+        content?.classList.add('grid-rows-[0fr]');
+        item?.classList.remove('border-brand-500', 'shadow-lg');
+        item?.classList.add('border-transparent');
+        if (icon) icon.style.transform = 'rotate(0deg)';
+      }
+    });
+  }
 });
