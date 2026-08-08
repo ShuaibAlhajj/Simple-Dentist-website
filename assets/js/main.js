@@ -275,4 +275,49 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // FAQ Accordion Logic
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const trigger = e.target.closest('button[aria-controls]');
+      if (!trigger) return;
+
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      const controlsId = trigger.getAttribute('aria-controls');
+      const content = document.getElementById(controlsId);
+
+      // Close other items
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((item) => {
+        const itemTrigger = item.querySelector('button[aria-controls]');
+        const itemContent = item.querySelector('.grid');
+        const itemChevron = itemTrigger?.querySelector('svg');
+
+        if (itemTrigger !== trigger) {
+          itemTrigger?.setAttribute('aria-expanded', 'false');
+          itemContent?.classList.remove('grid-rows-[1fr]');
+          itemContent?.classList.add('grid-rows-[0fr]');
+          itemChevron?.classList.remove('rotate-180');
+          item.classList.remove('border-brand-500', 'ring-1', 'ring-brand-500/20');
+        }
+      });
+
+      // Toggle current item
+      trigger.setAttribute('aria-expanded', String(!expanded));
+      const chevron = trigger.querySelector('svg');
+      const parentItem = trigger.closest('[data-faq-item]');
+
+      if (!expanded) {
+        content?.classList.remove('grid-rows-[0fr]');
+        content?.classList.add('grid-rows-[1fr]');
+        chevron?.classList.add('rotate-180');
+        parentItem?.classList.add('border-brand-500', 'ring-1', 'ring-brand-500/20');
+      } else {
+        content?.classList.remove('grid-rows-[1fr]');
+        content?.classList.add('grid-rows-[0fr]');
+        chevron?.classList.remove('rotate-180');
+        parentItem?.classList.remove('border-brand-500', 'ring-1', 'ring-brand-500/20');
+      }
+    });
+  }
 });
