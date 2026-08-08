@@ -275,4 +275,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faq = document.querySelector('[data-faq-accordion]');
+  if (faq) {
+    faq.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[aria-controls]');
+      if (!btn) return;
+      const item = btn.closest('[data-faq-item]'), expanded = btn.getAttribute('aria-expanded') === 'true';
+      faq.querySelectorAll('[data-faq-item]').forEach((it) => {
+        const b = it.querySelector('button'), c = document.getElementById(b.getAttribute('aria-controls'));
+        const isCurrent = it === item;
+        b.setAttribute('aria-expanded', isCurrent ? !expanded : 'false');
+        it.classList.toggle('border-brand-500', isCurrent && !expanded);
+        it.classList.toggle('border-brand-100', !isCurrent || expanded);
+        b.querySelector('svg')?.classList.toggle('rotate-180', isCurrent && !expanded);
+        if (c) { c.classList.toggle('grid-rows-[1fr]', isCurrent && !expanded); c.classList.toggle('grid-rows-[0fr]', !isCurrent || expanded); }
+      });
+    });
+  }
 });

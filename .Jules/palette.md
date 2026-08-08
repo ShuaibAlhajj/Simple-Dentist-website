@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Accessible Interactive Accordions and Focus States
+
+**Learning:** Transforming static content into interactive elements like accordions requires careful attention to both state management (ARIA) and keyboard accessibility. Removing default focus outlines without providing a clear `focus-visible` replacement creates a regression for keyboard users. Additionally, smooth height transitions can be achieved performantly using the CSS Grid `grid-rows` pattern.
+
+**Action:** When implementing accordions, always include `focus-visible` styles (e.g., `focus-visible:ring-4`) and ensure `aria-expanded` and `aria-controls` are correctly synchronized. Use the Tailwind Grid pattern for height animations to avoid layout shifts.
