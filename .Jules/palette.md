@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Accessible Accordions and State Restoration
+
+**Learning:** Accessible FAQ accordions require precise ARIA management (`aria-expanded`, `aria-controls`) and benefit from smooth height transitions using CSS Grid. In a single-open pattern, it is critical to explicitly restore default container styles (like `shadow-sm` or `border-transparent`) to closing items when they are swapped for active state styles (like `shadow-lg` or `border-brand-500`) to maintain visual consistency.
+
+**Action:** When implementing single-open interactive items, always ensure the state-reversal logic explicitly restores the original component classes to prevent "visual drift" in the UI.

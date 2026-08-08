@@ -24,15 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    // Match both header and nav to account for inconsistent page structures (e.g., contact.html)
+    document.querySelectorAll('header a[href$=".html"], nav a[href$=".html"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href === current || (current === 'index.html' && href === 'index.html');
+
+      // Clear all possible text/font weight classes to ensure active state is applied correctly
+      a.classList.remove('text-brand-500', 'text-brand-600', 'text-brand-700', 'font-medium', 'font-semibold', 'font-bold');
+
       if (isActive) {
         a.setAttribute('aria-current', 'page');
         a.classList.add('text-brand-600', 'font-bold');
       } else {
         a.removeAttribute('aria-current');
-        a.classList.remove('text-brand-600', 'font-bold');
+        // Re-add default text style based on standard nav patterns
+        a.classList.add('text-brand-700', 'font-medium');
       }
     });
   };
@@ -275,4 +281,46 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // FAQ Accordion Logic
+  const accordionContainer = document.querySelector('[data-faq-accordion]');
+  if (accordionContainer) {
+    accordionContainer.addEventListener('click', (e) => {
+      const trigger = e.target.closest('button[aria-controls]');
+      if (!trigger) return;
+
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      const contentId = trigger.getAttribute('aria-controls');
+      const content = document.getElementById(contentId);
+      const item = trigger.closest('[data-faq-item]');
+
+      // Close all other items (single-open behavior)
+      accordionContainer.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem === item) return;
+        const otherTrigger = otherItem.querySelector('button[aria-expanded]');
+        const otherContent = otherItem.querySelector('[role="region"]');
+
+        otherTrigger?.setAttribute('aria-expanded', 'false');
+        otherContent?.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+        otherItem.classList.replace('border-brand-500', 'border-transparent');
+        otherItem.classList.remove('shadow-lg', 'shadow-brand-500/10');
+        otherItem.classList.add('shadow-sm');
+      });
+
+      // Toggle current item
+      trigger.setAttribute('aria-expanded', String(!expanded));
+      if (content) {
+        content.classList.toggle('grid-rows-[0fr]', expanded);
+        content.classList.toggle('grid-rows-[1fr]', !expanded);
+      }
+
+      if (item) {
+        item.classList.toggle('border-transparent', expanded);
+        item.classList.toggle('border-brand-500', !expanded);
+        item.classList.toggle('shadow-sm', expanded);
+        item.classList.toggle('shadow-lg', !expanded);
+        item.classList.toggle('shadow-brand-500/10', !expanded);
+      }
+    });
+  }
 });
