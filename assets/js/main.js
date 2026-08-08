@@ -54,6 +54,46 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   prefillService();
 
+  // Accordion Logic
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    const items = faqAccordion.querySelectorAll('[data-faq-item]');
+    items.forEach(item => {
+      const button = item.querySelector('button');
+      const content = item.querySelector('.grid');
+      const icon = item.querySelector('svg');
+
+      button.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+        // Close other items
+        items.forEach(otherItem => {
+          if (otherItem !== item) {
+            const otherButton = otherItem.querySelector('button');
+            const otherContent = otherItem.querySelector('.grid');
+            const otherIcon = otherItem.querySelector('svg');
+            otherButton.setAttribute('aria-expanded', 'false');
+            otherContent.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+            otherIcon?.classList.remove('rotate-180');
+            otherItem.classList.remove('border-brand-500', 'ring-1', 'ring-brand-500/20');
+          }
+        });
+
+        // Toggle current item
+        button.setAttribute('aria-expanded', String(!isExpanded));
+        if (!isExpanded) {
+          content.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+          icon?.classList.add('rotate-180');
+          item.classList.add('border-brand-500', 'ring-1', 'ring-brand-500/20');
+        } else {
+          content.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+          icon?.classList.remove('rotate-180');
+          item.classList.remove('border-brand-500', 'ring-1', 'ring-brand-500/20');
+        }
+      });
+    });
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('href')?.slice(1);
