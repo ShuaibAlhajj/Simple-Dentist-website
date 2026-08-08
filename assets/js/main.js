@@ -24,15 +24,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('header a[href$=".html"], nav a[href$=".html"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href === current || (current === 'index.html' && href === 'index.html');
+
+      // Explicitly remove conflicting classes before applying active state
+      a.classList.remove('text-brand-500', 'text-brand-600', 'text-brand-700', 'font-medium', 'font-semibold', 'font-bold');
+
       if (isActive) {
         a.setAttribute('aria-current', 'page');
         a.classList.add('text-brand-600', 'font-bold');
       } else {
         a.removeAttribute('aria-current');
-        a.classList.remove('text-brand-600', 'font-bold');
+        // Restore default styles based on page structure
+        if (a.closest('header')) {
+          a.classList.add('font-medium', 'text-brand-700');
+        } else if (a.closest('nav')) {
+          a.classList.add('font-semibold');
+        }
       }
     });
   };
@@ -275,4 +284,40 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const item = button.closest('[data-faq-item]');
+      const content = document.getElementById(button.getAttribute('aria-controls'));
+      const icon = button.querySelector('svg');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Single-open logic: close others
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherButton = otherItem.querySelector('button[aria-controls]');
+          const otherContent = document.getElementById(otherButton.getAttribute('aria-controls'));
+          const otherIcon = otherButton.querySelector('svg');
+
+          otherButton.setAttribute('aria-expanded', 'false');
+          otherContent.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+          otherIcon.classList.remove('rotate-180');
+          otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        }
+      });
+
+      // Toggle current
+      button.setAttribute('aria-expanded', !isExpanded);
+      content.classList.toggle('grid-rows-[1fr]', !isExpanded);
+      content.classList.toggle('grid-rows-[0fr]', isExpanded);
+      icon.classList.toggle('rotate-180', !isExpanded);
+      item.classList.toggle('border-brand-500', !isExpanded);
+      item.classList.toggle('shadow-lg', !isExpanded);
+      item.classList.toggle('shadow-brand-500/10', !isExpanded);
+    });
+  }
 });
