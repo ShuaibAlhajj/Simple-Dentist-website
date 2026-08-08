@@ -214,18 +214,33 @@
     <section class="py-24 bg-brand-50">
       <div class="container mx-auto px-4 max-w-3xl">
         <h2 class="font-display text-4xl font-bold text-center mb-16">Frequently Asked Questions</h2>
-        <div class="space-y-6">
-          <div class="p-6 bg-white rounded-2xl shadow-sm">
-            <h4 class="font-bold mb-2">Do you accept dental insurance?</h4>
-            <p class="text-brand-700/70">Yes, we work with most major insurance providers. Our team will handle the claims for you.</p>
+        <div class="space-y-4" data-faq-accordion>
+          <div class="bg-white rounded-2xl shadow-sm overflow-hidden" data-faq-item>
+            <button class="w-full p-6 text-left flex justify-between items-center group focus-visible:ring-4 focus-visible:ring-brand-500/20 outline-none" aria-expanded="false">
+              <span class="font-bold text-brand-900 group-hover:text-brand-500 transition-colors">Do you accept dental insurance?</span>
+              <span class="text-brand-500 transition-transform duration-300">↓</span>
+            </button>
+            <div class="grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+              <p class="px-6 pb-6 text-brand-700/70 min-h-0">Yes, we work with most major insurance providers. Our team will handle the claims for you.</p>
+            </div>
           </div>
-          <div class="p-6 bg-white rounded-2xl shadow-sm">
-            <h4 class="font-bold mb-2">How often should I visit the dentist?</h4>
-            <p class="text-brand-700/70">We generally recommend a checkup and cleaning every six months to maintain optimal oral health.</p>
+          <div class="bg-white rounded-2xl shadow-sm overflow-hidden" data-faq-item>
+            <button class="w-full p-6 text-left flex justify-between items-center group focus-visible:ring-4 focus-visible:ring-brand-500/20 outline-none" aria-expanded="false">
+              <span class="font-bold text-brand-900 group-hover:text-brand-500 transition-colors">How often should I visit the dentist?</span>
+              <span class="text-brand-500 transition-transform duration-300">↓</span>
+            </button>
+            <div class="grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+              <p class="px-6 pb-6 text-brand-700/70 min-h-0">We generally recommend a checkup and cleaning every six months to maintain optimal oral health.</p>
+            </div>
           </div>
-          <div class="p-6 bg-white rounded-2xl shadow-sm">
-            <h4 class="font-bold mb-2">What should I bring to my first appointment?</h4>
-            <p class="text-brand-700/70">Please bring your ID, insurance card, and any relevant dental history or X-rays from your previous dentist.</p>
+          <div class="bg-white rounded-2xl shadow-sm overflow-hidden" data-faq-item>
+            <button class="w-full p-6 text-left flex justify-between items-center group focus-visible:ring-4 focus-visible:ring-brand-500/20 outline-none" aria-expanded="false">
+              <span class="font-bold text-brand-900 group-hover:text-brand-500 transition-colors">What should I bring to my first appointment?</span>
+              <span class="text-brand-500 transition-transform duration-300">↓</span>
+            </button>
+            <div class="grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+              <p class="px-6 pb-6 text-brand-700/70 min-h-0">Please bring your ID, insurance card, and any relevant dental history or X-rays from your previous dentist.</p>
+            </div>
           </div>
         </div>
       </div>
