@@ -34,6 +34,12 @@
 
 **Action:** Implement exact string matching for navigation state logic. Always prefer `setAttribute` for defining ARIA attributes on programmatically injected DOM elements to ensure consistent assistive technology support.
 
+## 2026-05-24 - Interactive Accordions and Accessible Content Transitions
+
+**Learning:** Interactive accordions improve UX by reducing visual noise while keeping information accessible. Using a CSS Grid transition (`grid-rows-[0fr]` to `grid-rows-[1fr]`) provides a smooth, performant animation without requiring JavaScript-calculated heights. For accessibility, it is crucial to use `aria-expanded` on the trigger and `role="region"` with `invisible` (to remove from tab order when collapsed) on the content.
+
+**Action:** When implementing accordions, use the Tailwind Grid pattern for height transitions. Ensure mutual exclusivity in the JS logic for a cleaner experience, and always synchronize ARIA states with visual changes.
+
 ## 2026-05-23 - Contextual Form Pre-filling and Browser Autocomplete
 
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
