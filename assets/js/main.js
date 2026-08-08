@@ -275,4 +275,32 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[aria-controls]');
+      if (!btn) return;
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const item = btn.closest('[data-faq-item]');
+
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((other) => {
+        const b = other.querySelector('button[aria-controls]');
+        const target = document.getElementById(b.getAttribute('aria-controls'));
+        const isCurrent = other === item;
+        const state = isCurrent ? !expanded : false;
+
+        b.setAttribute('aria-expanded', String(state));
+        target.classList.toggle('grid-rows-[1fr]', state);
+        target.classList.toggle('grid-rows-[0fr]', !state);
+        other.classList.toggle('border-brand-500', state);
+        other.classList.toggle('shadow-lg', state);
+        other.classList.toggle('shadow-brand-500/10', state);
+        other.classList.toggle('border-transparent', !state);
+        other.classList.toggle('shadow-sm', !state);
+        const svg = b.querySelector('svg');
+        if (svg) svg.classList.toggle('rotate-180', state);
+      });
+    });
+  }
 });
