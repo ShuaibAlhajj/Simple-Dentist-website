@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-06-30 - Single-Open Accordions and Robust Navigation Logic
+
+**Learning:** Interactive accordions (e.g., in 'services.html') follow a single-open pattern and use '[data-faq-item]' wrappers within a '[data-faq-accordion]' container. Centralized logic in 'assets/js/main.js' toggles expansion via the Grid pattern ('grid-rows-[0fr]' to 'grid-rows-[1fr]') and requires an inner 'overflow-hidden' div with 'min-h-0' for clean collapse. Additionally, navigation highlighting logic must explicitly remove potential conflicting classes (like 'text-brand-500' or 'font-medium') before applying active styles to ensure a consistent visual state across different page structures.
+
+**Action:** When implementing accordions, use the CSS Grid height transition pattern with semantic headers and ARIA attributes. For navigation logic, proactively clear existing styling classes to prevent "class soup" and ensure the intended active style is the only one rendered.

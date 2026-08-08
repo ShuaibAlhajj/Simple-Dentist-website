@@ -24,11 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('header a[href$=".html"], nav a[href$=".html"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href === current || (current === 'index.html' && href === 'index.html');
       if (isActive) {
         a.setAttribute('aria-current', 'page');
+        a.classList.remove('text-brand-500', 'text-brand-700', 'font-medium', 'font-semibold');
         a.classList.add('text-brand-600', 'font-bold');
       } else {
         a.removeAttribute('aria-current');
@@ -275,4 +276,39 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const accordion = document.querySelector('[data-faq-accordion]');
+  if (accordion) {
+    accordion.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[aria-controls]');
+      if (!btn) return;
+
+      const targetId = btn.getAttribute('aria-controls');
+      const target = document.getElementById(targetId);
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+      accordion.querySelectorAll('button[aria-expanded="true"]').forEach((openedBtn) => {
+        if (openedBtn !== btn) {
+          openedBtn.setAttribute('aria-expanded', 'false');
+          const openedTarget = document.getElementById(openedBtn.getAttribute('aria-controls'));
+          if (openedTarget) {
+            openedTarget.classList.remove('grid-rows-[1fr]');
+            openedTarget.classList.add('grid-rows-[0fr]');
+          }
+          openedBtn.closest('[data-faq-item]')?.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+          openedBtn.querySelector('svg')?.classList.remove('rotate-180');
+        }
+      });
+
+      btn.setAttribute('aria-expanded', !isExpanded);
+      if (target) {
+        target.classList.toggle('grid-rows-[0fr]', isExpanded);
+        target.classList.toggle('grid-rows-[1fr]', !isExpanded);
+      }
+      btn.closest('[data-faq-item]')?.classList.toggle('border-brand-500', !isExpanded);
+      btn.closest('[data-faq-item]')?.classList.toggle('shadow-lg', !isExpanded);
+      btn.closest('[data-faq-item]')?.classList.toggle('shadow-brand-500/10', !isExpanded);
+      btn.querySelector('svg')?.classList.toggle('rotate-180', !isExpanded);
+    });
+  }
 });
