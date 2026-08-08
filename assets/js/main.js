@@ -275,4 +275,73 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // FAQ Accordion
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const faqItem = button.closest('[data-faq-item]');
+      if (!faqItem) return;
+
+      const contentPanel = faqItem.querySelector('[role="region"]');
+      if (!contentPanel) return;
+
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Close all other items (Single-open pattern)
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((item) => {
+        if (item !== faqItem) {
+          const itemBtn = item.querySelector('button[aria-controls]');
+          const itemPanel = item.querySelector('[role="region"]');
+          const itemIcon = itemBtn?.querySelector('svg');
+
+          if (itemBtn) itemBtn.setAttribute('aria-expanded', 'false');
+          if (itemPanel) {
+            itemPanel.classList.remove('grid-rows-[1fr]');
+            itemPanel.classList.add('grid-rows-[0fr]');
+          }
+          if (itemIcon) {
+            itemIcon.classList.remove('rotate-180');
+          }
+          item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+          item.classList.add('border-transparent', 'shadow-sm');
+
+          const itemBtnHeader = item.querySelector('button');
+          if (itemBtnHeader) {
+            itemBtnHeader.classList.add('rounded-2xl');
+            itemBtnHeader.classList.remove('rounded-t-2xl', 'rounded-b-none');
+          }
+        }
+      });
+
+      // Toggle current item
+      const buttonIcon = button.querySelector('svg');
+      if (isExpanded) {
+        button.setAttribute('aria-expanded', 'false');
+        contentPanel.classList.remove('grid-rows-[1fr]');
+        contentPanel.classList.add('grid-rows-[0fr]');
+        if (buttonIcon) {
+          buttonIcon.classList.remove('rotate-180');
+        }
+        faqItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        faqItem.classList.add('border-transparent', 'shadow-sm');
+        button.classList.add('rounded-2xl');
+        button.classList.remove('rounded-t-2xl', 'rounded-b-none');
+      } else {
+        button.setAttribute('aria-expanded', 'true');
+        contentPanel.classList.remove('grid-rows-[0fr]');
+        contentPanel.classList.add('grid-rows-[1fr]');
+        if (buttonIcon) {
+          buttonIcon.classList.add('rotate-180');
+        }
+        faqItem.classList.remove('border-transparent', 'shadow-sm');
+        faqItem.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        button.classList.remove('rounded-2xl');
+        button.classList.add('rounded-t-2xl', 'rounded-b-none');
+      }
+    });
+  }
 });
