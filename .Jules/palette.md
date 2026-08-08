@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-05-24 - Interactive Accordion and Smooth Height Transitions
+
+**Learning:** Interactive accordions with smooth height transitions are best achieved using semantic `<button>` triggers with `aria-expanded` and the Tailwind CSS Grid transition pattern (`grid-rows-[0fr]` to `grid-rows-[1fr]`). Event delegation at the container level allows for efficient management of "single-open" behavior, which reduces cognitive load for the user.
+
+**Action:** Use semantic triggers and manage ARIA states programmatically. Apply the Tailwind Grid pattern with an inner `min-h-0` container to ensure reliable 0px collapse, and use border/shadow highlights to provide clear visual feedback for the active state.

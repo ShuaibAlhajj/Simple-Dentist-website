@@ -275,4 +275,48 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[aria-controls]');
+      if (!btn) return;
+
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const item = btn.closest('[data-faq-item]');
+      const answer = document.getElementById(btn.getAttribute('aria-controls'));
+      const chevron = btn.querySelector('svg');
+
+      // Single-open logic
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherBtn = otherItem.querySelector('button[aria-controls]');
+          const otherAnswer = document.getElementById(otherBtn?.getAttribute('aria-controls'));
+          const otherChevron = otherBtn?.querySelector('svg');
+
+          otherBtn?.setAttribute('aria-expanded', 'false');
+          otherItem.classList.remove('border-brand-500', 'ring-4', 'ring-brand-500/5');
+          otherItem.classList.add('border-transparent');
+          if (otherAnswer) {
+            otherAnswer.classList.remove('grid-rows-[1fr]');
+            otherAnswer.classList.add('grid-rows-[0fr]');
+          }
+          if (otherChevron) otherChevron.classList.remove('rotate-180');
+        }
+      });
+
+      // Toggle current
+      btn.setAttribute('aria-expanded', String(!expanded));
+      item.classList.toggle('border-brand-500', !expanded);
+      item.classList.toggle('ring-4', !expanded);
+      item.classList.toggle('ring-brand-500/5', !expanded);
+      item.classList.toggle('border-transparent', expanded);
+
+      if (answer) {
+        answer.classList.toggle('grid-rows-[0fr]', expanded);
+        answer.classList.toggle('grid-rows-[1fr]', !expanded);
+      }
+      if (chevron) chevron.classList.toggle('rotate-180', !expanded);
+    });
+  }
 });
