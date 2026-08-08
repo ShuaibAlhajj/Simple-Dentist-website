@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('header a[href$=".html"], nav a[href$=".html"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href === current || (current === 'index.html' && href === 'index.html');
       if (isActive) {
@@ -113,6 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       modal.classList.remove('hidden');
       modal.classList.add('flex');
+      document.body.classList.add('overflow-hidden');
+
       // Trigger transition
       setTimeout(() => {
         modalContent.classList.remove('scale-95', 'opacity-0');
@@ -127,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           modal.classList.add('hidden');
           modal.classList.remove('flex');
+          document.body.classList.remove('overflow-hidden');
           if (onDone) onDone();
         }, 300);
       };
@@ -275,4 +278,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('successModal');
+      if (modal && !modal.classList.contains('hidden')) {
+        modal.querySelector('button')?.click();
+      }
+      if (navToggle && navToggle.getAttribute('aria-expanded') === 'true') {
+        navToggle.click();
+      }
+    }
+  });
 });
