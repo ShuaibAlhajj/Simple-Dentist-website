@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-06-25 - Smooth Mobile Menu Transitions with CSS Grid
+
+**Learning:** Animating height from 0 to "auto" for mobile menus is most reliably achieved using the CSS Grid transition pattern (toggling `grid-rows-[0fr]` to `grid-rows-[1fr]`). This requires the direct child of the transition container to have `min-h-0` to allow the grid row to collapse. Pairing this transition with the `invisible` class ensures that hidden navigation links are removed from the accessibility tree and tab order, preventing focus traps when the menu is closed.
+
+**Action:** Use the CSS Grid height transition pattern for mobile menus to provide a smooth, polished feel. Always include a `min-h-0` wrapper and manage the `invisible` class alongside `aria-expanded` for optimal accessibility.

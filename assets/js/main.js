@@ -5,19 +5,21 @@ document.addEventListener('DOMContentLoaded', () => {
     navToggle.addEventListener('click', () => {
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
       navToggle.setAttribute('aria-expanded', String(!expanded));
-      navMenu.classList.toggle('hidden');
-      if (navMenu.classList.contains('hidden')) {
-        navMenu.classList.remove('flex');
+
+      if (expanded) {
+        navMenu.classList.add('invisible');
+        navMenu.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
       } else {
-        navMenu.classList.add('flex');
+        navMenu.classList.remove('invisible');
+        navMenu.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
       }
     });
 
     navMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         navToggle.setAttribute('aria-expanded', 'false');
-        navMenu.classList.add('hidden');
-        navMenu.classList.remove('flex');
+        navMenu.classList.add('invisible');
+        navMenu.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
       });
     });
   }
