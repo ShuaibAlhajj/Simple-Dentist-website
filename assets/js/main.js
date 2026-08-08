@@ -275,4 +275,52 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      const targetId = button.getAttribute('aria-controls');
+      const content = document.getElementById(targetId);
+      const item = button.closest('[data-faq-item]');
+      const icon = button.querySelector('svg');
+
+      // Close other items
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherButton = otherItem.querySelector('button[aria-controls]');
+          const otherContent = document.getElementById(otherButton.getAttribute('aria-controls'));
+          const otherIcon = otherButton.querySelector('svg');
+
+          otherButton.setAttribute('aria-expanded', 'false');
+          otherItem.classList.replace('border-brand-500', 'border-brand-100');
+          otherItem.classList.remove('shadow-lg', 'shadow-brand-500/10');
+          if (otherContent) {
+            otherContent.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+            otherContent.classList.add('invisible');
+          }
+          if (otherIcon) otherIcon.classList.remove('rotate-180');
+        }
+      });
+
+      // Toggle current item
+      button.setAttribute('aria-expanded', String(!expanded));
+      if (!expanded) {
+        item.classList.replace('border-brand-100', 'border-brand-500');
+        item.classList.add('shadow-lg', 'shadow-brand-500/10');
+        content.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+        content.classList.remove('invisible');
+        if (icon) icon.classList.add('rotate-180');
+      } else {
+        item.classList.replace('border-brand-500', 'border-brand-100');
+        item.classList.remove('shadow-lg', 'shadow-brand-500/10');
+        content.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+        content.classList.add('invisible');
+        if (icon) icon.classList.remove('rotate-180');
+      }
+    });
+  }
 });
