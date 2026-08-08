@@ -34,6 +34,12 @@
 
 **Action:** Implement exact string matching for navigation state logic. Always prefer `setAttribute` for defining ARIA attributes on programmatically injected DOM elements to ensure consistent assistive technology support.
 
+## 2026-05-24 - Inclusive Selectors for Global Navigation
+
+**Learning:** Global UI logic (like navigation active states) should use inclusive selectors (e.g., `nav a` instead of `header a`) to ensure consistency across pages that may use different semantic wrappers for the same navigation menu.
+
+**Action:** Always verify that global selectors account for slight structural variations across the site's pages, such as the absence of a `<header>` tag.
+
 ## 2026-05-23 - Contextual Form Pre-filling and Browser Autocomplete
 
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.

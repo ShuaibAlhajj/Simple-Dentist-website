@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('nav a[href$=".html"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href === current || (current === 'index.html' && href === 'index.html');
       if (isActive) {
@@ -275,4 +275,52 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // FAQ Accordion Logic
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-expanded]');
+      if (!button) return;
+
+      const item = button.closest('[data-faq-item]');
+      const content = item?.querySelector('.grid');
+      const icon = button.querySelector('span:last-child');
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Close other open items
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem === item) return;
+        const otherBtn = otherItem.querySelector('button');
+        const otherContent = otherItem.querySelector('.grid');
+        const otherIcon = otherBtn?.querySelector('span:last-child');
+
+        otherBtn?.setAttribute('aria-expanded', 'false');
+        otherContent?.classList.remove('grid-rows-[1fr]');
+        otherContent?.classList.add('grid-rows-[0fr]');
+        otherIcon?.classList.remove('rotate-180', 'bg-brand-500', 'text-white');
+        otherIcon?.classList.add('bg-brand-50', 'text-brand-500');
+        otherItem.classList.remove('border-brand-500');
+        otherItem.classList.add('border-brand-100');
+      });
+
+      // Toggle current item
+      button.setAttribute('aria-expanded', String(!expanded));
+      if (!expanded) {
+        content?.classList.remove('grid-rows-[0fr]');
+        content?.classList.add('grid-rows-[1fr]');
+        icon?.classList.add('rotate-180', 'bg-brand-500', 'text-white');
+        icon?.classList.remove('bg-brand-50', 'text-brand-500');
+        item?.classList.add('border-brand-500');
+        item?.classList.remove('border-brand-100');
+      } else {
+        content?.classList.remove('grid-rows-[1fr]');
+        content?.classList.add('grid-rows-[0fr]');
+        icon?.classList.remove('rotate-180', 'bg-brand-500', 'text-white');
+        icon?.classList.add('bg-brand-50', 'text-brand-500');
+        item?.classList.remove('border-brand-500');
+        item?.classList.add('border-brand-100');
+      }
+    });
+  }
 });
