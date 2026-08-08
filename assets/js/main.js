@@ -275,4 +275,49 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // FAQ Accordion Interactivity
+  const accordionContainer = document.querySelector('[data-faq-accordion]');
+  if (accordionContainer) {
+    accordionContainer.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const currentItem = button.closest('[data-faq-item]');
+      if (!currentItem) return;
+
+      const contentPanel = currentItem.querySelector('[role="region"]');
+      const icon = currentItem.querySelector('[data-faq-icon]');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Single-open accordion logic
+      accordionContainer.querySelectorAll('[data-faq-item]').forEach((item) => {
+        if (item === currentItem) return;
+        const btn = item.querySelector('button[aria-controls]');
+        const panel = item.querySelector('[role="region"]');
+        const ico = item.querySelector('[data-faq-icon]');
+
+        btn?.setAttribute('aria-expanded', 'false');
+        panel?.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+        ico?.classList.remove('rotate-45');
+        item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        item.classList.add('border-brand-100', 'shadow-sm');
+      });
+
+      // Toggle state for current item
+      if (isExpanded) {
+        button.setAttribute('aria-expanded', 'false');
+        contentPanel?.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+        icon?.classList.remove('rotate-45');
+        currentItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        currentItem.classList.add('border-brand-100', 'shadow-sm');
+      } else {
+        button.setAttribute('aria-expanded', 'true');
+        contentPanel?.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+        icon?.classList.add('rotate-45');
+        currentItem.classList.remove('border-brand-100', 'shadow-sm');
+        currentItem.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+      }
+    });
+  }
 });
