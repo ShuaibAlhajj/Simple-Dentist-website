@@ -39,3 +39,9 @@
 **Learning:** Users benefit significantly from contextual transitions (e.g., passing intent from a service list to a booking form) and browser-level assistance (`autocomplete`), which reduce cognitive load and form abandonment. Synchronizing form options with the rest of the site is critical for this "seamless" feel.
 
 **Action:** When designing multi-page funnels, always look for opportunities to carry user intent through query parameters and ensure all standard form fields use appropriate `autocomplete` tokens. Verify that form dropdowns stay synchronized with the marketing copy.
+
+## 2026-07-21 - Visual Focus Accessibility and Precise Navigation Highlighting
+
+**Learning:** Button elements representing status grids or choices (like Preferred Time slot grids) must have explicit `focus-visible` styling (`focus-visible:ring-4 focus-visible:ring-brand-500/20 outline-none`) configured alongside focus resets (`outline-none`) to be fully visual and interactive to keyboard-only users. Additionally, on static sites, navigation components on certain pages might lack standard layout constructs like `<header>` wrappers (e.g., `contact.html`). Standardizing global navigation query logic to lookup both `header a` and `nav a` elements—while explicitly excluding helper element groupings like logo wrapper links using `.group` selectors—prevents incorrect or missed active state rendering.
+
+**Action:** Ensure all interactive grid selections have explicit focus-visible rings defined. Generalize global navigation scripts to gracefully lookup links under `<nav>` sections and ignore site brand/logo components.

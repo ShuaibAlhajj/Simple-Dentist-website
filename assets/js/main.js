@@ -24,7 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    // Select links in both header and nav to account for pages without header tags (like contact.html)
+    document.querySelectorAll('header a[href$=".html"], nav a[href$=".html"]').forEach((a) => {
+      // Skip the logo link
+      if (a.classList.contains('group')) return;
+
       const href = a.getAttribute('href') || '';
       const isActive = href === current || (current === 'index.html' && href === 'index.html');
       if (isActive) {
