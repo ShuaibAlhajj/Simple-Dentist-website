@@ -24,11 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('header a[href$=".html"], nav a[href$=".html"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href === current || (current === 'index.html' && href === 'index.html');
+
+      // Remove common conflicting classes to ensure visibility and contrast
+      a.classList.remove('text-brand-500', 'text-brand-700', 'font-medium', 'font-semibold');
+
       if (isActive) {
         a.setAttribute('aria-current', 'page');
+        a.classList.remove('text-brand-900'); // Ensure active color wins
         a.classList.add('text-brand-600', 'font-bold');
       } else {
         a.removeAttribute('aria-current');
@@ -275,4 +280,45 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // FAQ Accordion Interactivity
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const item = button.closest('[data-faq-item]');
+      const content = document.getElementById(button.getAttribute('aria-controls'));
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Single-open behavior: close other items
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherButton = otherItem.querySelector('button[aria-controls]');
+          const otherContent = document.getElementById(otherButton.getAttribute('aria-controls'));
+
+          otherButton.setAttribute('aria-expanded', 'false');
+          otherContent.classList.remove('grid-rows-[1fr]');
+          otherContent.classList.add('grid-rows-[0fr]');
+          otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+          otherItem.classList.add('border-transparent', 'shadow-sm');
+        }
+      });
+
+      // Toggle current item
+      button.setAttribute('aria-expanded', String(!isExpanded));
+      if (!isExpanded) {
+        content.classList.remove('grid-rows-[0fr]');
+        content.classList.add('grid-rows-[1fr]');
+        item.classList.remove('border-transparent', 'shadow-sm');
+        item.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+      } else {
+        content.classList.remove('grid-rows-[1fr]');
+        content.classList.add('grid-rows-[0fr]');
+        item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        item.classList.add('border-transparent', 'shadow-sm');
+      }
+    });
+  }
 });
