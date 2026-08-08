@@ -24,18 +24,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('header a[href$=".html"], nav a[href$=".html"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href === current || (current === 'index.html' && href === 'index.html');
+
+      // Clear all possible active/inactive classes to ensure consistent state
+      a.classList.remove('text-brand-500', 'text-brand-600', 'text-brand-700', 'font-bold', 'font-medium');
+
       if (isActive) {
         a.setAttribute('aria-current', 'page');
         a.classList.add('text-brand-600', 'font-bold');
       } else {
         a.removeAttribute('aria-current');
-        a.classList.remove('text-brand-600', 'font-bold');
+        // Re-apply default styling if needed, or let CSS handle it
+        // Most nav links have text-brand-700 and font-medium by default
+        if (!a.classList.contains('bg-brand-500') && !a.classList.contains('bg-brand-900')) {
+          a.classList.add('text-brand-700', 'font-medium');
+        }
       }
     });
   };
+
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const trigger = e.target.closest('button[aria-controls]');
+      if (!trigger) return;
+
+      const contentId = trigger.getAttribute('aria-controls');
+      const content = document.getElementById(contentId);
+      const item = trigger.closest('[data-faq-item]');
+      const icon = trigger.querySelector('svg');
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+      // Close other items
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem === item) return;
+        const otherTrigger = otherItem.querySelector('button[aria-controls]');
+        const otherContent = document.getElementById(otherTrigger.getAttribute('aria-controls'));
+        const otherIcon = otherTrigger.querySelector('svg');
+
+        otherTrigger.setAttribute('aria-expanded', 'false');
+        otherContent.classList.remove('grid-rows-[1fr]');
+        otherContent.classList.add('grid-rows-[0fr]');
+        if (otherIcon) otherIcon.classList.remove('rotate-180');
+        otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        otherItem.classList.add('border-transparent', 'shadow-sm');
+      });
+
+      // Toggle current item
+      trigger.setAttribute('aria-expanded', String(!isExpanded));
+      if (!isExpanded) {
+        content.classList.remove('grid-rows-[0fr]');
+        content.classList.add('grid-rows-[1fr]');
+        if (icon) icon.classList.add('rotate-180');
+        item.classList.remove('border-transparent', 'shadow-sm');
+        item.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+      } else {
+        content.classList.remove('grid-rows-[1fr]');
+        content.classList.add('grid-rows-[0fr]');
+        if (icon) icon.classList.remove('rotate-180');
+        item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        item.classList.add('border-transparent', 'shadow-sm');
+      }
+    });
+  }
   setActiveNav();
 
   const dateInput = document.getElementById('date');
