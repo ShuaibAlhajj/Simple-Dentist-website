@@ -275,4 +275,40 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('button[aria-controls]');
+      if (!button) return;
+
+      const item = button.closest('[data-faq-item]');
+      const content = document.getElementById(button.getAttribute('aria-controls'));
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Single-open logic: close others
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem === item) return;
+        const otherButton = otherItem.querySelector('button[aria-controls]');
+        const otherContent = document.getElementById(otherButton.getAttribute('aria-controls'));
+
+        otherButton.setAttribute('aria-expanded', 'false');
+        otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        otherItem.classList.add('border-brand-100');
+        otherContent.classList.remove('grid-rows-[1fr]');
+        otherContent.classList.add('grid-rows-[0fr]');
+        otherButton.querySelector('svg')?.classList.remove('rotate-180');
+      });
+
+      // Toggle current item
+      button.setAttribute('aria-expanded', String(!isExpanded));
+      item.classList.toggle('border-brand-500', !isExpanded);
+      item.classList.toggle('shadow-lg', !isExpanded);
+      item.classList.toggle('shadow-brand-500/10', !isExpanded);
+      item.classList.toggle('border-brand-100', isExpanded);
+      content.classList.toggle('grid-rows-[1fr]', !isExpanded);
+      content.classList.toggle('grid-rows-[0fr]', isExpanded);
+      button.querySelector('svg')?.classList.toggle('rotate-180', !isExpanded);
+    });
+  }
 });
