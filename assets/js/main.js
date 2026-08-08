@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('nav a[href$=".html"]').forEach((a) => {
       const href = a.getAttribute('href') || '';
       const isActive = href === current || (current === 'index.html' && href === 'index.html');
       if (isActive) {
@@ -53,6 +53,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
   prefillService();
+
+  const faqItems = document.querySelectorAll('[data-faq-item]');
+  faqItems.forEach((item) => {
+    const btn = item.querySelector('button');
+    const content = item.querySelector('div[role="region"]');
+    if (btn && content) {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        // Close others
+        faqItems.forEach((other) => {
+          if (other === item) return;
+          other.classList.remove('is-active', 'border-brand-500', 'ring-1', 'ring-brand-500/20');
+          other.querySelector('button')?.setAttribute('aria-expanded', 'false');
+          other.querySelector('div[role="region"]')?.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+        });
+
+        // Toggle current
+        btn.setAttribute('aria-expanded', String(!expanded));
+        item.classList.toggle('is-active', !expanded);
+        item.classList.toggle('border-brand-500', !expanded);
+        item.classList.toggle('ring-1', !expanded);
+        item.classList.toggle('ring-brand-500/20', !expanded);
+        content.classList.replace(expanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]', expanded ? 'grid-rows-[0fr]' : 'grid-rows-[1fr]');
+      });
+    }
+  });
 
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
