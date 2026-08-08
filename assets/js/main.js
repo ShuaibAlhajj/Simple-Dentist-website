@@ -258,6 +258,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // FAQ Accordion Interactivity
+  const faqAccordion = document.querySelector('[data-faq-accordion]');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const button = e.target.closest('[data-faq-item] button');
+      if (!button) return;
+
+      const item = button.closest('[data-faq-item]');
+      const content = item?.querySelector('[role="region"]');
+      const icon = button.querySelector('span:last-child');
+      if (!item || !content || !icon) return;
+
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Single-open pattern: close other open items in the accordion
+      faqAccordion.querySelectorAll('[data-faq-item]').forEach((otherItem) => {
+        if (otherItem !== item) {
+          const otherButton = otherItem.querySelector('button');
+          const otherContent = otherItem.querySelector('[role="region"]');
+          const otherIcon = otherButton?.querySelector('span:last-child');
+
+          if (otherButton && otherContent) {
+            otherButton.setAttribute('aria-expanded', 'false');
+            otherButton.classList.add('rounded-2xl');
+            otherButton.classList.remove('rounded-t-2xl');
+            otherContent.classList.remove('grid-rows-[1fr]');
+            otherContent.classList.add('grid-rows-[0fr]');
+            otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+            otherItem.classList.add('border-brand-100', 'shadow-sm');
+            if (otherIcon) {
+              otherIcon.classList.remove('rotate-45');
+            }
+          }
+        }
+      });
+
+      // Toggle current item
+      if (isExpanded) {
+        button.setAttribute('aria-expanded', 'false');
+        button.classList.add('rounded-2xl');
+        button.classList.remove('rounded-t-2xl');
+        content.classList.remove('grid-rows-[1fr]');
+        content.classList.add('grid-rows-[0fr]');
+        item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        item.classList.add('border-brand-100', 'shadow-sm');
+        icon.classList.remove('rotate-45');
+      } else {
+        button.setAttribute('aria-expanded', 'true');
+        button.classList.remove('rounded-2xl');
+        button.classList.add('rounded-t-2xl');
+        content.classList.remove('grid-rows-[0fr]');
+        content.classList.add('grid-rows-[1fr]');
+        item.classList.remove('border-brand-100', 'shadow-sm');
+        item.classList.add('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+        icon.classList.add('rotate-45');
+      }
+    });
+  }
+
   const backToTop = document.createElement('button');
   backToTop.innerHTML = '↑';
   backToTop.setAttribute('aria-label', 'Back to top');
