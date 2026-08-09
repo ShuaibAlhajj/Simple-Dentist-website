@@ -121,7 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 10);
 
       const closeBtn = modal.querySelector('button');
+      const escHandler = (ev) => {
+        if (ev.key === 'Escape') {
+          closeHandler();
+        }
+      };
       const closeHandler = () => {
+        document.removeEventListener('keydown', escHandler);
         modalContent.classList.add('scale-95', 'opacity-0');
         modalContent.classList.remove('scale-100', 'opacity-100');
         setTimeout(() => {
@@ -130,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (onDone) onDone();
         }, 300);
       };
+      document.addEventListener('keydown', escHandler);
       closeBtn?.addEventListener('click', closeHandler, { once: true });
       modal.addEventListener('click', (ev) => {
         if (ev.target === modal) closeHandler();

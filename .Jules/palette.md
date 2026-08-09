@@ -45,3 +45,9 @@
 **Learning:** Building accordions using semantic structural headers wrapper around buttons, clear ARIA linking attributes (`aria-controls`, `aria-expanded`), and proper interactive states (e.g., solid color classes, focus-visible outlines, single-open item cleanups) creates a superior and non-disruptive user experience. Animating heights using CSS Grid `grid-rows-[0fr]` to `grid-rows-[1fr]` with direct child `min-h-0` is an elegant, pure Tailwind approach for fluid transitions without custom CSS.
 
 **Action:** When building collapsible panels, always structure with heading-wrapped buttons linked to ARIA regions, utilize grid-based height transitions, and perform robust cleanup/reset loops for closing active items in single-open implementations.
+
+## 2026-08-09 - Keyboard Dismissible Modals
+
+**Learning:** Dialogs and success modals are significantly more accessible when they support global keyboard actions like the Escape key to close. Scoping the keydown listener to the document while the modal is open and cleanly removing the listener when the modal closes ensures robust performance without unwanted background behavior or leaks.
+
+**Action:** To ensure keyboard accessibility for success modals, register a temporary keydown event listener on the document within the modal's open routine and cleanly de-register it in the modal's closing cleanup handler.
