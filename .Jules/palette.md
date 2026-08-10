@@ -45,3 +45,9 @@
 **Learning:** Building accordions using semantic structural headers wrapper around buttons, clear ARIA linking attributes (`aria-controls`, `aria-expanded`), and proper interactive states (e.g., solid color classes, focus-visible outlines, single-open item cleanups) creates a superior and non-disruptive user experience. Animating heights using CSS Grid `grid-rows-[0fr]` to `grid-rows-[1fr]` with direct child `min-h-0` is an elegant, pure Tailwind approach for fluid transitions without custom CSS.
 
 **Action:** When building collapsible panels, always structure with heading-wrapped buttons linked to ARIA regions, utilize grid-based height transitions, and perform robust cleanup/reset loops for closing active items in single-open implementations.
+
+## 2026-05-25 - Success Modal Focus Restoration and Disabled Element Blurring
+
+**Learning:** When an interactive element (like a form submit button) is disabled during async submission, the browser automatically blurs it, resetting `document.activeElement` to `document.body`. Consequently, standard modal focus-restoration logic that captures `document.activeElement` upon modal open will incorrectly target the body.
+
+**Action:** Accept an optional trigger element parameter in shared modal components. Explicitly pass the trigger button when launching the modal from forms where the button was temporarily disabled, ensuring focus is correctly returned upon dismissal.
