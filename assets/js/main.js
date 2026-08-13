@@ -348,4 +348,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Live Character Counters for Textareas
+  const setupCounter = (inputId, counterId, maxLen) => {
+    const input = document.getElementById(inputId);
+    const counter = document.getElementById(counterId);
+    if (input && counter) {
+      const update = () => {
+        counter.textContent = `${input.value.length} / ${maxLen}`;
+      };
+      input.addEventListener('input', update);
+      // Initialize on load (handles prefilled/cached input)
+      update();
+    }
+  };
+  setupCounter('message', 'message-counter', 500);
+  setupCounter('cmessage', 'cmessage-counter', 1000);
 });

@@ -45,3 +45,9 @@
 **Learning:** Building accordions using semantic structural headers wrapper around buttons, clear ARIA linking attributes (`aria-controls`, `aria-expanded`), and proper interactive states (e.g., solid color classes, focus-visible outlines, single-open item cleanups) creates a superior and non-disruptive user experience. Animating heights using CSS Grid `grid-rows-[0fr]` to `grid-rows-[1fr]` with direct child `min-h-0` is an elegant, pure Tailwind approach for fluid transitions without custom CSS.
 
 **Action:** When building collapsible panels, always structure with heading-wrapped buttons linked to ARIA regions, utilize grid-based height transitions, and perform robust cleanup/reset loops for closing active items in single-open implementations.
+
+## 2026-05-25 - Real-Time Accessible Character Counter for Textareas
+
+**Learning:** Adding real-time character counting provides strong visual feedback and acts as an elegant boundary-enforcing constraint (via `maxlength`) that improves form completion rates. To ensure full accessibility for users of assistive technologies, character counts should be coupled with `aria-live="polite"` so state updates are spoken naturally without disrupting the typing flow.
+
+**Action:** Implement a generic `setupCounter` helper in shared JS files that checks element existence first, dynamically updates limits on `input` events, and formats counters using semantic text paired with `aria-live="polite"`.
