@@ -45,3 +45,9 @@
 **Learning:** Building accordions using semantic structural headers wrapper around buttons, clear ARIA linking attributes (`aria-controls`, `aria-expanded`), and proper interactive states (e.g., solid color classes, focus-visible outlines, single-open item cleanups) creates a superior and non-disruptive user experience. Animating heights using CSS Grid `grid-rows-[0fr]` to `grid-rows-[1fr]` with direct child `min-h-0` is an elegant, pure Tailwind approach for fluid transitions without custom CSS.
 
 **Action:** When building collapsible panels, always structure with heading-wrapped buttons linked to ARIA regions, utilize grid-based height transitions, and perform robust cleanup/reset loops for closing active items in single-open implementations.
+
+## 2026-08-14 - Modal Dialog Keyboard Access and Focus Restoration
+
+**Learning:** For interactive overlay panels like success modals, true accessibility requires keyboard navigation support: specifically, adding an Escape key listener to close the overlay, and restoring focus to the initiating element (e.g. the form submit button) once closed. This prevents keyboard focus from resetting to the top of the viewport or getting trapped inside a hidden container.
+
+**Action:** Always bind a temporary keydown listener for the Escape key when modals/overlays are shown, cleanly remove all event listeners during closing transitions to prevent leaks, and accept a parameter to return focus to the exact trigger element.
