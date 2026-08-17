@@ -45,3 +45,9 @@
 **Learning:** Building accordions using semantic structural headers wrapper around buttons, clear ARIA linking attributes (`aria-controls`, `aria-expanded`), and proper interactive states (e.g., solid color classes, focus-visible outlines, single-open item cleanups) creates a superior and non-disruptive user experience. Animating heights using CSS Grid `grid-rows-[0fr]` to `grid-rows-[1fr]` with direct child `min-h-0` is an elegant, pure Tailwind approach for fluid transitions without custom CSS.
 
 **Action:** When building collapsible panels, always structure with heading-wrapped buttons linked to ARIA regions, utilize grid-based height transitions, and perform robust cleanup/reset loops for closing active items in single-open implementations.
+
+## 2026-05-25 - Programmatic Skip Link Injection and Keyboard Focus Management
+
+**Learning:** Injecting a 'Skip to main content' link programmatically in shared JS provides global keyboard accessibility across all static HTML pages without editing every template. For skip links to function properly with assistive technologies and browser keyboard navigation, the target `<main>` element must have `tabindex="-1"` and focus must be explicitly transferred (`target.focus({ preventScroll: true })`) during in-page smooth scrolling.
+
+**Action:** When implementing skip links or smooth anchor navigation in static sites, ensure target container elements are programmatically given `tabindex="-1"` and explicitly focus the target element upon navigation.

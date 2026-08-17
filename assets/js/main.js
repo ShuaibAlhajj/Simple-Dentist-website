@@ -54,6 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   prefillService();
 
+  const mainElement = document.querySelector('main');
+  if (mainElement) {
+    if (!mainElement.id) {
+      mainElement.id = 'main-content';
+    }
+    mainElement.setAttribute('tabindex', '-1');
+    mainElement.classList.add('outline-none');
+
+    const skipLink = document.createElement('a');
+    skipLink.href = `#${mainElement.id}`;
+    skipLink.textContent = 'Skip to main content';
+    skipLink.className = 'sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-3 focus:bg-brand-500 focus:text-white focus:font-semibold focus:rounded-xl focus:shadow-lg focus:outline-none focus:ring-4 focus:ring-brand-500/30 transition-all';
+    document.body.prepend(skipLink);
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('href')?.slice(1);
@@ -61,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.focus({ preventScroll: true });
       }
     });
   });
