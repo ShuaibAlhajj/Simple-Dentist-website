@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const showSuccessModal = (title, message, onDone) => {
+  const showSuccessModal = (title, message, onDone, triggerElement) => {
     const modal = document.getElementById('successModal');
     const modalContent = document.getElementById('modalContent');
     const modalTitle = document.getElementById('modalTitle');
@@ -110,6 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modal && modalContent) {
       if (modalTitle && title) modalTitle.textContent = title;
       if (modalText && message) modalText.textContent = message;
+
+      const previouslyFocused = triggerElement || document.activeElement;
 
       modal.classList.remove('hidden');
       modal.classList.add('flex');
@@ -121,19 +123,35 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 10);
 
       const closeBtn = modal.querySelector('button');
+
+      let closed = false;
       const closeHandler = () => {
+        if (closed) return;
+        closed = true;
+        document.removeEventListener('keydown', handleKeydown);
         modalContent.classList.add('scale-95', 'opacity-0');
         modalContent.classList.remove('scale-100', 'opacity-100');
         setTimeout(() => {
           modal.classList.add('hidden');
           modal.classList.remove('flex');
+          if (previouslyFocused && typeof previouslyFocused.focus === 'function') {
+            previouslyFocused.focus();
+          }
           if (onDone) onDone();
         }, 300);
       };
+
+      const handleKeydown = (ev) => {
+        if (ev.key === 'Escape') {
+          closeHandler();
+        }
+      };
+
+      document.addEventListener('keydown', handleKeydown);
       closeBtn?.addEventListener('click', closeHandler, { once: true });
       modal.addEventListener('click', (ev) => {
         if (ev.target === modal) closeHandler();
-      }, { once: true });
+      });
     } else {
       alert(message || title);
       if (onDone) onDone();
@@ -185,6 +203,9 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+
           showSuccessModal(
             'Request Sent!',
             "Thank you for choosing BrightSmile. We've received your request and will call you shortly to confirm your appointment.",
@@ -196,11 +217,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 b.classList.add('border-brand-100');
                 b.setAttribute('aria-pressed', 'false');
               });
-            }
+            },
+            submitBtn
           );
-
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
         }, 1000);
       } else {
         let firstErrorField = document.getElementById(errors[0]);
@@ -241,15 +260,17 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+
           showSuccessModal(
             'Message Sent!',
             "Thank you for reaching out to BrightSmile. We've received your message and our team will get back to you shortly.",
             () => {
               contactForm.reset();
-            }
+            },
+            submitBtn
           );
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
         }, 1000);
       } else {
         const firstError = !nameValid ? cname : (!emailValid ? cemail : cmessage);
