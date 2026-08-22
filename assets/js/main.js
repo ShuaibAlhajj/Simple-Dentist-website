@@ -54,6 +54,20 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   prefillService();
 
+  const mainEl = document.querySelector('main');
+  if (mainEl) {
+    if (!mainEl.id) {
+      mainEl.id = 'main-content';
+    }
+    mainEl.setAttribute('tabindex', '-1');
+
+    const skipLink = document.createElement('a');
+    skipLink.href = `#${mainEl.id}`;
+    skipLink.textContent = 'Skip to main content';
+    skipLink.className = 'sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand-600 focus:text-white focus:font-semibold focus:rounded-lg focus:shadow-xl focus:outline-none focus:ring-4 focus:ring-brand-500/50 transition-all';
+    document.body.insertBefore(skipLink, document.body.firstChild);
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('href')?.slice(1);
@@ -61,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.focus();
       }
     });
   });
