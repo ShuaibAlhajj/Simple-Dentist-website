@@ -101,13 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const showSuccessModal = (title, message, onDone) => {
+  const showSuccessModal = (title, message, onDone, triggerElement) => {
     const modal = document.getElementById('successModal');
     const modalContent = document.getElementById('modalContent');
     const modalTitle = document.getElementById('modalTitle');
     const modalText = modal?.querySelector('p');
 
     if (modal && modalContent) {
+      const previouslyFocused = triggerElement || (document.activeElement instanceof HTMLElement ? document.activeElement : null);
+      let isClosing = false;
+
       if (modalTitle && title) modalTitle.textContent = title;
       if (modalText && message) modalText.textContent = message;
 
@@ -121,19 +124,43 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 10);
 
       const closeBtn = modal.querySelector('button');
+
+      const cleanup = () => {
+        document.removeEventListener('keydown', keyHandler);
+        closeBtn?.removeEventListener('click', closeHandler);
+        modal.removeEventListener('click', backdropHandler);
+      };
+
       const closeHandler = () => {
+        if (isClosing) return;
+        isClosing = true;
+        cleanup();
+
         modalContent.classList.add('scale-95', 'opacity-0');
         modalContent.classList.remove('scale-100', 'opacity-100');
         setTimeout(() => {
           modal.classList.add('hidden');
           modal.classList.remove('flex');
           if (onDone) onDone();
+          if (previouslyFocused && typeof previouslyFocused.focus === 'function') {
+            previouslyFocused.focus();
+          }
         }, 300);
       };
-      closeBtn?.addEventListener('click', closeHandler, { once: true });
-      modal.addEventListener('click', (ev) => {
+
+      const backdropHandler = (ev) => {
         if (ev.target === modal) closeHandler();
-      }, { once: true });
+      };
+
+      const keyHandler = (ev) => {
+        if (ev.key === 'Escape') {
+          closeHandler();
+        }
+      };
+
+      closeBtn?.addEventListener('click', closeHandler);
+      modal.addEventListener('click', backdropHandler);
+      document.addEventListener('keydown', keyHandler);
     } else {
       alert(message || title);
       if (onDone) onDone();
@@ -196,7 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 b.classList.add('border-brand-100');
                 b.setAttribute('aria-pressed', 'false');
               });
-            }
+            },
+            submitBtn
           );
 
           submitBtn.disabled = false;
@@ -246,7 +274,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "Thank you for reaching out to BrightSmile. We've received your message and our team will get back to you shortly.",
             () => {
               contactForm.reset();
-            }
+            },
+            submitBtn
           );
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
