@@ -205,9 +205,10 @@
                 <div>
                     <h4 class="font-display text-lg font-bold mb-6">Newsletter</h4>
                     <p class="text-brand-100/60 text-sm mb-4">Get oral health tips and clinic updates.</p>
-                    <form class="flex gap-2">
-                        <input type="email" placeholder="Email" class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-500 w-full">
-                        <button class="px-4 py-2 bg-brand-500 rounded-lg text-sm font-bold">Join</button>
+                    <form class="flex gap-2" action="#" method="POST" onsubmit="event.preventDefault();">
+                        <label for="newsletter-email" class="sr-only">Email Address</label>
+                        <input id="newsletter-email" name="email" type="email" placeholder="Email" required autocomplete="email" class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm outline-none hover:bg-white/10 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all w-full">
+                        <button type="submit" aria-label="Subscribe to newsletter" class="px-4 py-2 bg-brand-500 rounded-lg text-sm font-bold hover:bg-brand-600 active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-brand-900 shrink-0">Join</button>
                     </form>
                 </div>
             </div>
