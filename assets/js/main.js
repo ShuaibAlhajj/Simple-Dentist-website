@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Inject Skip to Main Content Link for Keyboard Accessibility
+  const mainEl = document.querySelector('main');
+  if (mainEl) {
+    if (!mainEl.id) {
+      mainEl.id = 'main-content';
+    }
+    mainEl.setAttribute('tabindex', '-1');
+
+    const skipLink = document.createElement('a');
+    skipLink.href = `#${mainEl.id}`;
+    skipLink.textContent = 'Skip to main content';
+    skipLink.className = 'sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-brand-500 focus:text-white focus:font-bold focus:rounded-xl focus:shadow-xl focus:outline-none focus:ring-4 focus:ring-brand-500/50 transition-all';
+    document.body.insertBefore(skipLink, document.body.firstChild);
+  }
+
   const navToggle = document.querySelector('[data-nav-toggle]');
   const navMenu = document.querySelector('[data-nav-menu]');
   if (navToggle && navMenu) {
@@ -61,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.focus();
       }
     });
   });
