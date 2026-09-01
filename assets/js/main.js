@@ -297,6 +297,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const newsletterInput = document.getElementById('newsletter-email');
+  if (newsletterInput) {
+    const newsletterForm = newsletterInput.closest('form');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const emailValid = newsletterInput && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterInput.value.trim());
+
+        if (emailValid) {
+          const submitBtn = newsletterForm.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = `
+            <svg class="animate-spin h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          `;
+
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+
+            showSuccessModal(
+              'Subscribed!',
+              "Thank you for subscribing! You'll now receive oral health tips and clinic updates in your inbox.",
+              () => {
+                newsletterForm.reset();
+              },
+              submitBtn
+            );
+          }, 800);
+        } else {
+          newsletterInput.focus();
+        }
+      });
+    }
+  }
+
   const backToTop = document.createElement('button');
   backToTop.innerHTML = '↑';
   backToTop.setAttribute('aria-label', 'Back to top');
