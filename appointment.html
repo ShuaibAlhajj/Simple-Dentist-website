@@ -195,8 +195,11 @@
               </div>
 
               <div>
-                <label for="message" class="block text-sm font-bold text-brand-900 mb-2">Additional Notes (Optional)</label>
-                <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all resize-none" placeholder="Tell us about any specific concerns..."></textarea>
+                <div class="flex justify-between items-center mb-2">
+                  <label for="message" class="block text-sm font-bold text-brand-900">Additional Notes (Optional)</label>
+                  <span id="message-counter" class="text-xs text-brand-600 font-medium" aria-live="polite">0 / 500</span>
+                </div>
+                <textarea id="message" name="message" rows="4" maxlength="500" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all resize-none" placeholder="Tell us about any specific concerns..."></textarea>
               </div>
 
               <button type="submit" class="w-full py-4 rounded-xl bg-brand-500 text-white font-bold text-lg hover:bg-brand-600 shadow-xl shadow-brand-500/30 transition-all active:scale-[0.98]">
