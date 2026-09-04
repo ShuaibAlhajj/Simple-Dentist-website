@@ -45,3 +45,9 @@
 **Learning:** Building accordions using semantic structural headers wrapper around buttons, clear ARIA linking attributes (`aria-controls`, `aria-expanded`), and proper interactive states (e.g., solid color classes, focus-visible outlines, single-open item cleanups) creates a superior and non-disruptive user experience. Animating heights using CSS Grid `grid-rows-[0fr]` to `grid-rows-[1fr]` with direct child `min-h-0` is an elegant, pure Tailwind approach for fluid transitions without custom CSS.
 
 **Action:** When building collapsible panels, always structure with heading-wrapped buttons linked to ARIA regions, utilize grid-based height transitions, and perform robust cleanup/reset loops for closing active items in single-open implementations.
+
+## 2026-09-04 - Real-Time Form Validation Error Clearing
+
+**Learning:** Static submit-time form validation can leave stale error styling and `aria-invalid` states on screen long after a user has corrected their input. Attaching real-time input and change listeners that validate entries as users edit clears error states dynamically, maintaining assistive technology synchronization and providing instant positive feedback.
+
+**Action:** Whenever implementing custom form validation, attach input/change listeners to automatically remove error indicators (`setError(fieldId, false)`) as soon as the user enters valid input or selects an option.
