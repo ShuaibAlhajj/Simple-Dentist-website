@@ -81,24 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const slotsContainer = document.getElementById('timeSlots');
-  const hiddenTime = document.getElementById('time');
-  if (slotsContainer && hiddenTime) {
-    slotsContainer.addEventListener('click', (e) => {
-      const btn = e.target.closest('button[data-time]');
-      if (!btn) return;
-      slotsContainer.querySelectorAll('button[data-time]').forEach((b) => {
-        b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-500');
-        b.classList.add('border-brand-100');
-        b.setAttribute('aria-pressed', 'false');
-      });
-      btn.classList.remove('border-brand-100');
-      btn.classList.add('border-brand-500', 'bg-brand-50', 'text-brand-500');
-      btn.setAttribute('aria-pressed', 'true');
-      hiddenTime.value = btn.getAttribute('data-time') || '';
-    });
-  }
-
   const setError = (fieldId, hasError) => {
     const msg = document.querySelector(`[data-error-for="${fieldId}"]`);
     if (!msg) return;
@@ -116,6 +98,39 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   };
+
+  const attachRealtimeValidation = (formEl, validators) => {
+    if (!formEl) return;
+    const handleInput = (e) => {
+      const input = e.target;
+      if (!input || !input.id) return;
+      const validator = validators[input.id];
+      if (validator && validator(input)) {
+        setError(input.id, false);
+      }
+    };
+    formEl.addEventListener('input', handleInput);
+    formEl.addEventListener('change', handleInput);
+  };
+
+  const slotsContainer = document.getElementById('timeSlots');
+  const hiddenTime = document.getElementById('time');
+  if (slotsContainer && hiddenTime) {
+    slotsContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-time]');
+      if (!btn) return;
+      slotsContainer.querySelectorAll('button[data-time]').forEach((b) => {
+        b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-500');
+        b.classList.add('border-brand-100');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.remove('border-brand-100');
+      btn.classList.add('border-brand-500', 'bg-brand-50', 'text-brand-500');
+      btn.setAttribute('aria-pressed', 'true');
+      hiddenTime.value = btn.getAttribute('data-time') || '';
+      setError('time', false);
+    });
+  }
 
   const showSuccessModal = (title, message, onDone, triggerElement) => {
     const modal = document.getElementById('successModal');
@@ -178,6 +193,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const form = document.getElementById('appointmentForm');
   if (form) {
+    attachRealtimeValidation(form, {
+      firstName: (i) => i.value.trim().length >= 2,
+      lastName: (i) => i.value.trim().length >= 2,
+      email: (i) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(i.value.trim()),
+      phone: (i) => /^\+?\d{7,15}$/.test(i.value.trim()),
+      service: (i) => Boolean(i.value),
+      date: (i) => Boolean(i.value)
+    });
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const service = document.getElementById('service');
@@ -251,6 +275,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
+    attachRealtimeValidation(contactForm, {
+      cname: (i) => i.value.trim().length >= 2,
+      cemail: (i) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(i.value.trim()),
+      cmessage: (i) => i.value.trim().length >= 5
+    });
+
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const cname = document.getElementById('cname');
