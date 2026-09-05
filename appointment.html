@@ -132,12 +132,12 @@
             <form id="appointmentForm" class="space-y-6" novalidate>
               <div class="grid sm:grid-cols-2 gap-6">
                 <div>
-                  <label for="firstName" class="block text-sm font-bold text-brand-900 mb-2">First Name</label>
+                  <label for="firstName" class="block text-sm font-bold text-brand-900 mb-2">First Name <span class="text-red-500" aria-hidden="true">*</span></label>
                   <input type="text" id="firstName" name="firstName" required autocomplete="given-name" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="John">
                   <p id="error-firstName" class="mt-1 text-xs text-red-500 hidden" data-error-for="firstName">Required</p>
                 </div>
                 <div>
-                  <label for="lastName" class="block text-sm font-bold text-brand-900 mb-2">Last Name</label>
+                  <label for="lastName" class="block text-sm font-bold text-brand-900 mb-2">Last Name <span class="text-red-500" aria-hidden="true">*</span></label>
                   <input type="text" id="lastName" name="lastName" required autocomplete="family-name" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="Doe">
                   <p id="error-lastName" class="mt-1 text-xs text-red-500 hidden" data-error-for="lastName">Required</p>
                 </div>
@@ -145,19 +145,19 @@
 
               <div class="grid sm:grid-cols-2 gap-6">
                 <div>
-                  <label for="email" class="block text-sm font-bold text-brand-900 mb-2">Email Address</label>
+                  <label for="email" class="block text-sm font-bold text-brand-900 mb-2">Email Address <span class="text-red-500" aria-hidden="true">*</span></label>
                   <input type="email" id="email" name="email" required autocomplete="email" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="john@example.com">
                   <p id="error-email" class="mt-1 text-xs text-red-500 hidden" data-error-for="email">Invalid email</p>
                 </div>
                 <div>
-                  <label for="phone" class="block text-sm font-bold text-brand-900 mb-2">Phone Number</label>
+                  <label for="phone" class="block text-sm font-bold text-brand-900 mb-2">Phone Number <span class="text-red-500" aria-hidden="true">*</span></label>
                   <input type="tel" id="phone" name="phone" required autocomplete="tel" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="(555) 000-0000">
                   <p id="error-phone" class="mt-1 text-xs text-red-500 hidden" data-error-for="phone">Required</p>
                 </div>
               </div>
 
               <div>
-                <label for="service" class="block text-sm font-bold text-brand-900 mb-2">Select Service</label>
+                <label for="service" class="block text-sm font-bold text-brand-900 mb-2">Select Service <span class="text-red-500" aria-hidden="true">*</span></label>
                 <select id="service" name="service" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all bg-white">
                   <option value="">Choose a service...</option>
                   <option value="cleaning">Routine Cleaning</option>
@@ -176,12 +176,12 @@
 
               <div class="grid sm:grid-cols-2 gap-6">
                 <div class="sm:col-span-1">
-                  <label for="date" class="block text-sm font-bold text-brand-900 mb-2">Preferred Date</label>
+                  <label for="date" class="block text-sm font-bold text-brand-900 mb-2">Preferred Date <span class="text-red-500" aria-hidden="true">*</span></label>
                   <input type="date" id="date" name="date" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
                   <p id="error-date" class="mt-1 text-xs text-red-500 hidden" data-error-for="date">Required</p>
                 </div>
                 <div class="sm:col-span-2">
-                  <label class="block text-sm font-bold text-brand-900 mb-4">Preferred Time</label>
+                  <label class="block text-sm font-bold text-brand-900 mb-4">Preferred Time <span class="text-red-500" aria-hidden="true">*</span></label>
                   <div id="timeSlots" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                     <button type="button" data-time="09:00" aria-pressed="false" class="px-4 py-3 rounded-xl border border-brand-100 text-sm font-medium hover:border-brand-500 hover:bg-brand-50 focus-visible:ring-4 focus-visible:ring-brand-500/20 outline-none transition-all">09:00 AM</button>
                     <button type="button" data-time="10:30" aria-pressed="false" class="px-4 py-3 rounded-xl border border-brand-100 text-sm font-medium hover:border-brand-500 hover:bg-brand-50 focus-visible:ring-4 focus-visible:ring-brand-500/20 outline-none transition-all">10:30 AM</button>

@@ -126,12 +126,12 @@
                 <form id="contactForm" class="space-y-6" novalidate>
                     <div class="grid sm:grid-cols-2 gap-6">
                         <div>
-                            <label for="cname" class="block text-sm font-bold text-brand-900 mb-2">Full Name</label>
+                            <label for="cname" class="block text-sm font-bold text-brand-900 mb-2">Full Name <span class="text-red-500" aria-hidden="true">*</span></label>
                             <input type="text" id="cname" required autocomplete="name" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="Jane Doe">
                             <p id="error-cname" class="mt-1 text-xs text-red-500 hidden" data-error-for="cname">Required (min 2 characters)</p>
                         </div>
                         <div>
-                            <label for="cemail" class="block text-sm font-bold text-brand-900 mb-2">Email Address</label>
+                            <label for="cemail" class="block text-sm font-bold text-brand-900 mb-2">Email Address <span class="text-red-500" aria-hidden="true">*</span></label>
                             <input type="email" id="cemail" required autocomplete="email" class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all" placeholder="jane@example.com">
                             <p id="error-cemail" class="mt-1 text-xs text-red-500 hidden" data-error-for="cemail">Invalid email</p>
                         </div>
@@ -146,7 +146,7 @@
                         </select>
                     </div>
                     <div>
-                        <label for="cmessage" class="block text-sm font-bold text-brand-900 mb-2">Your Message</label>
+                        <label for="cmessage" class="block text-sm font-bold text-brand-900 mb-2">Your Message <span class="text-red-500" aria-hidden="true">*</span></label>
                         <textarea id="cmessage" rows="5" required class="w-full px-4 py-3 rounded-xl border border-brand-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all resize-none" placeholder="How can we help you?"></textarea>
                         <p id="error-cmessage" class="mt-1 text-xs text-red-500 hidden" data-error-for="cmessage">Required (min 5 characters)</p>
                     </div>
