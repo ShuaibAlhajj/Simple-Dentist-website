@@ -273,6 +273,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const setupCharacterCounter = (textareaId, maxLength = 500) => {
+    const textarea = document.getElementById(textareaId);
+    if (!textarea) return;
+
+    textarea.setAttribute('maxlength', String(maxLength));
+
+    const counterDiv = document.createElement('div');
+    counterDiv.className = 'flex justify-end mt-1 text-xs text-brand-700/60 font-medium transition-colors';
+    counterDiv.setAttribute('aria-live', 'polite');
+
+    const updateCount = () => {
+      const current = textarea.value.length;
+      const remaining = maxLength - current;
+      counterDiv.textContent = `${current}/${maxLength} characters`;
+
+      if (remaining < 0 || current > maxLength) {
+        counterDiv.className = 'flex justify-end mt-1 text-xs font-semibold text-red-500 transition-colors';
+      } else if (remaining <= 50) {
+        counterDiv.className = 'flex justify-end mt-1 text-xs font-semibold text-amber-600 transition-colors';
+      } else {
+        counterDiv.className = 'flex justify-end mt-1 text-xs text-brand-700/60 font-medium transition-colors';
+      }
+    };
+
+    textarea.parentNode.appendChild(counterDiv);
+    textarea.addEventListener('input', updateCount);
+
+    const formEl = textarea.closest('form');
+    if (formEl) {
+      formEl.addEventListener('reset', () => setTimeout(updateCount, 0));
+    }
+
+    updateCount();
+  };
+
+  setupCharacterCounter('message', 500);
+  setupCharacterCounter('cmessage', 500);
+
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     attachRealtimeValidation(contactForm, {
