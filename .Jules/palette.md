@@ -51,3 +51,9 @@
 **Learning:** Static submit-time form validation can leave stale error styling and `aria-invalid` states on screen long after a user has corrected their input. Attaching real-time input and change listeners that validate entries as users edit clears error states dynamically, maintaining assistive technology synchronization and providing instant positive feedback.
 
 **Action:** Whenever implementing custom form validation, attach input/change listeners to automatically remove error indicators (`setError(fieldId, false)`) as soon as the user enters valid input or selects an option.
+
+## 2026-09-07 - Accessible Functional External Link Replacements
+
+**Learning:** Static placeholder container elements (such as `<div>` cards or buttons in map sections) mimic interactive elements visually but are completely broken for keyboard and screen reader users. Replacing them with semantic `<a>` links featuring explicit `aria-label`s, `target="_blank"`, `rel="noopener noreferrer"`, and `focus-visible` styling turns non-functional UI placeholders into accessible, functional navigation tools.
+
+**Action:** Always audit static UI placeholders that look like buttons or interactive cards and convert them into semantic `<a>` links with clear ARIA descriptions and focus states when external destinations (like Google Maps) exist.
