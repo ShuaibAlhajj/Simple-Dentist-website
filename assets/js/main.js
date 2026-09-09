@@ -61,9 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const prefillService = () => {
     const params = new URLSearchParams(window.location.search);
-    const service = params.get('service');
+    let service = params.get('service');
     const serviceSelect = document.getElementById('service');
     if (service && serviceSelect) {
+      if (service === 'implants') service = 'implant';
       serviceSelect.value = service;
     }
   };
@@ -120,12 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const btn = e.target.closest('button[data-time]');
       if (!btn) return;
       slotsContainer.querySelectorAll('button[data-time]').forEach((b) => {
-        b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-500');
+        b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-600', 'font-bold');
         b.classList.add('border-brand-100');
         b.setAttribute('aria-pressed', 'false');
       });
       btn.classList.remove('border-brand-100');
-      btn.classList.add('border-brand-500', 'bg-brand-50', 'text-brand-500');
+      btn.classList.add('border-brand-500', 'bg-brand-50', 'text-brand-600', 'font-bold');
       btn.setAttribute('aria-pressed', 'true');
       hiddenTime.value = btn.getAttribute('data-time') || '';
       setError('time', false);
@@ -255,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
               form.reset();
               if (hiddenTime) hiddenTime.value = '';
               slotsContainer?.querySelectorAll('button[data-time]').forEach((b) => {
-                b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-500');
+                b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-500', 'text-brand-600', 'font-bold');
                 b.classList.add('border-brand-100');
                 b.setAttribute('aria-pressed', 'false');
               });
