@@ -51,3 +51,9 @@
 **Learning:** Static submit-time form validation can leave stale error styling and `aria-invalid` states on screen long after a user has corrected their input. Attaching real-time input and change listeners that validate entries as users edit clears error states dynamically, maintaining assistive technology synchronization and providing instant positive feedback.
 
 **Action:** Whenever implementing custom form validation, attach input/change listeners to automatically remove error indicators (`setError(fieldId, false)`) as soon as the user enters valid input or selects an option.
+
+## 2026-09-10 - Descriptive Card Link ARIA Labels and High-Contrast Time Slots
+
+**Learning:** Repeated short link texts (such as 'Book →') across multiple service cards hinder screen reader navigation when users list or jump between links out of context. Adding descriptive `aria-label` attributes (e.g. 'Book Routine Cleanings') satisfies WCAG 2.4.4. Additionally, using high-contrast active states (`text-brand-600 font-bold`) on light backgrounds (`bg-brand-50`) ensures WCAG AA compliance (>= 4.5:1 ratio).
+
+**Action:** Always provide explicit, descriptive `aria-label` attributes on repetitive call-to-action links in card grids, and verify that interactive button selected states meet WCAG AA contrast thresholds.
