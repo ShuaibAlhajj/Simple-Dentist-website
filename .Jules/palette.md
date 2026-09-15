@@ -57,3 +57,9 @@
 **Learning:** Repeated short link texts (such as 'Book →') across multiple service cards hinder screen reader navigation when users list or jump between links out of context. Adding descriptive `aria-label` attributes (e.g. 'Book Routine Cleanings') satisfies WCAG 2.4.4. Additionally, using high-contrast active states (`text-brand-600 font-bold`) on light backgrounds (`bg-brand-50`) ensures WCAG AA compliance (>= 4.5:1 ratio).
 
 **Action:** Always provide explicit, descriptive `aria-label` attributes on repetitive call-to-action links in card grids, and verify that interactive button selected states meet WCAG AA contrast thresholds.
+
+## 2026-09-15 - Mobile Navigation Dismissal & Focus Restoration
+
+**Learning:** Collapsible mobile navigation menus should support the standard WAI-ARIA disclosure pattern by allowing dismissal via the `Escape` key and by clicking outside the expanded menu. Restoring focus directly to the toggle button (`data-nav-toggle`) upon `Escape` key press prevents focus orientation loss for screen reader and keyboard-only users.
+
+**Action:** When implementing mobile navigation menus or disclosure panels, register document-level `Escape` key and click-outside listeners that synchronize `aria-expanded="false"`, hide the menu container, and restore focus back to the triggering element.

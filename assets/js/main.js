@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.querySelector('[data-nav-toggle]');
   const navMenu = document.querySelector('[data-nav-menu]');
   if (navToggle && navMenu) {
+    const closeMobileMenu = () => {
+      navToggle.setAttribute('aria-expanded', 'false');
+      navMenu.classList.add('hidden');
+      navMenu.classList.remove('flex');
+    };
+
     navToggle.addEventListener('click', () => {
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
       navToggle.setAttribute('aria-expanded', String(!expanded));
@@ -29,11 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     navMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        navToggle.setAttribute('aria-expanded', 'false');
-        navMenu.classList.add('hidden');
-        navMenu.classList.remove('flex');
-      });
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true') {
+        closeMobileMenu();
+        navToggle.focus();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (
+        navToggle.getAttribute('aria-expanded') === 'true' &&
+        !navMenu.contains(e.target) &&
+        !navToggle.contains(e.target)
+      ) {
+        closeMobileMenu();
+      }
     });
   }
 
