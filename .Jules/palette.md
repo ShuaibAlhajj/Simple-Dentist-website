@@ -57,3 +57,9 @@
 **Learning:** Repeated short link texts (such as 'Book →') across multiple service cards hinder screen reader navigation when users list or jump between links out of context. Adding descriptive `aria-label` attributes (e.g. 'Book Routine Cleanings') satisfies WCAG 2.4.4. Additionally, using high-contrast active states (`text-brand-600 font-bold`) on light backgrounds (`bg-brand-50`) ensures WCAG AA compliance (>= 4.5:1 ratio).
 
 **Action:** Always provide explicit, descriptive `aria-label` attributes on repetitive call-to-action links in card grids, and verify that interactive button selected states meet WCAG AA contrast thresholds.
+
+## 2026-09-11 - Contextual Feature Link Accessibility and Focus Indicators
+
+**Learning:** Repetitive call-to-action links (such as 'Learn More') in feature highlight cards lack context when announced by screen readers out of context (e.g., in a links list mode). Adding descriptive `aria-label` attributes (e.g., 'Learn more about General Dentistry') fulfills WCAG 2.4.4. Combining this with `focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 rounded-lg outline-none` ensures a highly visible focus indicator for keyboard navigation without introducing visual noise for mouse users.
+
+**Action:** Whenever implementing repetitive feature links, pair contextual `aria-label` descriptions with Tailwind `focus-visible:ring-*` styles to satisfy both screen reader context (WCAG 2.4.4) and visible keyboard focus requirements (WCAG 2.4.7).
