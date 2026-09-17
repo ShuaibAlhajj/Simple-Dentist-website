@@ -369,11 +369,33 @@ document.addEventListener('DOMContentLoaded', () => {
   if (newsletterInput) {
     const newsletterForm = newsletterInput.closest('form');
     if (newsletterForm) {
+      const setNewsletterError = (hasError) => {
+        newsletterInput.classList.toggle('border-red-500', hasError);
+        newsletterInput.classList.toggle('ring-2', hasError);
+        newsletterInput.classList.toggle('ring-red-500', hasError);
+        newsletterInput.classList.toggle('focus:ring-red-500', hasError);
+        newsletterInput.classList.toggle('focus:border-red-500', hasError);
+        newsletterInput.classList.toggle('focus:ring-brand-500', !hasError);
+        newsletterInput.classList.toggle('focus:border-brand-500', !hasError);
+        if (hasError) {
+          newsletterInput.setAttribute('aria-invalid', 'true');
+        } else {
+          newsletterInput.removeAttribute('aria-invalid');
+        }
+      };
+
+      newsletterInput.addEventListener('input', () => {
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterInput.value.trim())) {
+          setNewsletterError(false);
+        }
+      });
+
       newsletterForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const emailValid = newsletterInput && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterInput.value.trim());
 
         if (emailValid) {
+          setNewsletterError(false);
           const submitBtn = newsletterForm.querySelector('button[type="submit"]');
           const originalText = submitBtn.innerHTML;
           submitBtn.disabled = true;
@@ -393,11 +415,13 @@ document.addEventListener('DOMContentLoaded', () => {
               "Thank you for subscribing! You'll now receive oral health tips and clinic updates in your inbox.",
               () => {
                 newsletterForm.reset();
+                setNewsletterError(false);
               },
               submitBtn
             );
           }, 800);
         } else {
+          setNewsletterError(true);
           newsletterInput.focus();
         }
       });
