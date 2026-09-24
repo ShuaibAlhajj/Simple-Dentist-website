@@ -90,9 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
       input.classList.toggle('border-red-500', hasError);
       input.classList.toggle('ring-red-100', hasError);
       if (hasError) {
+        input.classList.remove('focus:ring-brand-500', 'focus:border-brand-500');
+        input.classList.add('focus:ring-red-500', 'focus:border-red-500');
         input.setAttribute('aria-invalid', 'true');
         input.setAttribute('aria-describedby', `error-${fieldId}`);
       } else {
+        input.classList.add('focus:ring-brand-500', 'focus:border-brand-500');
+        input.classList.remove('focus:ring-red-500', 'focus:border-red-500');
         input.removeAttribute('aria-invalid');
         input.removeAttribute('aria-describedby');
       }
