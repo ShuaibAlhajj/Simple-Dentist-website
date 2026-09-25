@@ -105,9 +105,15 @@
             <div class="contact-card bg-white p-8 rounded-[2rem] border border-brand-100 shadow-xl shadow-brand-500/5">
                 <div class="w-14 h-14 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center text-2xl mb-6">📞</div>
                 <h3 class="font-display text-xl font-bold mb-3">Phone & Email</h3>
-                <p class="text-brand-700/70 leading-relaxed mb-2">Main: (555) 123-4567</p>
-                <p class="text-brand-700/70 leading-relaxed mb-4">Email: hello@brightsmile.com</p>
-                <a href="tel:5551234567" class="text-brand-500 font-bold hover:underline">Call Us Now →</a>
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-brand-700/70 leading-relaxed">Main: (555) 123-4567</p>
+                    <button type="button" data-copy="(555) 123-4567" aria-label="Copy phone number to clipboard" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-brand-50 text-brand-600 hover:bg-brand-100 focus-visible:ring-2 focus-visible:ring-brand-500 outline-none transition-all">Copy</button>
+                </div>
+                <div class="flex items-center justify-between mb-4">
+                    <p class="text-brand-700/70 leading-relaxed">Email: hello@brightsmile.com</p>
+                    <button type="button" data-copy="hello@brightsmile.com" aria-label="Copy email address to clipboard" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-brand-50 text-brand-600 hover:bg-brand-100 focus-visible:ring-2 focus-visible:ring-brand-500 outline-none transition-all">Copy</button>
+                </div>
+                <a href="tel:5551234567" aria-label="Call BrightSmile Dental Clinic at (555) 123-4567" class="text-brand-500 font-bold hover:underline focus-visible:ring-4 focus-visible:ring-brand-500/20 rounded-lg outline-none">Call Us Now →</a>
             </div>
 
             <div class="contact-card bg-white p-8 rounded-[2rem] border border-brand-100 shadow-xl shadow-brand-500/5">
