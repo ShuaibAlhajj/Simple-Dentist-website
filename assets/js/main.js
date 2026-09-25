@@ -422,6 +422,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
+  // Copy to Clipboard Logic
+  const copyAnnouncer = document.createElement('div');
+  copyAnnouncer.setAttribute('aria-live', 'polite');
+  copyAnnouncer.className = 'sr-only';
+  document.body.appendChild(copyAnnouncer);
+
+  document.querySelectorAll('[data-copy]').forEach((btn) => {
+    let resetTimer = null;
+    const initialText = btn.textContent;
+    const initialAriaLabel = btn.getAttribute('aria-label') || '';
+
+    btn.addEventListener('click', async () => {
+      const textToCopy = btn.getAttribute('data-copy');
+      if (!textToCopy) return;
+
+      try {
+        await navigator.clipboard.writeText(textToCopy);
+        if (resetTimer) clearTimeout(resetTimer);
+
+        btn.textContent = 'Copied! ✓';
+        if (initialAriaLabel) {
+          btn.setAttribute('aria-label', `Copied ${textToCopy} to clipboard`);
+        }
+        copyAnnouncer.textContent = `Copied ${textToCopy} to clipboard`;
+
+        resetTimer = setTimeout(() => {
+          btn.textContent = initialText;
+          if (initialAriaLabel) {
+            btn.setAttribute('aria-label', initialAriaLabel);
+          }
+          copyAnnouncer.textContent = '';
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy text: ', err);
+      }
+    });
+  });
+
   // FAQ Accordion Logic
   const faqAccordion = document.querySelector('[data-faq-accordion]');
   if (faqAccordion) {
