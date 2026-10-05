@@ -39,15 +39,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setActiveNav = () => {
     const current = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('header a[href$=".html"]').forEach((a) => {
+    document.querySelectorAll('header nav a[href$=".html"], nav:not(#mobile-menu) a[href$=".html"], #mobile-menu a[href$=".html"]').forEach((a) => {
+      if (a.classList.contains('group')) return;
+      if (a.classList.contains('bg-brand-500') || a.classList.contains('bg-brand-900') || a.classList.contains('rounded-full')) return;
+
       const href = a.getAttribute('href') || '';
-      const isActive = href === current || (current === 'index.html' && href === 'index.html');
+      const isActive = href === current;
       if (isActive) {
         a.setAttribute('aria-current', 'page');
+        a.classList.remove('text-brand-500', 'text-brand-700', 'font-medium');
         a.classList.add('text-brand-600', 'font-bold');
       } else {
         a.removeAttribute('aria-current');
         a.classList.remove('text-brand-600', 'font-bold');
+        if (!a.closest('#mobile-menu')) {
+          a.classList.add('font-medium');
+        }
       }
     });
   };
