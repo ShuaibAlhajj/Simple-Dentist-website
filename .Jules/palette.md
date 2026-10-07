@@ -57,3 +57,9 @@
 **Learning:** Repeated short link texts (such as 'Book →') across multiple service cards hinder screen reader navigation when users list or jump between links out of context. Adding descriptive `aria-label` attributes (e.g. 'Book Routine Cleanings') satisfies WCAG 2.4.4. Additionally, using high-contrast active states (`text-brand-600 font-bold`) on light backgrounds (`bg-brand-50`) ensures WCAG AA compliance (>= 4.5:1 ratio).
 
 **Action:** Always provide explicit, descriptive `aria-label` attributes on repetitive call-to-action links in card grids, and verify that interactive button selected states meet WCAG AA contrast thresholds.
+
+## 2026-10-07 - Keyboard Navigation for Interactive Button Groups
+
+**Learning:** Interactive button grids (such as time slot selection controls in booking forms) require directional keyboard support (`ArrowRight`, `ArrowLeft`, `ArrowUp`, `ArrowDown`, `Home`, `End`) to adhere to standard WAI-ARIA radio group / button group navigation patterns. Preventing default key behaviors and programmatically moving focus and active selection (`aria-pressed="true"`) allows keyboard users to select options efficiently without repetitive Tab key presses.
+
+**Action:** When implementing custom button selection grids, attach `keydown` listeners on the group container to handle arrow keys and Home/End navigation, automatically syncing focus, selection state attributes, and form inputs.
