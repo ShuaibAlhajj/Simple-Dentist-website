@@ -116,8 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const slotsContainer = document.getElementById('timeSlots');
   const hiddenTime = document.getElementById('time');
   if (slotsContainer && hiddenTime) {
-    slotsContainer.addEventListener('click', (e) => {
-      const btn = e.target.closest('button[data-time]');
+    const selectSlot = (btn) => {
       if (!btn) return;
       slotsContainer.querySelectorAll('button[data-time]').forEach((b) => {
         b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-500', 'text-brand-600', 'font-bold');
@@ -129,6 +128,35 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.setAttribute('aria-pressed', 'true');
       hiddenTime.value = btn.getAttribute('data-time') || '';
       setError('time', false);
+    };
+
+    slotsContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-time]');
+      if (btn) selectSlot(btn);
+    });
+
+    slotsContainer.addEventListener('keydown', (e) => {
+      const buttons = Array.from(slotsContainer.querySelectorAll('button[data-time]'));
+      if (buttons.length === 0) return;
+      const currentIndex = buttons.indexOf(document.activeElement);
+      if (currentIndex === -1) return;
+
+      let nextIndex = -1;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        nextIndex = (currentIndex + 1) % buttons.length;
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+      } else if (e.key === 'Home') {
+        nextIndex = 0;
+      } else if (e.key === 'End') {
+        nextIndex = buttons.length - 1;
+      }
+
+      if (nextIndex !== -1) {
+        e.preventDefault();
+        buttons[nextIndex].focus();
+        selectSlot(buttons[nextIndex]);
+      }
     });
   }
 
