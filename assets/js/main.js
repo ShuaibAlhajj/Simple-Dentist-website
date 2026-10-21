@@ -369,11 +369,21 @@ document.addEventListener('DOMContentLoaded', () => {
   if (newsletterInput) {
     const newsletterForm = newsletterInput.closest('form');
     if (newsletterForm) {
+      newsletterInput.addEventListener('input', () => {
+        const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterInput.value.trim());
+        if (emailValid) {
+          newsletterInput.classList.remove('border-red-500', 'focus:ring-red-500');
+          newsletterInput.removeAttribute('aria-invalid');
+        }
+      });
+
       newsletterForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const emailValid = newsletterInput && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterInput.value.trim());
 
         if (emailValid) {
+          newsletterInput.classList.remove('border-red-500', 'focus:ring-red-500');
+          newsletterInput.removeAttribute('aria-invalid');
           const submitBtn = newsletterForm.querySelector('button[type="submit"]');
           const originalText = submitBtn.innerHTML;
           submitBtn.disabled = true;
@@ -398,6 +408,8 @@ document.addEventListener('DOMContentLoaded', () => {
             );
           }, 800);
         } else {
+          newsletterInput.classList.add('border-red-500', 'focus:ring-red-500');
+          newsletterInput.setAttribute('aria-invalid', 'true');
           newsletterInput.focus();
         }
       });
