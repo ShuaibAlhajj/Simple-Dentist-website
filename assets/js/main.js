@@ -425,6 +425,37 @@ document.addEventListener('DOMContentLoaded', () => {
   // FAQ Accordion Logic
   const faqAccordion = document.querySelector('[data-faq-accordion]');
   if (faqAccordion) {
+    const closeFaqItem = (item) => {
+      const button = item.querySelector('button[aria-controls]');
+      if (!button || button.getAttribute('aria-expanded') !== 'true') return;
+
+      const panelId = button.getAttribute('aria-controls');
+      const panel = panelId ? document.getElementById(panelId) : null;
+      const icon = button.querySelector('[data-faq-icon]');
+
+      button.setAttribute('aria-expanded', 'false');
+      if (panel) {
+        panel.classList.remove('grid-rows-[1fr]');
+        panel.classList.add('grid-rows-[0fr]');
+      }
+      if (icon) {
+        icon.classList.remove('rotate-45');
+      }
+      item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+      item.classList.add('border-transparent', 'shadow-sm');
+    };
+
+    faqAccordion.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const expandedItem = Array.from(faqAccordion.querySelectorAll('[data-faq-item]')).find(i => i.querySelector('button[aria-expanded="true"]'));
+        if (expandedItem) {
+          const button = expandedItem.querySelector('button[aria-controls]');
+          closeFaqItem(expandedItem);
+          button?.focus();
+        }
+      }
+    });
+
     faqAccordion.addEventListener('click', (e) => {
       const button = e.target.closest('button[aria-controls]');
       if (!button) return;
@@ -441,24 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const allItems = faqAccordion.querySelectorAll('[data-faq-item]');
       allItems.forEach((otherItem) => {
         if (otherItem !== item) {
-          const otherButton = otherItem.querySelector('button[aria-controls]');
-          const otherPanelId = otherButton?.getAttribute('aria-controls');
-          const otherPanel = document.getElementById(otherPanelId);
-          const otherIcon = otherButton?.querySelector('[data-faq-icon]');
-
-          if (otherButton && otherButton.getAttribute('aria-expanded') === 'true') {
-            otherButton.setAttribute('aria-expanded', 'false');
-            if (otherPanel) {
-              otherPanel.classList.remove('grid-rows-[1fr]');
-              otherPanel.classList.add('grid-rows-[0fr]');
-            }
-            if (otherIcon) {
-              otherIcon.classList.remove('rotate-45');
-            }
-            // Reset active styles on outer item container
-            otherItem.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
-            otherItem.classList.add('border-transparent', 'shadow-sm');
-          }
+          closeFaqItem(otherItem);
         }
       });
 
