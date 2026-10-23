@@ -57,3 +57,9 @@
 **Learning:** Repeated short link texts (such as 'Book →') across multiple service cards hinder screen reader navigation when users list or jump between links out of context. Adding descriptive `aria-label` attributes (e.g. 'Book Routine Cleanings') satisfies WCAG 2.4.4. Additionally, using high-contrast active states (`text-brand-600 font-bold`) on light backgrounds (`bg-brand-50`) ensures WCAG AA compliance (>= 4.5:1 ratio).
 
 **Action:** Always provide explicit, descriptive `aria-label` attributes on repetitive call-to-action links in card grids, and verify that interactive button selected states meet WCAG AA contrast thresholds.
+
+## 2026-10-23 - FAQ Accordion Escape Key Dismissal & Focus Management
+
+**Learning:** Accordion components built with WAI-ARIA disclosure patterns should support keyboard dismissal via the 'Escape' key when focused inside an expanded panel. Collapsing the active panel, resetting state styling, and returning focus to the trigger button improves keyboard navigation flow.
+
+**Action:** When implementing collapsible UI components, register a 'keydown' listener for the 'Escape' key that cleanly collapses open panels and restores keyboard focus back to the trigger element.
