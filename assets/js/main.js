@@ -89,6 +89,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (input) {
       input.classList.toggle('border-red-500', hasError);
       input.classList.toggle('ring-red-100', hasError);
+      input.classList.toggle('focus:ring-red-500', hasError);
+      input.classList.toggle('focus:border-red-500', hasError);
+      input.classList.toggle('focus:ring-brand-500', !hasError);
+      input.classList.toggle('focus:border-brand-500', !hasError);
       if (hasError) {
         input.setAttribute('aria-invalid', 'true');
         input.setAttribute('aria-describedby', `error-${fieldId}`);
