@@ -425,6 +425,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // FAQ Accordion Logic
   const faqAccordion = document.querySelector('[data-faq-accordion]');
   if (faqAccordion) {
+    faqAccordion.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const expandedButton = faqAccordion.querySelector('button[aria-expanded="true"]');
+        if (expandedButton) {
+          const item = expandedButton.closest('[data-faq-item]');
+          const panelId = expandedButton.getAttribute('aria-controls');
+          const panel = panelId ? document.getElementById(panelId) : null;
+          const icon = expandedButton.querySelector('[data-faq-icon]');
+
+          expandedButton.setAttribute('aria-expanded', 'false');
+          if (panel) {
+            panel.classList.remove('grid-rows-[1fr]');
+            panel.classList.add('grid-rows-[0fr]');
+          }
+          if (icon) {
+            icon.classList.remove('rotate-45');
+          }
+          if (item) {
+            item.classList.remove('border-brand-500', 'shadow-lg', 'shadow-brand-500/10');
+            item.classList.add('border-transparent', 'shadow-sm');
+          }
+          expandedButton.focus();
+        }
+      }
+    });
+
     faqAccordion.addEventListener('click', (e) => {
       const button = e.target.closest('button[aria-controls]');
       if (!button) return;
