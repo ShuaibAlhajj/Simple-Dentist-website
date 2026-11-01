@@ -57,3 +57,9 @@
 **Learning:** Repeated short link texts (such as 'Book →') across multiple service cards hinder screen reader navigation when users list or jump between links out of context. Adding descriptive `aria-label` attributes (e.g. 'Book Routine Cleanings') satisfies WCAG 2.4.4. Additionally, using high-contrast active states (`text-brand-600 font-bold`) on light backgrounds (`bg-brand-50`) ensures WCAG AA compliance (>= 4.5:1 ratio).
 
 **Action:** Always provide explicit, descriptive `aria-label` attributes on repetitive call-to-action links in card grids, and verify that interactive button selected states meet WCAG AA contrast thresholds.
+
+## 2026-11-01 - Mobile Menu Keyboard Dismissal and Focus Restoration
+
+**Learning:** Mobile navigation drawers that lack `Escape` key dismissal and click-outside dismissal trap keyboard and screen reader users inside the drawer or force unnecessary tab navigation to dismiss the menu. Providing `Escape` key dismissal with active focus restoration back to the toggle button (`[data-nav-toggle]`) creates a seamless keyboard flow compliant with W3C dialog/disclosure patterns.
+
+**Action:** Always pair expandable mobile navigation drawers with an `Escape` key listener that closes the drawer and restores focus to the toggle trigger, alongside click-outside dismissal listeners.
