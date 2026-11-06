@@ -57,3 +57,9 @@
 **Learning:** Repeated short link texts (such as 'Book →') across multiple service cards hinder screen reader navigation when users list or jump between links out of context. Adding descriptive `aria-label` attributes (e.g. 'Book Routine Cleanings') satisfies WCAG 2.4.4. Additionally, using high-contrast active states (`text-brand-600 font-bold`) on light backgrounds (`bg-brand-50`) ensures WCAG AA compliance (>= 4.5:1 ratio).
 
 **Action:** Always provide explicit, descriptive `aria-label` attributes on repetitive call-to-action links in card grids, and verify that interactive button selected states meet WCAG AA contrast thresholds.
+
+## 2026-09-15 - Interactive Contact Card Links & Focus Accessibility
+
+**Learning:** Static plain-text contact information inside summary or feature cards forces users to manually copy/paste phone numbers and email addresses, causing cognitive friction especially on mobile devices. Providing direct, semantic `tel:` and `mailto:` links with descriptive `aria-label` tags and visible keyboard focus rings (`focus-visible:ring-4`) transforms passive contact displays into accessible, one-tap interactive touchpoints without disrupting existing card aesthetics.
+
+**Action:** Whenever contact details (phone numbers, emails) are displayed in overview cards, make them semantic `tel:` and `mailto:` links with descriptive `aria-label` attributes and focus-visible indicators.
