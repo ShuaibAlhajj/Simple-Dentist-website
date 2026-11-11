@@ -104,21 +104,25 @@
             <h3 class="font-display text-2xl font-bold mb-8">Visit Details</h3>
             <div class="space-y-8">
               <div class="flex gap-4">
-                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0">📍</div>
+                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0" aria-hidden="true">📍</div>
                 <div>
                   <h4 class="font-bold mb-1">Location</h4>
-                  <p class="text-white/80 text-sm">123 Dental Street, NY</p>
+                  <p class="text-white/80 text-sm">
+                    <a href="https://maps.google.com/?q=123+Dental+Street+NY" target="_blank" rel="noopener noreferrer" aria-label="Find BrightSmile Dental Clinic on Google Maps (opens in a new tab)" class="hover:text-white underline decoration-white/40 hover:decoration-white transition-colors focus-visible:ring-2 focus-visible:ring-white rounded outline-none">123 Dental Street, NY</a>
+                  </p>
                 </div>
               </div>
               <div class="flex gap-4">
-                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0">📞</div>
+                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0" aria-hidden="true">📞</div>
                 <div>
                   <h4 class="font-bold mb-1">Call Us</h4>
-                  <p class="text-white/80 text-sm">+1 (212) 555-0198</p>
+                  <p class="text-white/80 text-sm">
+                    <a href="tel:+12125550198" aria-label="Call BrightSmile Dental Clinic at +1 (212) 555-0198" class="hover:text-white underline decoration-white/40 hover:decoration-white transition-colors focus-visible:ring-2 focus-visible:ring-white rounded outline-none">+1 (212) 555-0198</a>
+                  </p>
                 </div>
               </div>
               <div class="flex gap-4">
-                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0">⏳</div>
+                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0" aria-hidden="true">⏳</div>
                 <div>
                   <h4 class="font-bold mb-1">Confirmation</h4>
                   <p class="text-white/80 text-sm">Within 24 hours</p>
